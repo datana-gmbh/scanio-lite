@@ -1,0 +1,50 @@
+{% macro render_item(item, matcher, isChild = false) %}
+    {% if item.children|length > 0 %}
+        <li class="space-y-1">
+            <span class="collapsible cursor-pointer items-center {% if matcher.isAncestor(item, 5) %}text-white hover:bg-white/5{% else %}text-white/70 hover:bg-white/5{% endif %} group flex gap-x-3 rounded-md p-2 {% if isChild %}text-sm{% else %}text-base{% endif %} leading-6 font-semibold">
+                <span class="flex-1">{{ item.label }}</span>
+                {% if item.extras.show_count and item.extras.count is not null %}
+                    <span class="py-0.5 px-2 bg-primary-500 text-white/50 group-hover:text-white group-hover:bg-primary-700 text-xs rounded-full">{{ item.extras.count }}</span>
+                {% endif %}
+                <svg class="toggle-icon h-4 w-4 shrink-0 group-hover:text-white {% if matcher.isAncestor(item, 5) == false %}-rotate-90{% endif %} transition duration-200 ease-in-out" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/>
+                </svg>
+            </span>
+            <ul class="space-y-1 ml-3.5 {% if matcher.isAncestor(item, 5) %}visible-transition{% else %}invisible-transition{% endif %} transition duration-300 ease-in-out">
+                {% for child in item.children %}
+                    {{ _self.render_item(child, matcher, true) }}
+                {% endfor %}
+            </ul>
+        </li>
+    {% elseif item.uri %}
+        <li class="space-y-1">
+            <a
+                class="{% if matcher.isCurrent(item) %}bg-white/5 text-white{% else %}hover:bg-white/5 text-white/70{% endif %} group items-center flex gap-x-3 rounded-md p-2 {% if isChild %}text-sm{% else %}text-base{% endif %} leading-6 font-semibold"
+                href="{{ item.uri }}"
+            >
+                {% if item.extras.icon is not null %}
+                    <i class="{{ item.extras.icon }} shrink-0 text-xl text-white/20 group-hover:text-white/50"></i>
+                {% endif %}
+                <span class="flex-1">{{ item.label }}</span>
+
+                {% if item.extras.show_count and item.extras.count is not null %}
+                    <span class="py-0.5 px-2 bg-primary-500 text-white/50 group-hover:text-white group-hover:bg-primary-700 text-xs rounded-full">{{ item.extras.count }}</span>
+                {% endif %}
+            </a>
+        </li>
+    {% else %}
+        <li class="space-y-1">
+            <span
+                class="cursor-pointer text-white/70 hover:bg-white/5 group flex gap-x-3 rounded-md p-2 {% if isChild %}text-sm{% else %}text-base{% endif %} leading-6 font-semibold"
+            >
+                {{ item.label }}
+            </span>
+        </li>
+    {% endif %}
+{% endmacro %}
+
+<ul role="list" class="-mx-2 space-y-1.5">
+    {% for item in item.children %}
+        {{ _self.render_item(item, matcher) }}
+    {% endfor %}
+</ul>

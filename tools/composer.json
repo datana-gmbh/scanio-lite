@@ -5,7 +5,15 @@
     "type": "project",
     "require": {
         "php": "^8.2",
-        "ext-ctype": "*"
+        "ext-ctype": "*",
+        "knplabs/knp-menu": "^3.4",
+        "knplabs/knp-menu-bundle": "^3.3",
+        "oskarstark/enum-helper": "^1.2",
+        "symfony/form": "^6.4",
+        "symfony/options-resolver": "^6.4",
+        "symfony/string": "^6.4",
+        "symfony/translation": "^6.4",
+        "symfony/workflow": "^6.4"
     },
     "replace": {
         "symfony/polyfill-ctype": "*",

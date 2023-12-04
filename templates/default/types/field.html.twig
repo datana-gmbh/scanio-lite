@@ -1,0 +1,25 @@
+{# @var field \App\Crud\Domain\Value\Field #}
+
+{% set value = get_value(item, field.propertyPath) %}
+
+{% if value is not null %}
+    {% if field.type.value == 'id' %}
+        {% include 'default/types/id.html.twig' %}
+    {% elseif field.type.value == 'boolean' %}
+        {% include 'default/types/boolean.html.twig' %}
+    {% elseif field.type.value == 'text' %}
+        {% include 'default/types/text.html.twig' %}
+    {% elseif field.type.value == 'url' %}
+        {% include 'default/types/url.html.twig' %}
+    {% elseif field.type.value == 'date' %}
+        {% include 'default/types/date.html.twig' %}
+    {% elseif field.type.value == 'datetime' %}
+        {% include 'default/types/datetime.html.twig' %}
+    {% elseif field.type.value == 'integer' %}
+        {% include 'default/types/integer.html.twig' %}
+    {% else %}
+        {{ item[field.propertyPath] }}
+    {% endif %}
+{% else %}
+    -
+{% endif %}

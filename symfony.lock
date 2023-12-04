@@ -117,6 +117,9 @@
             ".php-cs-fixer.dist.php"
         ]
     },
+    "knplabs/knp-menu-bundle": {
+        "version": "v3.3.0"
+    },
     "league/flysystem-bundle": {
         "version": "3.3",
         "recipe": {
@@ -357,6 +360,18 @@
         "files": [
             "config/packages/web_profiler.yaml",
             "config/routes/web_profiler.yaml"
+        ]
+    },
+    "symfony/workflow": {
+        "version": "6.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "3.3",
+            "ref": "3b2f8ca32a07fcb00f899649053943fa3d8bbfb6"
+        },
+        "files": [
+            "config/packages/workflow.yaml"
         ]
     },
     "vincentlanglet/twig-cs-fixer": {
