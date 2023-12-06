@@ -34,7 +34,7 @@ final readonly class UploadController
             return $this->responder->route(Routes::DASHBOARD);
         }
 
-        return $this->responder->render('upload/upload_file.html.twig', [
+        return $this->responder->render('upload/upload.html.twig', [
             'form' => $form->createView(),
         ]);
     }

@@ -1,12 +1,12 @@
 {# @var fields \App\Crud\Domain\Value\Field[] #}
 {# @var pagination \App\Crud\Domain\Value\Pagination #}
 {# @var sortings \App\Crud\Domain\Value\Sorting[] #}
-{# @var belegtyp \App\Domain\Enum\Belegtyp #}
+{# @var type \App\Domain\Enum\Belegtyp #}
 {# @var venture \App\Domain\Enum\Venture #}
 
 {% extends 'layout.html.twig' %}
 
-{% block title belegtyp.label() ~ ' - ' ~ venture.label() ~ ' - ' ~ parent() %}
+{% block title type.label() ~ ' - ' ~ venture.label() ~ ' - ' ~ parent() %}
 
 {% block sidebar %}{% endblock %}
 
@@ -15,10 +15,10 @@
         <div class="sm:flex sm:items-center">
             <div class="sm:flex-auto">
                 <h1 class="text-lg font-semibold leading-6 text-gray-900 items-center">
-                    {% if belegtyp.icon is not null %}
-                        <i class="{{ belegtyp.icon() }} mr-1.5"></i>
+                    {% if type.icon is not null %}
+                        <i class="{{ type.icon() }} mr-1.5"></i>
                     {% endif %}
-                    {{ belegtyp.label }}
+                    {{ type.label }}
                 </h1>
             </div>
         </div>
@@ -46,7 +46,7 @@
                                         </td>
                                     {% endfor %}
                                     <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:pr-8">
-                                        <a href="{{ path(constant('App\\Routing\\Routes::EDIT'), {venture: venture.value, belegtyp: belegtyp.value, id: item.id}) }}"
+                                        <a href="{{ path(constant('App\\Routing\\Routes::EDIT'), {venture: venture.value, type: type.value, id: item.id}) }}"
                                            class="text-primary-600 hover:opacity-80">Bearbeiten</a>
                                     </td>
                                 </tr>

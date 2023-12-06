@@ -1,4 +1,4 @@
-{# @var belegtyp \App\Domain\Enum\Belegtyp #}
+{# @var type \App\Domain\Enum\Belegtyp #}
 {# @var venture \App\Domain\Enum\Venture #}
 
 {% extends 'layout.html.twig' %}
@@ -6,7 +6,7 @@
 {# @TODO: move to twig.yaml when old code is gone. #}
 {% form_theme form 'form/tailwind_layout.html.twig' %}
 
-{% block title belegtyp.label() ~ ' - ' ~ venture.label() ~ ' - ' ~ parent() %}
+{% block title type.label() ~ ' - ' ~ venture.label() ~ ' - ' ~ parent() %}
 
 {% block sidebar_content %}
     {{ form_start(form, {attr: {class: 'flex h-[94vh] flex-col divide-y divide-gray-200'}}) }}
@@ -41,10 +41,10 @@
         <div class="sm:flex sm:items-center">
             <div class="sm:flex-auto">
                 <h1 class="text-lg font-semibold leading-6 text-gray-900 items-center">
-                    {% if belegtyp.icon is not null %}
-                        <i class="{{ belegtyp.icon() }} mr-1.5"></i>
+                    {% if type.icon is not null %}
+                        <i class="{{ type.icon() }} mr-1.5"></i>
                     {% endif %}
-                    {{ belegtyp.label }} - {{ entity.id }}
+                    {{ type.label }} - {{ entity.id }}
                 </h1>
             </div>
         </div>

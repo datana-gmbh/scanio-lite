@@ -6,14 +6,14 @@ namespace App\Crud\Domain\Value;
 
 use App\Crud\Domain\Enum\FieldType;
 
-final readonly class Field
+final class Field
 {
-    public bool $isSortable;
+    public bool $isSortable = false;
 
     public function __construct(
-        public FieldType $type,
-        public string $label,
-        public string $propertyPath,
+        public readonly FieldType $type,
+        public readonly string $label,
+        public readonly string $propertyPath,
     ) {
         $this->isSortable = false;
     }
