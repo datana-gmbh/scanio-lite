@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Form;
 
+use App\Domain\Enum\Type;
 use App\Domain\Enum\Venture;
 
 final class Choices
@@ -61,5 +62,19 @@ final class Choices
         }
 
         return $ventures;
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    public static function types(): array
+    {
+        $types = [];
+
+        foreach (Type::cases() as $type) {
+            $types[$type->value] = $type->label();
+        }
+
+        return $types;
     }
 }

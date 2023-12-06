@@ -23,9 +23,9 @@ final readonly class DefaultLetterQuery implements QueryInterface
     ) {
         $qb = $this->repository->createQueryBuilder('l');
         $qb->where(
-            $qb->expr()->eq('l.status', ':status'),
+            $qb->expr()->eq('l.type', ':type'),
         );
-        $qb->setParameter('status', $this->type->status());
+        $qb->setParameter('type', $this->type->value);
 
         $this->qb = $qb;
     }

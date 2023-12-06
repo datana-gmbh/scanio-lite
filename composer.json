@@ -59,7 +59,6 @@
         "symfony/uid": "^6.4.0",
         "symfony/validator": "^6.4.0",
         "symfony/var-dumper": "^6.4.0",
-        "symfony/workflow": "^6.4",
         "symfony/yaml": "^6.4.0",
         "thecodingmachine/safe": "^2.5",
         "twig/twig": "^3.8.0",

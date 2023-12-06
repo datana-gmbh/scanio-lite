@@ -44,17 +44,9 @@ enum Type: string
         };
     }
 
-    public function status(): string
-    {
-        return match ($this) {
-            default => u($this->value)->replace('_', ' ')->camel()->toString(),
-        };
-    }
-
     public function showCountInTree(): bool
     {
         return match ($this) {
-            self::LOESCHLISTE, self::UEBERTRAGEN => false,
             default => true,
         };
     }

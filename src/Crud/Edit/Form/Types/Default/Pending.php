@@ -43,7 +43,7 @@ final class Pending extends AbstractType implements FormTypeFactoryLoadableInter
             [
                 'label' => 'Typ',
                 'required' => true,
-                'choices' => $options['transitions'],
+                'choices' => Choices::types(),
                 'placeholder' => Choices::PLACEHOLDER,
                 'property_path' => 'data[type]',
                 'attr' => ['class' => 'js-advanced-select-custom'],

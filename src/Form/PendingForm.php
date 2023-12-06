@@ -24,7 +24,7 @@ final class PendingForm extends AbstractType
             [
                 'label' => 'Venture',
                 'mapped' => false,
-                'choices' => $options['transitions'],
+                'choices' => Choices::ventures(),
                 'placeholder' => Choices::PLACEHOLDER,
             ],
         );

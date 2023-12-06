@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -14,20 +12,6 @@ use Symfony\Component\Validator\Constraints\GroupSequence;
 
 class BaseForm extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options): void
-    {
-        if ([] !== $options['transitions']) {
-            $builder->add(
-                'transition',
-                HiddenType::class,
-                [
-                    'data' => array_values($options['transitions'])[0],
-                    'mapped' => false,
-                ],
-            );
-        }
-    }
-
     public function buildView(FormView $view, FormInterface $form, array $options): void
     {
         $view->vars['submit_enabled'] = $options['submit_enabled'];
@@ -45,7 +29,6 @@ class BaseForm extends AbstractType
         $resolver->setDefault('rotation_enabled', true);
         $resolver->setDefault('jump_to_pending_enabled', true);
         $resolver->setDefault('error_bubbling', true);
-        $resolver->setRequired(['transitions']);
 
         $resolver->setDefault('validation_groups', new GroupSequence(['Default']));
     }

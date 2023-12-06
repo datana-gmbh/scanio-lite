@@ -10,7 +10,6 @@ use App\Domain\Enum\Venture;
 use App\Domain\Identifier\LetterId;
 use App\Repository\LetterRepositoryInterface;
 use App\Routing\Routes;
-use App\Workflow\WorkflowExtractor;
 use OskarStark\Symfony\Http\Responder;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,7 +24,6 @@ final readonly class EditController
         private FormFactoryInterface $formFactory,
         private FormTypeFactoryInterface $formTypeFactory,
         private Responder $responder,
-        private WorkflowExtractor $workflowExtractor,
     ) {
     }
 
@@ -39,7 +37,6 @@ final readonly class EditController
             $formType::class,
             $letter,
             [
-                'transitions' => $this->workflowExtractor->getTransitionsByEntityAndStatus($letter, $letter->getStatus()),
                 'submit_enabled' => !$letter->isFinished(),
             ],
         );
