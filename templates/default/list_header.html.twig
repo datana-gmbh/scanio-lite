@@ -7,7 +7,7 @@
         {% set currentSorting = sortings|filter(sorting => sorting.property == field.propertyPath)|first %}
         {% set orderParameters = app.request.query.get('order') %}
 
-        {% if orderParameters is  null %}
+        {% if orderParameters is null %}
             {% set orderParameters = {} %}
         {% endif %}
 
