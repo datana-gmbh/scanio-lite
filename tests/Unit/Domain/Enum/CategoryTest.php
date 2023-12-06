@@ -37,9 +37,9 @@ final class CategoryTest extends EnumTestCase
      *
      * @dataProvider iconProvider
      */
-    public function icon(string $expected, Category $belegtyp): void
+    public function icon(string $expected, Category $category): void
     {
-        self::assertSame($expected, $belegtyp->icon());
+        self::assertSame($expected, $category->icon());
     }
 
     /**
