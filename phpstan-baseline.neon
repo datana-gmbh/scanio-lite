@@ -16,14 +16,14 @@ parameters:
 			path: src/Bridge/Faker/Provider/ArrayProvider.php
 
 		-
+			message: "#^Call to static method Webmozart\\\\Assert\\\\Assert\\:\\:startsWith\\(\\) with string and string will always evaluate to true\\.$#"
+			count: 1
+			path: src/Bridge/Flysystem/UrlGenerator.php
+
+		-
 			message: "#^Call to an undefined method Symfony\\\\Component\\\\HttpFoundation\\\\Session\\\\SessionInterface\\:\\:getFlashBag\\(\\)\\.$#"
 			count: 1
 			path: src/Controller/UploadController.php
-
-		-
-			message: "#^Readonly property App\\\\Crud\\\\Domain\\\\Value\\\\Field\\:\\:\\$isSortable is assigned outside of the constructor\\.$#"
-			count: 1
-			path: src/Crud/Domain/Value/Field.php
 
 		-
 			message: "#^Method App\\\\Crud\\\\Edit\\\\Form\\\\FormTypeFactory\\:\\:create\\(\\) should return App\\\\Crud\\\\Edit\\\\Form\\\\FormTypeFactoryLoadableInterface but returns App\\\\Crud\\\\Edit\\\\Form\\\\FormTypeFactoryLoadableInterface\\|false\\.$#"
