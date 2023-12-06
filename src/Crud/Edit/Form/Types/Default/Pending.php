@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Crud\Edit\Form\Types\Default;
 
 use App\Crud\Edit\Form\FormTypeFactoryLoadableInterface;
+use App\Domain\Enum\Category;
 use App\Domain\Enum\Group;
-use App\Domain\Enum\Type;
 use App\Form\Choices;
 use App\Form\Type\DatePickerType;
 use App\Form\Type\SearchableChoicesType;
@@ -38,14 +38,14 @@ final class Pending extends AbstractType implements FormTypeFactoryLoadableInter
         );
 
         $builder->add(
-            'type',
+            'category',
             SearchableChoicesType::class,
             [
                 'label' => 'Typ',
                 'required' => true,
-                'choices' => Choices::types(),
+                'choices' => Choices::categories(),
                 'placeholder' => Choices::PLACEHOLDER,
-                'property_path' => 'data[type]',
+                'property_path' => 'data[category]',
                 'attr' => ['class' => 'js-advanced-select-custom'],
                 'constraints' => [
                     new NotBlank(),
@@ -54,9 +54,9 @@ final class Pending extends AbstractType implements FormTypeFactoryLoadableInter
         );
     }
 
-    public function supports(Group $group, Type $type): bool
+    public function supports(Group $group, Category $category): bool
     {
         return $group->equals(Group::Default)
-            && $type->equals(Type::Pending);
+            && $category->equals(Category::Pending);
     }
 }

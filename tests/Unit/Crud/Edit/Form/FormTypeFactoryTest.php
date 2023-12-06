@@ -6,8 +6,8 @@ namespace App\Tests\Unit\Crud\Edit\Form;
 
 use App\Crud\Edit\Form\FormTypeFactory;
 use App\Crud\Edit\Form\FormTypeFactoryLoadableInterface;
+use App\Domain\Enum\Category;
 use App\Domain\Enum\Group;
-use App\Domain\Enum\Type;
 use App\Tests\Unit\UnitTestCase;
 use Symfony\Component\Form\AbstractType;
 
@@ -25,14 +25,14 @@ final class FormTypeFactoryTest extends UnitTestCase
     {
         $factory = new FormTypeFactory([
             new class() extends AbstractType implements FormTypeFactoryLoadableInterface {
-                public function supports(Group $group, Type $type): bool
+                public function supports(Group $group, Category $category): bool
                 {
                     return true;
                 }
             },
         ]);
 
-        $factory->create(Group::Default, Type::Other);
+        $factory->create(Group::Default, Category::Other);
     }
 
     /**
@@ -45,7 +45,7 @@ final class FormTypeFactoryTest extends UnitTestCase
         self::expectException(\InvalidArgumentException::class);
         self::expectExceptionMessage('No form type found for group "default" and type "other".');
 
-        $factory->create(Group::Default, Type::Other);
+        $factory->create(Group::Default, Category::Other);
     }
 
     /**
@@ -55,13 +55,13 @@ final class FormTypeFactoryTest extends UnitTestCase
     {
         $factory = new FormTypeFactory([
             new class() extends AbstractType implements FormTypeFactoryLoadableInterface {
-                public function supports(Group $group, Type $type): bool
+                public function supports(Group $group, Category $category): bool
                 {
                     return true;
                 }
             },
             new class() extends AbstractType implements FormTypeFactoryLoadableInterface {
-                public function supports(Group $group, Type $type): bool
+                public function supports(Group $group, Category $category): bool
                 {
                     return true;
                 }
@@ -71,6 +71,6 @@ final class FormTypeFactoryTest extends UnitTestCase
         self::expectException(\InvalidArgumentException::class);
         self::expectExceptionMessage('Multiple form types found for group "default" and type "other".');
 
-        $factory->create(Group::Default, Type::Other);
+        $factory->create(Group::Default, Category::Other);
     }
 }

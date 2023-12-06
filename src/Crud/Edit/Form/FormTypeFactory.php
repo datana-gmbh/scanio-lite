@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Crud\Edit\Form;
 
+use App\Domain\Enum\Category;
 use App\Domain\Enum\Group;
-use App\Domain\Enum\Type;
 use Symfony\Component\DependencyInjection\Attribute\TaggedIterator;
 
 final readonly class FormTypeFactory implements FormTypeFactoryInterface
@@ -25,11 +25,11 @@ final readonly class FormTypeFactory implements FormTypeFactoryInterface
         $this->formTypes = $formTypes instanceof \Traversable ? iterator_to_array($formTypes) : $formTypes;
     }
 
-    public function create(Group $group, Type $type): FormTypeFactoryLoadableInterface
+    public function create(Group $group, Category $category): FormTypeFactoryLoadableInterface
     {
         $found = array_filter(
             $this->formTypes,
-            static fn (FormTypeFactoryLoadableInterface $formType) => $formType->supports($group, $type),
+            static fn (FormTypeFactoryLoadableInterface $formType) => $formType->supports($group, $category),
         );
 
         $count = \count($found);
@@ -40,16 +40,16 @@ final readonly class FormTypeFactory implements FormTypeFactoryInterface
 
         if (1 < $count) {
             throw new \InvalidArgumentException(sprintf(
-                'Multiple form types found for group "%s" and type "%s".',
+                'Multiple form types found for group "%s" and category "%s".',
                 $group->value,
-                $type->value,
+                $category->value,
             ));
         }
 
         throw new \InvalidArgumentException(sprintf(
-            'No form type found for group "%s" and type "%s".',
+            'No form type found for group "%s" and category "%s".',
             $group->value,
-            $type->value,
+            $category->value,
         ));
     }
 }

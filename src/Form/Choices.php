@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Form;
 
+use App\Domain\Enum\Category;
 use App\Domain\Enum\Group;
-use App\Domain\Enum\Type;
 
 final class Choices
 {
@@ -67,14 +67,14 @@ final class Choices
     /**
      * @return array<string, string>
      */
-    public static function types(): array
+    public static function categories(): array
     {
-        $types = [];
+        $categories = [];
 
-        foreach (Type::cases() as $type) {
-            $types[$type->value] = $type->label();
+        foreach (Category::cases() as $category) {
+            $categories[$category->value] = $category->label();
         }
 
-        return $types;
+        return $categories;
     }
 }

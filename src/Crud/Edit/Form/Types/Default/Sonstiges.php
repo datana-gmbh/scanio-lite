@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Crud\Edit\Form\Types\Default;
 
 use App\Crud\Edit\Form\FormTypeFactoryLoadableInterface;
+use App\Domain\Enum\Category;
 use App\Domain\Enum\Group;
-use App\Domain\Enum\Type;
 use App\Entity\Letter;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -39,9 +39,9 @@ final class Sonstiges extends AbstractType implements FormTypeFactoryLoadableInt
         );
     }
 
-    public function supports(Group $group, Type $type): bool
+    public function supports(Group $group, Category $category): bool
     {
         return $group->equals(Group::Default)
-            && $type->equals(Type::Other);
+            && $category->equals(Category::Other);
     }
 }

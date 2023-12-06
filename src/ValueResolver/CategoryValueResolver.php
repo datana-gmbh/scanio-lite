@@ -4,22 +4,22 @@ declare(strict_types=1);
 
 namespace App\ValueResolver;
 
-use App\Domain\Enum\Type;
+use App\Domain\Enum\Category;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Controller\ValueResolverInterface;
 use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-final readonly class TypeValueResolver implements ValueResolverInterface
+final readonly class CategoryValueResolver implements ValueResolverInterface
 {
-    private const ROUTE_PLACEHOLDER = 'type';
+    private const ROUTE_PLACEHOLDER = 'category';
 
     /**
-     * @return Type[]
+     * @return Category[]
      */
     public function resolve(Request $request, ArgumentMetadata $argument): iterable
     {
-        if ($argument->isVariadic() || Type::class !== $argument->getType()) {
+        if ($argument->isVariadic() || Category::class !== $argument->getType()) {
             return [];
         }
 
@@ -30,9 +30,9 @@ final readonly class TypeValueResolver implements ValueResolverInterface
         }
 
         try {
-            return [Type::from($value)];
+            return [Category::from($value)];
         } catch (\ValueError) {
-            throw new NotFoundHttpException(sprintf('Type "%s" not found.', $value));
+            throw new NotFoundHttpException(sprintf('Category "%s" not found.', $value));
         }
     }
 }

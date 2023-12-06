@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\Tree\Node;
 
+use App\Domain\Enum\Category;
 use App\Domain\Enum\Group;
-use App\Domain\Enum\Type;
 use App\Tree\Domain\Value\Node;
 
 final class DefaultGroupNodeBuilder extends AbstractNodeBuilder
 {
     public function __construct(
-        private readonly TypeNodeFactory $typeNodeFactory,
+        private readonly CategoryNodeFactory $categoryNodeFactory,
     ) {
     }
 
@@ -25,12 +25,12 @@ final class DefaultGroupNodeBuilder extends AbstractNodeBuilder
         $group = Group::Default;
 
         foreach ([
-            Type::Pending,
-            Type::Other,
-            Type::Unknown,
-        ] as $type) {
+            Category::Pending,
+            Category::Other,
+            Category::Unknown,
+        ] as $category) {
             $node->addChild(
-                $this->typeNodeFactory->create($group, $type),
+                $this->categoryNodeFactory->create($group, $category),
             );
         }
 

@@ -9,7 +9,7 @@ use App\Crud\Domain\Value\Field;
 use App\Crud\Domain\Value\Pagination;
 use App\Crud\List\ListResult;
 use App\Crud\List\Query\QueryInterface;
-use App\Domain\Enum\Type;
+use App\Domain\Enum\Category;
 use App\Repository\LetterRepositoryInterface;
 use Doctrine\ORM\QueryBuilder;
 
@@ -19,13 +19,13 @@ final readonly class DefaultLetterQuery implements QueryInterface
 
     public function __construct(
         private LetterRepositoryInterface $repository,
-        private Type $type,
+        private Category $category,
     ) {
         $qb = $this->repository->createQueryBuilder('l');
         $qb->where(
-            $qb->expr()->eq('l.type', ':type'),
+            $qb->expr()->eq('l.category', ':category'),
         );
-        $qb->setParameter('type', $this->type->value);
+        $qb->setParameter('category', $this->category->value);
 
         $this->qb = $qb;
     }

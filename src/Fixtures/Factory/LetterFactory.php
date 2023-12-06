@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Fixtures\Factory;
 
 use App\Bridge\Faker\ExtendedGenerator;
+use App\Domain\Enum\Category;
 use App\Domain\Enum\Group;
-use App\Domain\Enum\Type;
 use App\Entity\Letter;
 use League\Flysystem\FilesystemOperator;
 use Safe\DateTimeImmutable;
@@ -32,9 +32,9 @@ final class LetterFactory extends ModelFactory
         return $this->addState(['group' => $group]);
     }
 
-    public function withType(Type $type): self
+    public function withCategory(Category $category): self
     {
-        return $this->addState(['type' => $type]);
+        return $this->addState(['category' => $category]);
     }
 
     public function withFilename(string $filename): self
@@ -61,7 +61,7 @@ final class LetterFactory extends ModelFactory
             'createdAt' => $createdAt = new DateTimeImmutable(),
             'inboxDate' => clone $createdAt,
             'group' => $faker->randomElement(Group::cases()),
-            'type' => $faker->randomElement(Type::cases()),
+            'category' => $faker->randomElement(Category::cases()),
             'content' => $faker->text(),
             'filename' => $filename,
             'user' => sprintf('%s %s', $faker->firstName(), $faker->lastName()),

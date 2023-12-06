@@ -4,32 +4,32 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Domain\Enum;
 
-use App\Domain\Enum\Type;
+use App\Domain\Enum\Category;
 use OskarStark\Enum\Test\EnumTestCase;
 
 /**
- * @covers \App\Domain\Enum\Type
+ * @covers \App\Domain\Enum\Category
  */
-final class TypeTest extends EnumTestCase
+final class CategoryTest extends EnumTestCase
 {
     /**
      * @test
      *
      * @dataProvider labelProvider
      */
-    public function label(string $expected, Type $belegtyp): void
+    public function label(string $expected, Category $category): void
     {
-        self::assertSame($expected, $belegtyp->label());
+        self::assertSame($expected, $category->label());
     }
 
     /**
-     * @return \Generator<array{0: string, 1: Type}>
+     * @return \Generator<array{0: string, 1: Category}>
      */
     public static function labelProvider(): iterable
     {
-        yield ['Sonstiges', Type::Other];
-        yield ['Unbearbeitet', Type::Pending];
-        yield ['Unbekannt', Type::Unknown];
+        yield ['Sonstiges', Category::Other];
+        yield ['Unbearbeitet', Category::Pending];
+        yield ['Unbekannt', Category::Unknown];
     }
 
     /**
@@ -37,18 +37,18 @@ final class TypeTest extends EnumTestCase
      *
      * @dataProvider iconProvider
      */
-    public function icon(string $expected, Type $belegtyp): void
+    public function icon(string $expected, Category $belegtyp): void
     {
         self::assertSame($expected, $belegtyp->icon());
     }
 
     /**
-     * @return \Generator<array{0: string, 1: Type}>
+     * @return \Generator<array{0: string, 1: Category}>
      */
     public static function iconProvider(): iterable
     {
-        yield ['fa-light fa-clipboard-list', Type::Pending];
-        yield ['fa-light fa-square-question', Type::Unknown];
+        yield ['fa-light fa-clipboard-list', Category::Pending];
+        yield ['fa-light fa-square-question', Category::Unknown];
     }
 
     /**
@@ -56,22 +56,22 @@ final class TypeTest extends EnumTestCase
      *
      * @dataProvider showCountInTreeProvider
      */
-    public function showCountInTree(bool $expected, Type $belegtyp): void
+    public function showCountInTree(bool $expected, Category $belegtyp): void
     {
         self::assertSame($expected, $belegtyp->showCountInTree());
     }
 
     /**
-     * @return \Generator<array{0: bool, 1: Type}>
+     * @return \Generator<array{0: bool, 1: Category}>
      */
     public static function showCountInTreeProvider(): iterable
     {
-        yield [true, Type::Pending];
+        yield [true, Category::Pending];
     }
 
     protected static function getClass(): string
     {
-        return Type::class;
+        return Category::class;
     }
 
     protected static function getNumberOfValues(): int
