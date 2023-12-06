@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Bridge\Doctrine\DBAL\Types\Type\Identifier\LetterIdType;
+use App\Domain\Enum\Group;
 use App\Domain\Enum\Type;
-use App\Domain\Enum\Venture;
 use App\Domain\Identifier\LetterId;
 use App\Repository\LetterRepository;
 use Doctrine\DBAL\Types\Types;
@@ -28,8 +28,8 @@ class Letter implements \Stringable
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $content = null;
 
-    #[ORM\Column(type: Types::STRING, enumType: Venture::class)]
-    private Venture $venture = Venture::Default;
+    #[ORM\Column(type: Types::STRING, enumType: Group::class)]
+    private Group $group = Group::Default;
 
     #[ORM\Column(type: Types::STRING, enumType: Type::class)]
     private Type $type = Type::Pending;
@@ -91,14 +91,14 @@ class Letter implements \Stringable
         $this->inboxDate = $inboxDate;
     }
 
-    public function getVenture(): Venture
+    public function getGroup(): Group
     {
-        return $this->venture;
+        return $this->group;
     }
 
-    public function setVenture(Venture $venture): void
+    public function setGroup(Group $group): void
     {
-        $this->venture = $venture;
+        $this->group = $group;
     }
 
     public function getContent(): ?string

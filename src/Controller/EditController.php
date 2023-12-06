@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Crud\Edit\Form\FormTypeFactoryInterface;
+use App\Domain\Enum\Group;
 use App\Domain\Enum\Type;
-use App\Domain\Enum\Venture;
 use App\Domain\Identifier\LetterId;
 use App\Repository\LetterRepositoryInterface;
 use App\Routing\Routes;
@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route(name: Routes::EDIT, path: '/edit/{venture}/{type}/{letterId}')]
+#[Route(name: Routes::EDIT, path: '/edit/{group}/{type}/{letterId}')]
 final readonly class EditController
 {
     public function __construct(
@@ -27,11 +27,11 @@ final readonly class EditController
     ) {
     }
 
-    public function __invoke(Request $request, Venture $venture, Type $type, LetterId $id): Response
+    public function __invoke(Request $request, Group $group, Type $type, LetterId $id): Response
     {
         $letter = $this->letters->get($id);
 
-        $formType = $this->formTypeFactory->create($venture, $type);
+        $formType = $this->formTypeFactory->create($group, $type);
 
         $form = $this->formFactory->create(
             $formType::class,
@@ -49,7 +49,7 @@ final readonly class EditController
         }
 
         return $this->responder->render('default/edit.html.twig', [
-            'venture' => $venture,
+            'group' => $group,
             'type' => $type,
             'letter' => $letter,
             'form' => $form->createView(),

@@ -6,10 +6,7 @@ namespace App\Domain\Enum;
 
 use OskarStark\Enum\Trait\Comparable;
 
-/**
- * @todo Rename to Group
- */
-enum Venture: string
+enum Group: string
 {
     use Comparable;
 

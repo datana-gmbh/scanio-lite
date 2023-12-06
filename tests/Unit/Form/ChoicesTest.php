@@ -83,13 +83,13 @@ final class ChoicesTest extends UnitTestCase
     /**
      * @test
      */
-    public function ventures(): void
+    public function groups(): void
     {
         self::assertSame(
             [
                 'default' => 'Standard',
             ],
-            Choices::ventures(),
+            Choices::groups(),
         );
     }
 }

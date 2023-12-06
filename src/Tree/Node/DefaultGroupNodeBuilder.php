@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Tree\Node;
 
+use App\Domain\Enum\Group;
 use App\Domain\Enum\Type;
-use App\Domain\Enum\Venture;
 use App\Tree\Domain\Value\Node;
 
-final class DefaultVentureNodeBuilder extends AbstractNodeBuilder
+final class DefaultGroupNodeBuilder extends AbstractNodeBuilder
 {
     public function __construct(
         private readonly TypeNodeFactory $typeNodeFactory,
@@ -22,7 +22,7 @@ final class DefaultVentureNodeBuilder extends AbstractNodeBuilder
 
     protected function configure(Node $node): Node
     {
-        $venture = Venture::Default;
+        $group = Group::Default;
 
         foreach ([
             Type::Pending,
@@ -30,7 +30,7 @@ final class DefaultVentureNodeBuilder extends AbstractNodeBuilder
             Type::Unknown,
         ] as $type) {
             $node->addChild(
-                $this->typeNodeFactory->create($venture, $type),
+                $this->typeNodeFactory->create($group, $type),
             );
         }
 

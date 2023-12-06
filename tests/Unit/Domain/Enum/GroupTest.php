@@ -4,35 +4,35 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Domain\Enum;
 
-use App\Domain\Enum\Venture;
+use App\Domain\Enum\Group;
 use OskarStark\Enum\Test\EnumTestCase;
 
 /**
- * @covers \App\Domain\Enum\Venture
+ * @covers \App\Domain\Enum\Group
  */
-final class VentureTest extends EnumTestCase
+final class GroupTest extends EnumTestCase
 {
     /**
      * @test
      *
      * @dataProvider labelProvider
      */
-    public function label(string $expected, Venture $venture): void
+    public function label(string $expected, Group $group): void
     {
-        self::assertSame($expected, $venture->label());
+        self::assertSame($expected, $group->label());
     }
 
     /**
-     * @return \Generator<array<string|Venture>>
+     * @return \Generator<array<Group|string>>
      */
     public static function labelProvider(): iterable
     {
-        yield ['Standard', Venture::Default];
+        yield ['Standard', Group::Default];
     }
 
     protected static function getClass(): string
     {
-        return Venture::class;
+        return Group::class;
     }
 
     protected static function getNumberOfValues(): int
