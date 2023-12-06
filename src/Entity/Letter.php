@@ -13,7 +13,6 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Id;
-use Safe\DateTime;
 
 /**
  * @todo Rename all Letter stuff to Document
@@ -50,11 +49,23 @@ class Letter implements \Stringable
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
     private \DateTimeImmutable $inboxDate;
 
+    /**
+     * Das Dokument wurde gelöscht (soft delete) und kann wiederhergestellt werden.
+     */
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
     private ?\DateTimeImmutable $deletedAt = null;
 
+    /**
+     * Die Bearbeitung durch den Benutzer ist abgeschlossen.
+     */
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
     private ?\DateTimeImmutable $finishedAt = null;
+
+    /**
+     * Alle Informationen samt Dokument wurden an das Ziel-System gemeldet.
+     */
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
+    private ?\DateTimeImmutable $exportedAt = null;
 
     public function __construct(
         #[ORM\Column(type: Types::STRING, length: 255)]
@@ -100,16 +111,6 @@ class Letter implements \Stringable
         $this->content = $content;
     }
 
-    public function getFinishedAt(): ?\DateTimeImmutable
-    {
-        return $this->finishedAt;
-    }
-
-    public function setFinishedAt(?\DateTimeImmutable $finishedAt): void
-    {
-        $this->finishedAt = $finishedAt;
-    }
-
     public function getId(): LetterId
     {
         return $this->id;
@@ -153,6 +154,26 @@ class Letter implements \Stringable
     public function setDeletedAt(?\DateTimeImmutable $deletedAt): void
     {
         $this->deletedAt = $deletedAt;
+    }
+
+    public function getFinishedAt(): ?\DateTimeImmutable
+    {
+        return $this->finishedAt;
+    }
+
+    public function setFinishedAt(?\DateTimeImmutable $finishedAt): void
+    {
+        $this->finishedAt = $finishedAt;
+    }
+
+    public function getExportedAt(): ?\DateTimeImmutable
+    {
+        return $this->exportedAt;
+    }
+
+    public function setExportedAt(?\DateTimeImmutable $exportedAt): void
+    {
+        $this->exportedAt = $exportedAt;
     }
 
     /**

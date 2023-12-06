@@ -7,15 +7,15 @@ namespace App\Domain\Enum;
 use OskarStark\Enum\Trait\Comparable;
 use function Symfony\Component\String\u;
 
+/**
+ * @todo rename to Category
+ */
 enum Type: string
 {
     use Comparable;
 
     case KEINE_ZUORDNUNG_MOEGLICH = 'keine_zuordnung_moeglich';
-    case KT_SYNC = 'kt_sync';
-    case LOESCHLISTE = 'to_be_deleted';
     case SONSTIGES = 'sonstiges';
-    case UEBERTRAGEN = 'uebertragen';
     case UNBEARBEITET = 'pending';
     case UNBEKANNT = 'unknown';
     case UNVOLLSTAENDIG = 'unvollstaendig';
@@ -24,9 +24,6 @@ enum Type: string
     {
         return match ($this) {
             self::KEINE_ZUORDNUNG_MOEGLICH => 'Keine Zuordnung möglich',
-            self::KT_SYNC => 'KT Synchronisation',
-            self::LOESCHLISTE => 'Löschliste',
-            self::UEBERTRAGEN => 'Übertragen',
             self::UNBEARBEITET => 'Unbearbeitet',
             self::UNBEKANNT => 'Unbekannt',
             self::UNVOLLSTAENDIG => 'Unvollständig',
@@ -40,9 +37,6 @@ enum Type: string
     public function icon(): ?string
     {
         return match ($this) {
-            self::KT_SYNC => 'fa-light fa-arrow-right-to-bracket',
-            self::LOESCHLISTE => 'fa-light fa-trash',
-            self::UEBERTRAGEN => 'fa-light fa-square-check',
             self::UNBEARBEITET => 'fa-light fa-clipboard-list',
             self::UNBEKANNT => 'fa-light fa-square-question',
             self::UNVOLLSTAENDIG => 'fa-light fa-square-exclamation',
