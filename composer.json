@@ -20,6 +20,8 @@
         "doctrine/orm": "^2.17.1",
         "doctrine/persistence": "^3.2",
         "easycorp/easyadmin-bundle": "^4.8.6",
+        "league/flysystem": "^3.23",
+        "league/flysystem-bundle": "^3.3",
         "nelmio/cors-bundle": "^2.4.0",
         "oskarstark/symfony-http-responder": "^1.5",
         "oskarstark/trimmed-non-empty-string": "^1.11.1",
