@@ -51,7 +51,7 @@ final readonly class EditController
         return $this->responder->render('default/edit.html.twig', [
             'venture' => $venture,
             'type' => $type,
-            'entity' => $letter,
+            'letter' => $letter,
             'form' => $form->createView(),
         ]);
     }

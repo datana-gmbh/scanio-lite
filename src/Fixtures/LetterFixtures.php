@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Fixtures;
 
-use App\Domain\Enum\Type;
 use App\Fixtures\Factory\LetterFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
@@ -14,9 +13,7 @@ final class LetterFixtures extends Fixture implements OrderedFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
-        LetterFactory::new()
-            ->withType(Type::Pending)
-            ->create();
+        LetterFactory::createMany(10);
     }
 
     public function getOrder(): int

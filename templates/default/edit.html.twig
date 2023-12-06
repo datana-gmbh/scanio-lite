@@ -42,15 +42,15 @@
             <div class="sm:flex-auto">
                 <h1 class="text-lg font-semibold leading-6 text-gray-900 items-center">
                     {% if type.icon is not null %}
-                        <i class="{{ type.icon() }} mr-1.5"></i>
+                        <i class="{{ type.icon }} mr-1.5"></i>
                     {% endif %}
-                    {{ type.label }} - {{ entity.id }}
+                    {{ letter.filename }} ({{ type.label }})
                 </h1>
             </div>
         </div>
 
         <div class="mt-6 -mb-16" style="height: 91vh">
-            {{ render_pdf_preview(entity) }}
+            {{ render_pdf_preview(letter) }}
         </div>
     </div>
 {% endblock %}
