@@ -24,8 +24,8 @@ class Letter implements \Stringable
     #[Column(type: LetterIdType::class, unique: true)]
     private LetterId $id;
 
-    #[ORM\Column(type: Types::TEXT)]
-    private string $content;
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $content = null;
 
     #[ORM\Column(type: Types::STRING, enumType: Type::class)]
     private Type $type = Type::UNBEARBEITET;
@@ -36,7 +36,7 @@ class Letter implements \Stringable
     #[ORM\Column(type: Types::ARRAY)]
     private array $data = [];
 
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[ORM\Column(name: '`user`', type: Types::TEXT, nullable: true)]
     private ?string $user = null;
 
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
@@ -59,6 +59,16 @@ class Letter implements \Stringable
     public function __toString(): string
     {
         return $this->id->toString();
+    }
+
+    public function getContent(): ?string
+    {
+        return $this->content;
+    }
+
+    public function setContent(?string $content): void
+    {
+        $this->content = $content;
     }
 
     public function getFinishedAt(): ?\DateTimeImmutable
@@ -114,16 +124,6 @@ class Letter implements \Stringable
     public function setDeletedAt(?\DateTimeImmutable $deletedAt): void
     {
         $this->deletedAt = $deletedAt;
-    }
-
-    public function getContent(): string
-    {
-        return $this->content;
-    }
-
-    public function setContent(string $content): void
-    {
-        $this->content = $content;
     }
 
     /**

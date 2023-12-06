@@ -1,7 +1,6 @@
 .build/
-*.sql
-*.sql*
 public/uploads
+public/documents
 .symfony/symfony
 ~*
 

@@ -10,6 +10,7 @@ use App\Entity\Letter;
 use League\Flysystem\FilesystemOperator;
 use Safe\DateTimeImmutable;
 use Zenstruck\Foundry\ModelFactory;
+use function Symfony\Component\String\u;
 
 /**
  * @extends ModelFactory<Letter>
@@ -21,8 +22,7 @@ final class LetterFactory extends ModelFactory
      */
     public function __construct(
         private readonly FilesystemOperator $documentsStorage,
-    )
-    {
+    ) {
         parent::__construct();
     }
 
@@ -56,11 +56,14 @@ final class LetterFactory extends ModelFactory
         /** @var ExtendedGenerator $faker */
         $faker = self::faker();
 
+        $filename = u($faker->sha1)->truncate(8)->append('.pdf')->toString();
+
         $defaults = [
             'createdAt' => new DateTimeImmutable(),
             'type' => $faker->randomElement(Type::cases()),
             'content' => $faker->text(),
-            'filename' => $faker->sha1.'.pdf',
+            'filename' => $filename,
+            'user' => sprintf('%s %s', $faker->firstName(), $faker->lastName()),
         ];
 
         $this->createDocument($defaults['filename'], $defaults['content']);

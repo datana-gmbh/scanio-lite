@@ -12,12 +12,11 @@ use Doctrine\Persistence\ObjectManager;
 
 final class LetterFixtures extends Fixture implements OrderedFixtureInterface
 {
-
     public function load(ObjectManager $manager): void
     {
         LetterFactory::new()
             ->withType(Type::UNBEARBEITET)
-        ->create();
+            ->create();
     }
 
     public function getOrder(): int
