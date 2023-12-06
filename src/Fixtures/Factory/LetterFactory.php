@@ -55,7 +55,7 @@ final class LetterFactory extends ModelFactory
         /** @var ExtendedGenerator $faker */
         $faker = self::faker();
 
-        $filename = u($faker->sha1)->truncate(20)->append('.pdf')->toString();
+        $filename = u($faker->sha1())->truncate(20)->append('.pdf')->toString();
 
         return [
             'createdAt' => new DateTimeImmutable(),
