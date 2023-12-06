@@ -32,3 +32,21 @@ services:
     # https://symfony.com/doc/current/components/uid.html#generating-and-inspecting-uuids-ulids-in-the-console
     Symfony\Component\Uid\Command\GenerateUlidCommand: ~
     Symfony\Component\Uid\Command\InspectUlidCommand: ~
+
+    Knp\Menu\Matcher\Matcher:
+        arguments:
+            - { 0: '@App\Tree\Voter\UrlPathVoter' }
+
+    Knp\Menu\Matcher\MatcherInterface: '@Knp\Menu\Matcher\Matcher'
+
+    app.main_menu:
+        class: Knp\Menu\MenuItem
+        factory: [ '@App\Tree\KnpMenuBuilder', build ]
+        arguments: [ "@request_stack" ]
+        tags:
+            - { name: knp_menu.menu, alias: main }
+
+    App\ValueResolver\:
+        resource: '../src/ValueResolver/'
+        tags:
+            - { name: controller.argument_value_resolver, priority: 150 }

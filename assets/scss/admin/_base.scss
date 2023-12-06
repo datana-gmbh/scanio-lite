@@ -1,0 +1,167 @@
+// This file is for setting minimum base styles and normalizing common tags.
+// Please do not style tags like h1, h2, p etc. globally because they rarely have the same styling on every page.
+
+// Superior Styles
+html {
+  box-sizing: border-box;
+}
+
+// stylelint-disable selector-max-universal
+* {
+  -moz-osx-font-smoothing: unset;
+  -webkit-font-smoothing: unset;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+// stylelint-enable selector-max-universal
+
+[hidden] {
+  display: none !important; // stylelint-disable-line declaration-no-important
+}
+
+// Body
+body {
+  @include sans-serif-font;
+  @include font-preset('16/20');
+  min-height: 100vh;
+  font-feature-settings: 'kern' 1;
+  font-kerning: normal;
+  text-align: left;
+  text-size-adjust: 100%;
+  color: $color-text-near-dark;
+  background-color: $color-background-light;
+}
+
+// Mobile Safari Fix
+@supports (-webkit-touch-callout: none) {
+  html {
+    height: -webkit-fill-available; // stylelint-disable-line value-no-vendor-prefix
+  }
+
+  body {
+    min-height: -webkit-fill-available; // stylelint-disable-line value-no-vendor-prefix
+  }
+}
+
+// General Text Formatting
+b,
+strong {
+  font-weight: 700;
+}
+
+i,
+em {
+  font-style: italic;
+}
+
+dfn,
+address {
+  font-style: normal;
+}
+
+abbr[title] {
+  text-decoration: none;
+}
+
+sub,
+sup {
+  @include font-preset('10/10');
+  position: relative;
+}
+
+sub {
+  top: 4px;
+}
+
+sup {
+  top: -6px;
+}
+
+mark {
+  color: $color-text-light;
+  background-color: $color-background-obtrusive;
+}
+
+pre,
+code,
+kbd,
+samp,
+var {
+  @include monospace-font;
+}
+
+// Textselection
+::selection {
+  text-shadow: none;
+  color: $color-text-light;
+  // Workaround: rgba to adjust Chrome-Firefox differences
+  background-color: rgba($color-background-obtrusive, 0.99);
+}
+
+// Horizontal Rules
+hr {
+  height: 1px;
+  margin: 0;
+  border: 0;
+  padding: 0;
+  background-color: $color-background-muted;
+}
+
+// Images
+img {
+  display: block;
+  max-width: 100%;
+}
+
+// Buttons
+button {
+  @include font-smoothing;
+  appearance: none;
+  display: inline-block;
+  overflow: visible;
+  position: relative;
+  vertical-align: top;
+  margin: 0;
+  border: 0;
+  padding: 0;
+  font-family: inherit;
+  text-align: center;
+  text-transform: none;
+  color: inherit;
+  background-color: transparent;
+  cursor: pointer;
+
+  &:focus,
+  &:hover {
+    outline: 0;
+  }
+
+  &::-moz-focus-inner { // stylelint-disable-line no-descending-specificity
+    border: 0;
+    padding: 0;
+  }
+
+  &[disabled] {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+}
+
+// Links
+a {
+  text-decoration-skip: objects;
+  color: $color-text-obtrusive;
+  background-color: transparent;
+  cursor: pointer;
+
+  &:focus,
+  &:hover,
+  &:active {
+    color: $color-text-obtrusive;
+    outline: 0; // Don't forget to set focus/hover/active styles individually!
+  }
+}

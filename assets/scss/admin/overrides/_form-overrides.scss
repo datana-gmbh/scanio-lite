@@ -1,0 +1,98 @@
+// stylelint-disable selector-max-attribute, selector-max-combinators, selector-no-qualifying-type, color-no-hex
+label {
+  font-weight: 600;
+}
+
+input[type='password'],
+input[type='text'] {
+  background-clip: padding-box;
+}
+
+input[type='date'] {
+  text-transform: uppercase;
+}
+
+input[type='checkbox']:focus,
+input[type='file']:focus,
+input[type='radio']:focus {
+  outline-color: $color-border-obtrusive;
+  outline-offset: 0;
+}
+
+select,
+select.form-control {
+  appearance: none;
+  padding-right: 40px;
+  background-image: url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2012%2012%22%3E%3Ctitle%3Edown-arrow%3C%2Ftitle%3E%3Cg%20fill%3D%22%23000000%22%3E%3Cpath%20d%3D%22M10.293%2C3.293%2C6%2C7.586%2C1.707%2C3.293A1%2C1%2C0%2C0%2C0%2C.293%2C4.707l5%2C5a1%2C1%2C0%2C0%2C0%2C1.414%2C0l5-5a1%2C1%2C0%2C1%2C0-1.414-1.414Z%22%20fill%3D%22%23000000%22%3E%3C%2Fpath%3E%3C%2Fg%3E%3C%2Fsvg%3E');
+  background-position: calc(100% - 15px) 50%;
+  background-repeat: no-repeat;
+  background-size: 10px;
+}
+
+.form-group {
+  max-width: inherit;
+  margin-bottom: 20px;
+}
+
+.fos_user_change_password label,
+.label--lighter {
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+}
+
+.form-group--icon-in-control__icon {
+  top: 36px;
+  left: 10px;
+  user-select: none;
+  pointer-events: none;
+}
+
+.fos_user_change_password .form-group > input[type='date'][type='text'],
+.fos_user_change_password .form-group > input[type='datetime-local'][type='text'],
+.fos_user_change_password .form-group > input[type='month'][type='text'],
+.fos_user_change_password .form-group > input[type='time'][type='text'],
+.fos_user_change_password input[type='date'][type='password'],
+.fos_user_change_password input[type='datetime-local'][type='password'],
+.fos_user_change_password input[type='month'][type='password'],
+.fos_user_change_password input[type='time'][type='password'],
+input[type='date'].form-control,
+input[type='datetime-local'].form-control,
+input[type='month'].form-control,
+input[type='time'].form-control {
+  line-height: 1;
+}
+
+.fos_user_change_password .form-group > input[type='file'][type='text'],
+.fos_user_change_password input[type='file'][type='password'],
+input[type='file'].form-control {
+  height: 40px;
+}
+
+.form-control,
+.fos_user_change_password .form-group > input[type='text'],
+.fos_user_change_password input[type='password'] {
+  @include font-preset('16/16');
+  max-width: inherit;
+  height: 40px;
+  color: $color-text-unobtrusive;
+}
+
+.form-control:focus,
+.fos_user_change_password .form-group > input:focus[type='text'],
+.fos_user_change_password input:focus[type='password'] {
+  border-color: $color-border-obtrusive-hover;
+  box-shadow: 0 0 8px rgba($color-box-shadow-obtrusive, 0.6);
+}
+
+.form-control:hover:not(:focus),
+.fos_user_change_password .form-group > input:hover[type='text']:not(:focus),
+.fos_user_change_password input:hover[type='password']:not(:focus) {
+  border-color: $color-border-neutral;
+}
+
+.time-widget > div:not(.js-datepicker) .form-control:first-child,
+.time-widget > div:not(.js-datepicker) .form-control:last-child {
+  margin: 0;
+}
+// stylelint-enable selector-max-attribute, selector-max-combinators, selector-no-qualifying-type, color-no-hex

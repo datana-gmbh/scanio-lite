@@ -19,7 +19,7 @@ final readonly class FormTypeFactory implements FormTypeFactoryInterface
      * @param iterable<FormTypeFactoryLoadableInterface> $formTypes
      */
     public function __construct(
-        #[TaggedIterator(tag: 'scanio.formtype')]
+        #[TaggedIterator(tag: FormTypeFactoryLoadableInterface::class)]
         iterable $formTypes,
     ) {
         $this->formTypes = $formTypes instanceof \Traversable ? iterator_to_array($formTypes) : $formTypes;

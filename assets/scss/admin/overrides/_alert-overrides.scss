@@ -1,0 +1,70 @@
+// stylelint-disable no-descending-specificity
+.alert {
+  @include font-preset('16/20');
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 10px 15px;
+  color: $color-text-light;
+
+  .close {
+    opacity: 1;
+    margin-right: -10px;
+    padding: 5px 10px;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    color: $color-text-light;
+
+    &:focus,
+    &:hover {
+      opacity: 1;
+      transform: scale(1.3);
+    }
+  }
+
+  .message {
+    margin-right: 10px;
+  }
+
+  .alert-link {
+    font-style: italic;
+    font-weight: inherit;
+    color: $color-text-light;
+  }
+}
+
+.alert-danger {
+  border-color: $color-status-error;
+  background-color: $color-status-error;
+}
+
+.alert-warning {
+  border-color: $color-status-warning;
+  background-color: $color-status-warning;
+}
+
+.alert-info {
+  border-color: $color-status-info;
+  background-color: $color-status-info;
+}
+
+.alert-success {
+  border-color: $color-status-success;
+  background-color: $color-status-success;
+}
+
+.alert__action {
+  float: none;
+  margin: 0;
+  padding: 5px 10px;
+}
+
+.alert-dismissible {
+  .close {
+    top: unset;
+    right: unset;
+  }
+}
+// stylelint-enable no-descending-specificity

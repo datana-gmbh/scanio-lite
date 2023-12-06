@@ -1,0 +1,10 @@
+// stylelint-disable selector-no-qualifying-type
+.bootstrap-datetimepicker-widget td.active,
+.bootstrap-datetimepicker-widget td.active:hover {
+  background-color: $color-background-obtrusive;
+}
+
+.bootstrap-datetimepicker-widget td.today::before {
+  border-bottom-color: $color-background-obtrusive;
+}
+// stylelint-enable selector-no-qualifying-type

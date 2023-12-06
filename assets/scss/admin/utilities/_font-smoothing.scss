@@ -1,0 +1,6 @@
+// Use font-antialising for a smoother font-rendering on Mac OS X
+
+@mixin font-smoothing {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
