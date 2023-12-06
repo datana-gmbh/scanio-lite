@@ -25,6 +25,7 @@ final class DefaultVentureNodeBuilder extends AbstractNodeBuilder
         $venture = Venture::Default;
 
         foreach ([
+            Type::Pending,
             Type::Other,
             Type::Unknown,
         ] as $type) {
