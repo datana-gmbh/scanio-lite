@@ -27,7 +27,7 @@ final class VentureTest extends EnumTestCase
      */
     public static function labelProvider(): iterable
     {
-        yield ['Default', Venture::Default];
+        yield ['Standard', Venture::Default];
     }
 
     protected static function getClass(): string
