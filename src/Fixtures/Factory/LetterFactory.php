@@ -33,14 +33,7 @@ final class LetterFactory extends ModelFactory
 
     public function withFilename(string $filename): self
     {
-        $content = self::faker()->text();
-
-        $this->createDocument($filename, $content);
-
-        return $this->addState([
-            'filename' => $filename,
-            'content' => $content,
-        ]);
+        return $this->addState(['filename' => $filename]);
     }
 
     public static function getClass(): string
@@ -56,7 +49,7 @@ final class LetterFactory extends ModelFactory
         /** @var ExtendedGenerator $faker */
         $faker = self::faker();
 
-        $filename = u($faker->sha1)->truncate(8)->append('.pdf')->toString();
+        $filename = u($faker->sha1)->truncate(20)->append('.pdf')->toString();
 
         $defaults = [
             'createdAt' => new DateTimeImmutable(),
@@ -76,11 +69,12 @@ final class LetterFactory extends ModelFactory
      */
     protected function initialize(): self
     {
-        return $this;
-    }
+        return $this
+            ->afterInstantiate(function(Letter $letter, array $attributes): void {
+                // $object is the instantiated object
+                // $attributes contains the attributes used to instantiate the object and any extras
 
-    private function createDocument(string $filename, string $content): void
-    {
-        $this->documentsStorage->write($filename, $content);
+                $this->documentsStorage->write($letter->getFilename(), $letter->getContent() ?? '');
+            });
     }
 }
