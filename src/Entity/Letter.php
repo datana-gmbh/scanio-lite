@@ -18,9 +18,6 @@ use Doctrine\ORM\Mapping\Id;
  */
 #[ORM\Entity(repositoryClass: LetterRepository::class)]
 #[ORM\Table(name: 'letters')]
-#[ORM\Index(name: 'letter_status', columns: ['status'])]
-#[ORM\Index(name: 'letter_type', columns: ['type'])]
-#[ORM\Index(name: 'letter_filepath', columns: ['filepath'])]
 class Letter implements \Stringable
 {
     #[Id]
@@ -52,8 +49,8 @@ class Letter implements \Stringable
     private ?\DateTimeImmutable $finishedAt = null;
 
     public function __construct(
-        #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
-        private ?string $filepath = null,
+        #[ORM\Column(type: Types::STRING, length: 255)]
+        private string $filename,
     ) {
         $this->id = new LetterId();
         $this->createdAt = new \DateTimeImmutable();
@@ -89,14 +86,14 @@ class Letter implements \Stringable
         $this->type = $type;
     }
 
-    public function setFilepath(?string $filepath = null): void
+    public function setFilename(string $filename): void
     {
-        $this->filepath = $filepath;
+        $this->filename = $filename;
     }
 
-    public function getFilepath(): ?string
+    public function getFilename(): string
     {
-        return $this->filepath;
+        return $this->filename;
     }
 
     public function getCreatedAt(): \DateTimeImmutable

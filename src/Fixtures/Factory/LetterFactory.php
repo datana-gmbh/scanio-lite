@@ -7,6 +7,7 @@ namespace App\Fixtures\Factory;
 use App\Bridge\Faker\ExtendedGenerator;
 use App\Domain\Enum\Type;
 use App\Entity\Letter;
+use League\Flysystem\FilesystemOperator;
 use Safe\DateTimeImmutable;
 use Zenstruck\Foundry\ModelFactory;
 
@@ -18,7 +19,9 @@ final class LetterFactory extends ModelFactory
     /**
      * @see https://github.com/zenstruck/foundry#factories-as-services
      */
-    public function __construct()
+    public function __construct(
+        private readonly FilesystemOperator $documentsStorage,
+    )
     {
         parent::__construct();
     }
@@ -26,6 +29,18 @@ final class LetterFactory extends ModelFactory
     public function withType(Type $type): self
     {
         return $this->addState(['type' => $type]);
+    }
+
+    public function withFilename(string $filename): self
+    {
+        $content = self::faker()->text();
+
+        $this->createDocument($filename, $content);
+
+        return $this->addState([
+            'filename' => $filename,
+            'content' => $content,
+        ]);
     }
 
     public static function getClass(): string
@@ -41,11 +56,16 @@ final class LetterFactory extends ModelFactory
         /** @var ExtendedGenerator $faker */
         $faker = self::faker();
 
-        return [
+        $defaults = [
             'createdAt' => new DateTimeImmutable(),
             'type' => $faker->randomElement(Type::cases()),
             'content' => $faker->text(),
+            'filename' => $faker->sha1.'.pdf',
         ];
+
+        $this->createDocument($defaults['filename'], $defaults['content']);
+
+        return $defaults;
     }
 
     /**
@@ -54,5 +74,10 @@ final class LetterFactory extends ModelFactory
     protected function initialize(): self
     {
         return $this;
+    }
+
+    private function createDocument(string $filename, string $content): void
+    {
+        $this->documentsStorage->write($filename, $content);
     }
 }

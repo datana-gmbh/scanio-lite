@@ -136,6 +136,7 @@ public/build/manifest.json: webpack.config.js node_modules
 
 .PHONY: dev
 dev: doctrine
+	symfony console doctrine:fixtures:load --no-interaction
 
 .PHONY: infection
 infection: vendor doctrine code-coverage

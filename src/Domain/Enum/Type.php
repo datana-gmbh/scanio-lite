@@ -11,7 +11,6 @@ enum Type: string
 {
     use Comparable;
 
-    case FILEPACKS = 'filepacks';
     case KEINE_ZUORDNUNG_MOEGLICH = 'keine_zuordnung_moeglich';
     case KT_SYNC = 'kt_sync';
     case LOESCHLISTE = 'to_be_deleted';
@@ -41,7 +40,6 @@ enum Type: string
     public function icon(): ?string
     {
         return match ($this) {
-            self::FILEPACKS => 'fa-light fa-files',
             self::KT_SYNC => 'fa-light fa-arrow-right-to-bracket',
             self::LOESCHLISTE => 'fa-light fa-trash',
             self::UEBERTRAGEN => 'fa-light fa-square-check',

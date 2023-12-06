@@ -11,7 +11,7 @@ final class LetterIdType extends AbstractUidType
 {
     public function getName(): string
     {
-        return 'letter_id';
+        return self::class;
     }
 
     protected function getUidClass(): string
