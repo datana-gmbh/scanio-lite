@@ -1,0 +1,95 @@
+name: "DB Schema Check"
+
+on: # yamllint disable-line rule:truthy
+    pull_request:
+        paths:
+            - ".github/workflows/database-migration-check.yaml"
+            - "**"
+
+env:
+    DATANA_BOT_EMAIL: "bot@datana.rocks"
+    DATANA_BOT_NAME: "datana-bot"
+    REQUIRED_PHP_EXTENSIONS: "ctype, filter, hash, iconv, imap, mbstring, mongodb, pdo, pdo_pgsql, pgsql, redis, simplexml, gd, random"
+
+jobs:
+    schema:
+        name: "Migration Check / Creation"
+
+        runs-on: "ubuntu-latest"
+
+        services:
+            database-default:
+                image: "postgres:15"
+                env:
+                    POSTGRES_USER: "postgres"
+                    POSTGRES_PASSWORD: "postgres"
+                    POSTGRES_DB: "default"
+                ports:
+                    - "5432:5432"
+                options: "--health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 3"
+
+        env:
+            APP_ENV: "dev"
+            ENTITY_MANAGER_NAME_DEFAULT: "default"
+            DATABASE_URL: "postgresql://postgres:postgres@127.0.0.1:5432/default?serverVersion=15&charset=utf8"
+
+        strategy:
+            matrix:
+                php-version:
+                    - "8.3"
+
+        steps:
+            # workaround for missing secret in fork PRs - see https://github.com/actions/checkout/issues/298
+            # see https://github.com/rectorphp/rector/commit/d395e1c28b8e6a56711dcc2e10490a82965850e4
+            -   if: github.actor != 'dependabot[bot]'
+                name: "Checkout"
+                uses: "actions/checkout@v4"
+                with:
+                    ref: "${{ github.head_ref }}"
+                    # Must be used to be able to commit changed files
+                    token: "${{ secrets.DATANA_BOT_TOKEN }}"
+
+            # in forks, the token is not available - so we cannot use it
+            -   if: github.actor == 'dependabot[bot]'
+                name: "Checkout"
+                uses: "actions/checkout@v4"
+                with:
+                    ref: "${{ github.head_ref }}"
+
+            -   name: "Install PHP with extensions"
+                uses: "shivammathur/setup-php@2.28.0"
+                with:
+                    coverage: "none"
+                    extensions: "${{ env.REQUIRED_PHP_EXTENSIONS }}"
+                    php-version: "${{ matrix.php-version }}"
+                    tools: "composer:v2"
+
+            -   name: "Install dependencies with composer"
+                uses: "ramsey/composer-install@2.2.0"
+
+            -   name: "Show Doctrine migration status"
+                run: "bin/console doctrine:migrations:status"
+
+            -   name: "Execute Doctrine migrations"
+                run: "bin/console doctrine:migrations:migrate --no-interaction"
+
+            -   name: "Create new Migration Diff"
+                run: "bin/console doctrine:migrations:diff --allow-empty-diff"
+
+            -   name: "Execute new Migration Diff"
+                run: "bin/console doctrine:migrations:migrate --no-interaction"
+
+            -   name: "Commit new Migration"
+                uses: "stefanzweifel/git-auto-commit-action@v5.0.0"
+                with:
+                    branch: "${{ github.head_ref }}"
+                    commit_author: "${{ env.DATANA_BOT_NAME }} <${{ env.DATANA_BOT_EMAIL }}>"
+                    commit_message: "Created new migration"
+                    commit_user_email: "${{ env.DATANA_BOT_EMAIL }}"
+                    commit_user_name: "${{ env.DATANA_BOT_NAME }}"
+
+            -   name: "Show Doctrine mapping information"
+                run: "bin/console doctrine:mapping:info --em=${{ env.ENTITY_MANAGER_NAME_DEFAULT }}"
+
+            -   name: "Validate Doctrine mapping"
+                run: "bin/console doctrine:schema:validate --em=${{ env.ENTITY_MANAGER_NAME_DEFAULT }}"
