@@ -9,7 +9,7 @@ on: # yamllint disable-line rule:truthy
 env:
     DATANA_BOT_EMAIL: "bot@datana.rocks"
     DATANA_BOT_NAME: "datana-bot"
-    REQUIRED_PHP_EXTENSIONS: "ctype, filter, hash, iconv, imap, mbstring, mongodb, pdo, pdo_pgsql, pgsql, redis, simplexml, gd, random"
+    REQUIRED_PHP_EXTENSIONS: "ctype, filter, pdo_pgsql"
 
 jobs:
     schema:
