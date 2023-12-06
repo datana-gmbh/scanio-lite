@@ -1,0 +1,15 @@
+{# @var field \App\Crud\Domain\Value\Field #}
+
+{# NOTE: the rel="noopener" attr is needed to avoid performance and security issues
+  (see https://web.dev/external-anchors-use-rel-noopener/) #}
+<div class="max-w-xs truncate">
+    <a
+        target="_blank"
+        rel="noopener"
+        href="{{ value }}"
+        title="{{ value }}"
+        class="text-primary-600 hover:opacity-80 transition duration-200"
+    >
+        {{ value }}
+    </a>
+</div>

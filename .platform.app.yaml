@@ -22,6 +22,7 @@ dependencies:
 
 relationships:
     database: "main:postgresql"
+    "/public/documents": { source: service, service: files, source_path: documents }
 
 build:
     flavor: none

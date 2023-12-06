@@ -1,0 +1,168 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('new') }}
+{% endblock %}
+
+{% block body %}
+    <div
+        class="fixed z-50 top-5 left-1/2 transform -translate-x-1/2 inset-x-0 max-w-3xl space-y-2">
+        {% for label, messages in app.flashes %}
+            {% set bgColor = 'bg-blue-50' %}
+            {% set textColor = 'text-blue-800' %}
+
+            {% if label == 'success' %}
+                {% set bgColor = 'bg-green-50' %}
+                {% set textColor = 'text-green-800' %}
+            {% elseif label == 'notice' %}
+                {% set bgColor = 'bg-yellow-50' %}
+                {% set textColor = 'text-yellow-800' %}
+            {% elseif label == 'error' %}
+                {% set bgColor = 'bg-red-50' %}
+                {% set textColor = 'text-red-800' %}
+            {% endif %}
+
+            {% for message in messages %}
+                <div class="flash-message rounded-md p-4 {{ bgColor }}">
+                    <div class="flex">
+                        <div class="ml-3">
+                            <p class="text-sm font-medium {{ textColor }}">
+                                {{ message }}
+                            </p>
+                        </div>
+                        <div class="ml-auto pl-3">
+                            <div class="-mx-1.5 -my-1.5">
+                                <button type="button"
+                                        class="inline-flex rounded-md {{ bgColor }} p-1.5 {{ textColor }} hover:opacity-80 focus:outline-none">
+                                    <span class="sr-only">Dismiss</span>
+                                    <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                        <path
+                                            d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+    <div>
+        <!-- Off-canvas menu for mobile, show/hide based on off-canvas menu state. -->
+        <div class="relative z-50 lg:hidden" role="dialog" aria-modal="true">
+            <!--
+              Off-canvas menu backdrop, show/hide based on off-canvas menu state.
+
+              Entering: "transition-opacity ease-linear duration-300"
+                From: "opacity-0"
+                To: "opacity-100"
+              Leaving: "transition-opacity ease-linear duration-300"
+                From: "opacity-100"
+                To: "opacity-0"
+            -->
+            <div class="fixed inset-0 bg-gray-900/80"></div>
+
+            <div class="fixed inset-0 flex">
+                <!--
+                  Off-canvas menu, show/hide based on off-canvas menu state.
+
+                  Entering: "transition ease-in-out duration-300 transform"
+                    From: "-translate-x-full"
+                    To: "translate-x-0"
+                  Leaving: "transition ease-in-out duration-300 transform"
+                    From: "translate-x-0"
+                    To: "-translate-x-full"
+                -->
+                <div class="relative mr-16 flex w-full max-w-xs flex-1">
+                    <!--
+                      Close button, show/hide based on off-canvas menu state.
+
+                      Entering: "ease-in-out duration-300"
+                        From: "opacity-0"
+                        To: "opacity-100"
+                      Leaving: "ease-in-out duration-300"
+                        From: "opacity-100"
+                        To: "opacity-0"
+                    -->
+                    <div class="absolute left-full top-0 flex w-16 justify-center pt-5">
+                        <button type="button" class="-m-2.5 p-2.5">
+                            <span class="sr-only">Close sidebar</span>
+                            <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Sidebar component, swap this element with another sidebar if you like -->
+                    <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-primary-600 px-6 pb-4">
+                        <div class="flex h-16 shrink-0 items-center">
+                            <img alt="Logo scan.io" src="{{ asset('build/images/logo.png') }}" class="h-8 invert">
+                        </div>
+                        <nav class="sidebar-menu flex flex-1 flex-col">
+                            {{ knp_menu_render('main', {'template': 'menu/menu.html.twig'}) }}
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Static sidebar for desktop -->
+        <div class="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-80 lg:flex-col">
+            <!-- Sidebar component, swap this element with another sidebar if you like -->
+            <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-primary-600 px-6 pb-4">
+                <div class="flex h-16 shrink-0 items-center">
+                    <img alt="Logo scan.io" src="{{ asset('build/images/logo.png') }}" class="h-8 invert">
+                </div>
+                <nav class="sidebar-menu flex flex-1 flex-col">
+                    {{ knp_menu_render('main', {'template': 'menu/menu.html.twig'}) }}
+
+                    <ul class="mt-4 pt-4 border-t border-primary-500">
+                        <li>
+                            <div class="text-sm font-semibold leading-6 text-white/50">
+                                {{ app.user }}
+                            </div>
+                            <ul role="list" class="-mx-2 mt-2 space-y-1">
+                                <li class="space-y-1">
+                                    <a
+                                        class="hover:bg-white/5 text-white/70 group items-center flex gap-x-3 rounded-md p-2 text-base leading-6 font-semibold"
+                                        href="#"
+                                    >
+                                        <i class="fa-light fa-gear shrink-0 text-xl text-white/20 group-hover:text-white/50"></i>
+                                        <span class="flex-1">Einstellungen</span>
+                                    </a>
+                                </li>
+{# <li class="space-y-1"> #}
+{# <a #}
+{# class="hover:bg-white/5 text-white/70 group items-center flex gap-x-3 rounded-md p-2 text-base leading-6 font-semibold" #}
+{# href="{{ path(constant('App\\Routing\\Routes::LOGOUT')) }}" #}
+{# > #}
+{# <i class="fa-light fa-arrow-right-from-bracket shrink-0 text-xl text-white/20 group-hover:text-white/50"></i> #}
+{# <span class="flex-1">Abmelden</span> #}
+{# </a> #}
+{# </li> #}
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <div class="lg:pl-80">
+
+            <main class="px-4 py-10 sm:px-6 lg:px-8 lg:py-6">
+                {% block content %}{% endblock %}
+            </main>
+
+            {% block sidebar %}
+                <aside class="fixed inset-y-0 right-0 hidden w-3/12 overflow-y-auto border-l border-gray-200 pt-12 xl:block">
+                    <div class="relative">
+                        {% block sidebar_content %}{% endblock %}
+                    </div>
+                </aside>
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('new') }}
+{% endblock %}

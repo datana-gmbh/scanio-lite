@@ -1,0 +1,11 @@
+{# @var field \App\Crud\Domain\Value\Field #}
+
+{% if value == true %}
+    <span class="px-2 py-0.5 rounded-md bg-green-700 text-white">
+        Ja
+    </span>
+{% else %}
+    <span class="px-2 py-0.5 rounded-md bg-red-700 text-white">
+        Nein
+    </span>
+{% endif %}

@@ -1,0 +1,70 @@
+// Layering
+//
+// This function is used for managing z-index layers within a Sass map. The advantage of this, you have an overview of all z-index layers used inside your website/app plus you can spot the hierarchy at first glance.
+//
+// Usage:
+//
+// Define your layers.
+//
+// $z-layers: (
+//   'dropdown': 500,
+//   'modal': (
+//     'base': 100,
+//     'close': 101
+//   ),
+//   'default': 1,
+//   'below': -1
+// );
+//
+// Sample input:
+// .dropdown {
+//   position: absolute;
+//   z-index: z('dropdown');
+// }
+//
+// .modal {
+//   position: absolute;
+//   z-index: z('modal', 'base');
+// }
+//
+// .modal--close {
+//   position: absolute;
+//   z-index: z('modal', 'close');
+// }
+//
+// Sample output:
+// .dropdown {
+//   position: absolute;
+//   z-index: 500;
+// }
+//
+// .modal {
+//   position: absolute;
+//   z-index: 100;
+// }
+//
+// .modal--close {
+//   position: absolute;
+//   z-index: 101;
+// }
+
+$z-layers: (
+  'default': 1,
+  'below': -1
+);
+
+@function map-deep-get($map, $keys...) {
+  @each $key in $keys {
+    $map: map-get($map, $key);
+  }
+
+  @return $map;
+}
+
+@function z($layers...) {
+  @if not map-deep-get($z-layers, $layers...) {
+    @warn 'No layer found for #{inspect($layers...)} in $z-layers map. Property omitted.';
+  }
+
+  @return map-deep-get($z-layers, $layers...);
+}

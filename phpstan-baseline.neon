@@ -16,6 +16,44 @@ parameters:
 			path: src/Bridge/Faker/Provider/ArrayProvider.php
 
 		-
+			message: "#^Call to static method Webmozart\\\\Assert\\\\Assert\\:\\:startsWith\\(\\) with string and string will always evaluate to true\\.$#"
+			count: 1
+			path: src/Bridge/Flysystem/UrlGenerator.php
+
+		-
+			message: "#^Call to an undefined method Symfony\\\\Component\\\\HttpFoundation\\\\Session\\\\SessionInterface\\:\\:getFlashBag\\(\\)\\.$#"
+			count: 1
+			path: src/Controller/UploadController.php
+
+		-
+			message: "#^Method App\\\\Crud\\\\Edit\\\\Form\\\\FormTypeFactory\\:\\:create\\(\\) should return App\\\\Crud\\\\Edit\\\\Form\\\\FormTypeFactoryLoadableInterface but returns App\\\\Crud\\\\Edit\\\\Form\\\\FormTypeFactoryLoadableInterface\\|false\\.$#"
+			count: 1
+			path: src/Crud/Edit/Form/FormTypeFactory.php
+
+		-
+			message: "#^Match arm comparison between \\$this\\(App\\\\Domain\\\\Enum\\\\Type\\)&App\\\\Domain\\\\Enum\\\\Type\\:\\:Unknown and App\\\\Domain\\\\Enum\\\\Type\\:\\:Unknown is always true\\.$#"
+			count: 1
+			path: src/Domain/Enum/Type.php
+
+		-
+			message: "#^Match arm is unreachable because previous comparison is always true\\.$#"
+			count: 1
+			path: src/Domain/Enum/Type.php
+
+		-
+			message: "#^Class DateTimeImmutable is unsafe to use\\. Its methods can return FALSE instead of throwing an exception\\. Please add 'use Safe\\\\DateTimeImmutable;' at the beginning of the file to use the variant provided by the 'thecodingmachine/safe' library\\.$#"
+			count: 1
+			path: src/Entity/Letter.php
+
+		-
+			message: """
+				#^Fetching deprecated class constant ARRAY of class Doctrine\\\\DBAL\\\\Types\\\\Types\\:
+				Use \\{@link Types\\:\\:JSON\\} instead\\.$#
+			"""
+			count: 1
+			path: src/Entity/Letter.php
+
+		-
 			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertTrue\\(\\) with true will always evaluate to true\\.$#"
 			count: 1
 			path: tests/Acceptance/AcceptanceDummyTest.php
@@ -41,11 +79,6 @@ parameters:
 			path: tests/Functional/FunctionalDummyTest.php
 
 		-
-			message: "#^Call to static method App\\\\Tests\\\\Integration\\\\IntegrationTestCase\\:\\:assertTrue\\(\\) with true will always evaluate to true\\.$#"
-			count: 1
-			path: tests/Integration/IntegrationDummyTest.php
-
-		-
 			message: "#^Method App\\\\Tests\\\\Integration\\\\IntegrationTestCase\\:\\:createKernel\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: tests/Integration/IntegrationTestCase.php
@@ -56,12 +89,17 @@ parameters:
 			path: tests/Integration/IntegrationTestCase.php
 
 		-
+			message: "#^Call to static method App\\\\Tests\\\\Unit\\\\UnitTestCase\\:\\:assertSame\\(\\) with 'Bitte auswählen' and 'Bitte auswählen' will always evaluate to true\\.$#"
+			count: 1
+			path: tests/Unit/Form/ChoicesTest.php
+
+		-
 			message: "#^Call to static method App\\\\Tests\\\\Unit\\\\UnitTestCase\\:\\:assertSame\\(\\) with 'admin_dashboard' and 'admin_dashboard' will always evaluate to true\\.$#"
 			count: 1
 			path: tests/Unit/Routing/AdminRoutesTest.php
 
 		-
-			message: "#^Call to static method App\\\\Tests\\\\Unit\\\\UnitTestCase\\:\\:assertSame\\(\\) with 'index' and 'index' will always evaluate to true\\.$#"
+			message: "#^Call to static method App\\\\Tests\\\\Unit\\\\UnitTestCase\\:\\:assertSame\\(\\) with 'dashboard' and 'dashboard' will always evaluate to true\\.$#"
 			count: 1
 			path: tests/Unit/Routing/RoutesTest.php
 

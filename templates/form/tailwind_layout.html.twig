@@ -1,0 +1,334 @@
+{% use 'tailwind_2_layout.html.twig' %}
+
+{% block form_errors %}
+    {% if errors|length > 0 %}
+        {% if compound %}
+            <ul>
+                {% for error in errors %}
+                    <li class="text-red-600">{{ error.message }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="mt-2 text-sm text-red-600 inline-flex">
+                <svg class="h-5 w-5 text-red-500"
+                     xmlns="http://www.w3.org/2000/svg"
+                     viewBox="0 0 20 20"
+                     fill="currentColor"
+                     aria-hidden="true"
+                >
+                    <path fill-rule="evenodd"
+                          d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                          clip-rule="evenodd"
+                    />
+                </svg>
+                {{ errors[0].message }}
+            </p>
+        {% endif %}
+    {% endif %}
+{% endblock form_errors %}
+
+{%- block choice_widget_collapsed -%}
+    {%- set class = attribute(attr, 'class') is defined ? attr.class : '' %}
+    {%- set class = (class ~ ' appearance-none block w-full py-3 px-4 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-primary-600 focus:border-primary-600 sm:text-sm rounded-md')|trim %}
+    {%- set attr = attr|merge({class}) -%}
+    {%- if required and placeholder is none and not placeholder_in_choices and not multiple and (attr.size is not defined or attr.size <= 1) -%}
+        {% set required = false %}
+    {%- endif -%}
+    <select {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
+        {%- if placeholder is not none -%}
+            <option value=""{% if required and value is empty %} selected="selected"{% endif %} {% with {attr: placeholder_attr|default([])} only %}{{ block('attributes') }}{% endwith %}>{{ placeholder != '' ? (translation_domain is same as(false) ? placeholder : placeholder|trans({}, translation_domain)) }}</option>
+        {%- endif -%}
+        {%- if preferred_choices|length > 0 -%}
+            {% set options = preferred_choices %}
+            {% set render_preferred_choices = true %}
+            {{- block('choice_widget_options') -}}
+            {%- if choices|length > 0 and separator is not none -%}
+                <option disabled="disabled">{{ separator }}</option>
+            {%- endif -%}
+        {%- endif -%}
+        {%- set options = choices -%}
+        {%- set render_preferred_choices = false -%}
+        {{- block('choice_widget_options') -}}
+    </select>
+{%- endblock choice_widget_collapsed -%}
+
+{%- block choice_widget_expanded -%}
+    {%- set attr = attr|merge({class: attr.class|default('mt-2 space-y-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-10')}) -%}
+    <div {{ block('widget_container_attributes') }}>
+        {%- for child in form %}
+            <div class="flex items-center">
+                {{- form_widget(child, {
+                    attr: {
+                        class: 'h-7 w-7 border-gray-300 text-black focus:ring-black'
+                    }
+                }) -}}
+                {{- form_label(child, null, {
+                    translation_domain: choice_translation_domain,
+                    label_attr: {
+                        class: 'ml-3 block font-medium text-gray-900',
+                    },
+                }) -}}
+            </div>
+        {% endfor -%}
+    </div>
+{%- endblock choice_widget_expanded -%}
+
+{% block template_form_type_row %}
+    {% include form.parent.vars.template with form.parent.vars.template_options %}
+{% endblock template_form_type_row %}
+
+{% block date_row %}
+    {% if form.vars.widget == 'single_text' %}
+        {{ form_row(form, {attr: {class: 'appearance-none block w-full py-3 px-4 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-primary-600 focus:border-primary-600 sm:text-sm rounded-md'}}) }}
+    {% else %}
+        {{ form_label(form) }}
+        <div class="grid grid-cols-6 gap-6 {{ errors|length > 0 ? 'has-errors' : '' }}">
+            <div class="col-span-2 sm:col-span-2">
+                {{ form_widget(form.day, {attr: {class: 'appearance-none block w-full py-4 px-4 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-black focus:border-black sm:text-sm rounded-md'}}) }}
+            </div>
+            <div class="col-span-2 sm:col-span-2">
+                {{ form_widget(form.month, {attr: {class: 'appearance-none block w-full py-4 px-4 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-black focus:border-black sm:text-sm rounded-md'}}) }}
+            </div>
+            <div class="col-span-2 sm:col-span-2">
+                {{ form_widget(form.year, {attr: {class: 'appearance-none block w-full py-4 px-4 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-black focus:border-black sm:text-sm rounded-md'}}) }}
+            </div>
+        </div>
+        {{ form_errors(form) }}
+    {% endif %}
+{% endblock date_row %}
+
+{% block file_widget %}
+    {%- set class = attribute(attr, 'class') is defined ? attr.class : '' %}
+    {%- set class = (class ~ 'px-0 py-0 appearance-none block w-full w-full sm:text-sm border border-gray-300 focus:outline-none text-gray-500 file:mr-4 file:py-3 file:px-4 file:rounded-l-md file:border-y-0 file:border-l-0 file:border-r file:border-gray-100 file:sm:text-sm file:font-semibold file:bg-gray-100 file:text-black file:cursor-pointer hover:file:bg-opacity-80')|trim %}
+    {%- set attr = attr|merge({class}) -%}
+    {% with {attr: attr} %}{{ block('form_widget') }}{% endwith %}
+{% endblock file_widget %}
+
+{%- block form_widget_simple -%}
+    {%- set class = attribute(attr, 'class') is defined ? attr.class : '' %}
+    {%- set class = (class ~ ' appearance-none block w-full py-3 px-4 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-primary-600 focus:border-primary-600 sm:text-sm rounded-md')|trim %}
+    {%- set attr = attr|merge({class}) -%}
+    {{ parent() }}
+{%- endblock form_widget_simple -%}
+
+{% block form_help -%}
+    {%- set help_attr = help_attr|merge({class: 'text-sm text-gray-500'}) -%}
+    {{ parent() }}
+{%- endblock form_help %}
+
+{% block submit_widget %}
+    {%- set attr = attr|merge({class: 'relative items-center justify-center px-6 py-3 border-2 border-primary-600 text-base font-medium rounded-md text-white bg-primary-600 hover:opacity-80 sm:px-14 transition ease-in-out duration-100'}) %}
+    {{ parent() }}
+{% endblock submit_widget %}
+
+{% block form_label %}
+    {%- if label is not same as(false) -%}
+        {% if label_attr is not defined or attribute(label_attr, 'class') is not defined %}
+            {% set label_attr = label_attr|merge({'class': 'text-left font-bold tracking-wide text-sm text-black inline-flex'}) %}
+        {% endif %}
+        {{- parent(form) -}}
+    {%- endif -%}
+{% endblock form_label %}
+
+{% block form_row %}
+    {%- if errors|length > 0 -%}
+        {%- set class = attribute(row_attr, 'class') is defined ? row_attr.class : '' %}
+        {%- set class = (class ~ ' has-errors')|trim %}
+        {%- set row_attr = row_attr|merge({class}) %}
+    {%- endif -%}
+
+    <div{% with {attr: row_attr} %}{{ block('attributes') }}{% endwith %}>
+        {{- form_label(form) -}}
+        {%- set widget_attr = {} -%}
+        {%- if help is not empty -%}
+            {%- set widget_attr = {attr: {'aria-describedby': id ~ "_help"}} -%}
+        {%- endif -%}
+
+        {{- form_widget(form, widget_attr) -}}
+        {{- form_help(form) -}}
+        {{- form_errors(form) -}}
+    </div>
+{% endblock form_row %}
+
+{% block collection_row %}
+    {%- if errors|length > 0 -%}
+        {%- set class = attribute(row_attr, 'class') is defined ? row_attr.class : '' %}
+        {%- set class = (class ~ ' has-errors')|trim %}
+        {%- set row_attr = row_attr|merge({class}) %}
+    {%- endif -%}
+
+    <div{% with {attr: row_attr} %}{{ block('attributes') }}{% endwith %}>
+        {{- form_label(form) -}}
+        {{- form_errors(form) -}}
+        {%- set widget_attr = {} -%}
+        {%- if help is not empty -%}
+            {%- set widget_attr = {attr: {'aria-describedby': id ~ "_help"}} -%}
+        {%- endif -%}
+
+        {{- form_widget(form, widget_attr) -}}
+        {{- form_help(form) -}}
+
+    </div>
+{% endblock collection_row %}
+
+{%- block collection_widget -%}
+
+    <div
+        id="{{ form.vars.id }}_collection_list"
+        class="space-y-6 mt-3"
+        {% if form.vars.prototype is defined %}
+            data-prototype="{{ form_widget(form.vars.prototype)|e }}"
+            data-counter="{{ form.children|length }}"
+        {% endif %}
+    >
+        {{ block('form_widget') }}
+    </div>
+    {% if form.vars.prototype is defined and form.vars.allow_add == true %}
+        <button
+            type="button"
+            id="{{ form.vars.id }}_add_button"
+            class="mt-6 text-base font-medium tracking-wide text-primary hover:opacity-80 sm:px-6 transition ease-in-out duration-100"
+        >
+            <i class="far fa-plus mr-4 text-xl"></i>
+
+            {{ ('button.add.' ~ form.vars.name)|trans }}
+        </button>
+
+        <script>
+            (() => {
+                const addButton = document.getElementById('{{ form.vars.id }}_add_button')
+
+                if (!addButton) {
+                    return
+                }
+
+                const collectionList = document.getElementById('{{ form.vars.id }}_collection_list')
+                const prototype = collectionList.getAttribute('data-prototype')
+                let counter = collectionList.getAttribute('data-counter')
+
+                const applyDeleteButtonEventListener = () => {
+                    collectionList.querySelectorAll('.delete-button').forEach(button => {
+                        button.addEventListener('click', () => {
+                            document.getElementById(button.getAttribute('data-target-id'))?.remove()
+                        })
+                    })
+                }
+
+                addButton.addEventListener('click', () => {
+                    let row = prototype
+                        .replaceAll('{{ form.vars.prototype.vars.name }}', counter)
+
+                    collectionList.insertAdjacentHTML('beforeend', row)
+
+                    counter++
+
+                    applyDeleteButtonEventListener()
+                })
+
+                applyDeleteButtonEventListener()
+            })()
+        </script>
+    {% endif %}
+
+{%- endblock collection_widget -%}
+
+{%- block searchable_choices_widget -%}
+    {%- set class = attribute(attr, 'class') is defined ? attr.class : '' %}
+    {%- set class = (class ~ ' appearance-none block w-full py-3 px-4 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-primary-600 focus:border-primary-600 sm:text-sm rounded-md')|trim %}
+    {% set attributes = attr|merge({class: class, disabled: disabled}) %}
+
+    <div
+        class="searchable-choices-type" {{ errors|length > 0 ? 'has-errors' : '' }}
+        data-id="{{ id }}"
+        data-name="{{ full_name }}"
+        data-attributes="{{ attributes|json_encode }}"
+        data-choices="{{ choices|json_encode }}"
+        {% if value %}data-value="{{ value }}"{% endif %}
+    >
+        <div class="{{ class }} cursor-not-allowed opacity-60">&nbsp;</div>
+    </div>
+{%- endblock searchable_choices_widget -%}
+
+{%- block date_picker_widget -%}
+    {%- set class = attribute(attr, 'class') is defined ? attr.class : '' %}
+    {%- set class = (class ~ ' appearance-none block w-full py-3 pl-9 pr-4 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-primary-600 focus:border-primary-600 sm:text-sm rounded-md')|trim %}
+    {% set attributes = attr|merge({class: class, disabled: disabled}) %}
+
+    <div
+        class="date-picker-type" {{ errors|length > 0 ? 'has-errors' : '' }}
+        data-id="{{ id }}"
+        data-name="{{ full_name }}"
+        data-attributes="{{ attributes|json_encode }}"
+        {% if value %}data-value="{{ value }}"{% endif %}
+    >
+        <div class="{{ class }} cursor-not-allowed opacity-60">&nbsp;</div>
+    </div>
+{%- endblock date_picker_widget -%}
+
+{%- block aktensuche_widget -%}
+    {%- set class = attribute(attr, 'class') is defined ? attr.class : '' %}
+    {%- set class = (class ~ ' appearance-none block w-full py-3 px-4 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-primary-600 focus:border-primary-600 sm:text-sm rounded-md disabled:bg-gray-50 disabled:opacity-90 disabled:cursor-not-allowed')|trim %}
+    {% set attributes = attr|merge({class: class, disabled: disabled}) %}
+
+    <div
+        class="api-search-type" {{ errors|length > 0 ? 'has-errors' : '' }}
+        data-id="{{ id }}"
+        data-name="{{ full_name }}"
+        data-attributes="{{ attributes|json_encode }}"
+        data-url="{{ path(constant('App\\Routing\\Routes::AKTENSUCHE')) }}"
+        {% if value %}data-value="{{ value }}"{% endif %}
+    >
+        <div class="{{ class }} cursor-not-allowed opacity-60">&nbsp;</div>
+    </div>
+{%- endblock aktensuche_widget -%}
+
+{%- block checkbox_widget -%}
+    {%- set class = attribute(attr, 'class') is defined ? attr.class : '' %}
+    {%- set class = (class ~ ' mr-2.5 h-5 w-5 rounded border-gray-300 text-primary-600 focus:ring-primary-600')|trim %}
+    {%- set attr = attr|merge({class, checked: value == 1}) -%}
+    {{ parent() }}
+{%- endblock checkbox_widget -%}
+
+{%- block frist_widget -%}
+    {%- set class = attribute(attr, 'class') is defined ? attr.class : '' %}
+    {%- set class = (class ~ ' appearance-none block w-full py-3 px-4 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-primary-600 focus:border-primary-600 sm:text-sm rounded-md')|trim %}
+    {% set attributes = attr|merge({class: class, disabled: disabled}) %}
+
+    {{ form_row(form.aktiv) }}
+    <div class="space-y-4 rounded-md shadow px-4 mt-2 py-4 border border-gray-100 {% if form.aktiv.vars.value == 0 %}hidden{% endif %}" id="container-{{ form.vars.id }}">
+        {{ form_rest(form) }}
+    </div>
+    <script>
+        (() => {
+            const container = document.getElementById('container-{{ form.vars.id }}')
+
+            document.getElementById('{{ form.aktiv.vars.id }}')
+                .addEventListener('change', () => {
+                    container.classList.toggle('hidden')
+                })
+        })()
+    </script>
+    {% with {attr: attr} %}{{ block('form_widget') }}{% endwith %}
+{%- endblock frist_widget -%}
+
+{%- block eingansbestaetigung_widget -%}
+    {%- set class = attribute(attr, 'class') is defined ? attr.class : '' %}
+    {%- set class = (class ~ ' appearance-none block w-full py-3 px-4 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-primary-600 focus:border-primary-600 sm:text-sm rounded-md')|trim %}
+    {% set attributes = attr|merge({class: class, disabled: disabled}) %}
+
+    {{ form_row(form.has_eingangsbestaetigung) }}
+    <div class="space-y-4 rounded-md shadow px-4 mt-2 py-4 border border-gray-100 {% if form.has_eingangsbestaetigung.vars.value == 0 %}hidden{% endif %}" id="container-{{ form.vars.id }}">
+        {{ form_rest(form) }}
+    </div>
+    <script>
+        (() => {
+            const container = document.getElementById('container-{{ form.vars.id }}')
+
+            document.getElementById('{{ form.has_eingangsbestaetigung.vars.id }}')
+                .addEventListener('change', () => {
+                    container.classList.toggle('hidden')
+                })
+        })()
+    </script>
+    {% with {attr: attr} %}{{ block('form_widget') }}{% endwith %}
+{%- endblock eingansbestaetigung_widget -%}

@@ -1,0 +1,150 @@
+:root {
+  --color-selected-doc: #014c59;
+  --opacity-selected-doc: 0.7;
+}
+
+#outer-container {
+  display: grid;
+  gap: 5px 10px;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto;
+  grid-auto-flow: row
+}
+
+#filepack_filepackLetters {
+  grid-column: 3 / 5;
+  grid-row: 1/ 2;
+}
+
+#trash-container  {
+  grid-column: 3 / 5;
+  grid-row: 2 / 3;
+}
+
+.file {
+  display: flex;
+  padding: 3px;
+  font-size: 11px;
+  margin: 8px;
+  border: 1px solid #DDDDDD;
+  border-radius: 3px;
+}
+
+.file > p {
+  width: 70%;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  opacity: 1.0;
+}
+
+.file-icon-wrapper {
+  width: 30%;
+  padding: 0px 5px;
+  display:flex;
+  justify-content: space-evenly;
+  flex-grow: 1;
+}
+
+.file:hover {
+  cursor: pointer;
+  border: 1px solid var(--color-selected-doc);
+  opacity: var(--opacity-selected-doc);
+}
+
+.file-before-drop {
+  background-color: var(--color-selected-doc);
+  opacity: var(--opacity-selected-doc);
+}
+
+.file-active {
+  border: 1px solid var(--color-selected-doc);
+  opacity: var(--opacity-selected-doc);
+  font-weight: bold;
+}
+
+.file-add-filepack > * {
+ pointer-events: none;
+}
+
+.file-add-trash > * {
+ pointer-events: none;
+}
+
+
+.attachment-name {
+  text-align: center;
+}
+
+.letter-wrapper {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.inbox{
+  grid-column: 1 / 3;
+  grid-row: 1 / 2;
+}
+
+.letter-box {
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+  padding: 5px;
+  border: 1px solid #DDDDDD;
+  border-radius: 3px;
+}
+
+.drop-zone {
+  grid-column: 1 / 5;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  position: relative;
+  font-size: 30px;
+  padding: 10px;
+  min-height: 80px;
+}
+
+.letter-create {
+  background-color: #014c59;
+}
+
+.file-trash {
+  border: solid #ff7f7f 1px;
+  opacity: 0.8;
+}
+
+.icon {
+    position: absolute;
+    z-index: -100;
+}
+
+
+.letter-select-wrapper, .letter-heading-wrapper {
+  display: flex;
+  justify-content: space-around;
+}
+
+
+.letter-select-wrapper, .letter-heading-wrapper > img{
+cursor: pointer;
+}
+
+.is-hidden {
+  visibility: hidden;
+  height: 0px;
+}
+
+.moveAllFiles{
+    font-size:13px;
+}
+
+.checkboxSelectForMove{
+    margin-right:8px !important;
+}

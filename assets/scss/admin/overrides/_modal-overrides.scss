@@ -1,0 +1,34 @@
+.modal-header {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 0;
+  color: $color-text-light;
+  background-color: $color-background-obtrusive;
+
+  &::before,
+  &::after {
+    content: none;
+  }
+}
+
+.modal-header .close {
+  @include font-preset('20/20');
+  opacity: 1;
+  margin: 0;
+  padding: 5px 10px;
+  color: $color-text-light;
+
+  &:focus,
+  &:hover,
+  &:active {
+    transform: scale(1.3);
+  }
+}
+
+.modal-title {
+  @include font-preset('20/20');
+  flex: 1;
+  padding-right: 40px;
+}

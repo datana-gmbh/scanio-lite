@@ -1,0 +1,14 @@
+// stylelint-disable selector-max-combinators
+.dropdown-menu {
+  @include font-preset('16/20');
+}
+
+.dropdown-menu > li > a {
+  padding: 7px 20px;
+  line-height: inherit;
+}
+
+.dropdown-toggle .fa {
+  margin-left: 5px;
+}
+// stylelint-enable selector-max-combinators

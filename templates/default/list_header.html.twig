@@ -1,0 +1,42 @@
+{# @var field \App\Crud\Domain\Value\Field #}
+{# @var sortings \App\Crud\Domain\Value\Sorting[] #}
+
+<th scope="col" class="{{ loop.first ? 'py-3.5 pl-4 pr-3 text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8' : 'px-3 py-3.5 text-sm font-semibold text-gray-900' }} {{ field.type.value == 'integer' ? 'text-right' : 'text-left' }}">
+    {% if field.isSortable is defined and field.isSortable == true %}
+        {# @var currentSorting \App\Crud\Domain\Value\Sorting #}
+        {% set currentSorting = sortings|filter(sorting => sorting.property == field.propertyPath)|first %}
+        {% set orderParameters = app.request.query.get('order') %}
+
+        {% if orderParameters is null %}
+            {% set orderParameters = {} %}
+        {% endif %}
+
+        {% if currentSorting %}
+            {% if currentSorting.direction.value == 'ASC' %}
+                {% set orderParameters = orderParameters|merge({(field.propertyPath): 'DESC'}) %}
+                {% set icon = 'fa-solid fa-arrow-up-short-wide' %}
+            {% elseif currentSorting.direction.value == 'DESC' %}
+                {% set orderParameters = orderParameters|merge({(field.propertyPath): 'ASC'}) %}
+                {% set icon = 'fa-solid fa-arrow-down-short-wide' %}
+            {% else %}
+                {% set orderParameters = orderParameters|merge({(field.propertyPath): 'ASC'}) %}
+                {% set icon = 'fa-solid fa-arrow-up-arrow-down' %}
+            {% endif %}
+        {% else %}
+            {# no current sorting enabled #}
+            {% set icon = 'fa-solid fa-arrow-up-arrow-down' %}
+            {% set orderParameters = orderParameters|merge({(field.propertyPath): 'ASC'}) %}
+        {% endif %}
+
+        {% set queryParameters = app.request.query.all()|merge({order: orderParameters}) %}
+        <a
+            href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge(queryParameters)) }}"
+            class="text-primary-600 hover:opacity-80"
+        >
+            {{ field.label }}
+            <i class="{{ icon }}"></i>
+        </a>
+    {% else %}
+        {{ field.label }}
+    {% endif %}
+</th>

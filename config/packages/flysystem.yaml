@@ -4,4 +4,4 @@ flysystem:
         documents.storage:
             adapter: 'local'
             options:
-                directory: '%kernel.project_dir%/public/documents'
+                directory: '%documents_dir%'

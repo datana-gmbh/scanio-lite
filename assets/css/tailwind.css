@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.has-errors input {
+    border: solid 2px rgb(220 38 38) !important;
+}
+
+.invisible-transition {
+    @apply h-0 overflow-hidden transition-all duration-500 ease-in-out;
+}
+
+.visible-transition {
+    @apply h-auto transition-all duration-500 ease-in-out;
+}
+
+/** v-calendar overrides **/
+.vc-primary {
+    --vc-accent-50: #dcf0f3;
+    --vc-accent-100: #6d9db5;
+    --vc-accent-200: #6095af;
+    --vc-accent-300: #1F8696;
+    --vc-accent-400: #00768d;
+    --vc-accent-500: #006074;
+    --vc-accent-600: #004b5a;
+    --vc-accent-700: #003b46;
+    --vc-accent-800: #003641;
+    --vc-accent-900: #002127;
+}

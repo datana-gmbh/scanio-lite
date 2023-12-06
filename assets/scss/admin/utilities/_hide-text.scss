@@ -1,0 +1,8 @@
+// Hide text only (in sake of accessibility)
+
+@mixin hide-text {
+  overflow: hidden;
+  font: 0/0 serif;
+  text-shadow: none;
+  color: transparent;
+}

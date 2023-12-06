@@ -1,0 +1,31 @@
+// stylelint-disable selector-max-combinators, selector-no-qualifying-type
+.nav-tabs {
+  border-bottom: 1px solid $color-border-muted;
+}
+
+.nav-tabs > li {
+  &:not(:last-child) {
+    margin-right: 5px;
+  }
+}
+
+.nav-tabs > li > a {
+  margin-right: 0;
+  border-color: $color-border-muted;
+  padding: 8px 15px;
+  line-height: inherit;
+
+  &:focus,
+  &:hover {
+    border-color: $color-border-muted;
+  }
+}
+
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:focus,
+.nav-tabs > li.active > a:hover {
+  border-color: $color-border-obtrusive $color-border-obtrusive transparent;
+  color: $color-text-light;
+  background-color: $color-background-obtrusive;
+}
+// stylelint-enable selector-max-combinators

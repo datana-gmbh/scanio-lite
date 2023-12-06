@@ -7,6 +7,6 @@ namespace App\Exception;
 /**
  * @author Oskar Stark <oskarstark@googlemail.com>
  */
-class NotFoundException extends \LogicException implements AppExceptionInterface
+class NotFoundException extends \RuntimeException implements AppExceptionInterface
 {
 }
