@@ -15,7 +15,7 @@ final class LetterFixtures extends Fixture implements OrderedFixtureInterface
     public function load(ObjectManager $manager): void
     {
         LetterFactory::new()
-            ->withType(Type::PENDING)
+            ->withType(Type::Pending)
             ->create();
     }
 

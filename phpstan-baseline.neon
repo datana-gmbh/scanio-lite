@@ -31,6 +31,16 @@ parameters:
 			path: src/Crud/Edit/Form/FormTypeFactory.php
 
 		-
+			message: "#^Match arm comparison between \\$this\\(App\\\\Domain\\\\Enum\\\\Type\\)&App\\\\Domain\\\\Enum\\\\Type\\:\\:Unknown and App\\\\Domain\\\\Enum\\\\Type\\:\\:Unknown is always true\\.$#"
+			count: 1
+			path: src/Domain/Enum/Type.php
+
+		-
+			message: "#^Match arm is unreachable because previous comparison is always true\\.$#"
+			count: 1
+			path: src/Domain/Enum/Type.php
+
+		-
 			message: "#^Class DateTimeImmutable is unsafe to use\\. Its methods can return FALSE instead of throwing an exception\\. Please add 'use Safe\\\\DateTimeImmutable;' at the beginning of the file to use the variant provided by the 'thecodingmachine/safe' library\\.$#"
 			count: 1
 			path: src/Entity/Letter.php
@@ -77,6 +87,11 @@ parameters:
 			message: "#^Method App\\\\Tests\\\\Integration\\\\IntegrationTestCase\\:\\:formatAndContextSpecificSerializer\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: tests/Integration/IntegrationTestCase.php
+
+		-
+			message: "#^Call to static method App\\\\Tests\\\\Unit\\\\UnitTestCase\\:\\:assertSame\\(\\) with 'Bitte auswählen' and 'Bitte auswählen' will always evaluate to true\\.$#"
+			count: 1
+			path: tests/Unit/Form/ChoicesTest.php
 
 		-
 			message: "#^Call to static method App\\\\Tests\\\\Unit\\\\UnitTestCase\\:\\:assertSame\\(\\) with 'admin_dashboard' and 'admin_dashboard' will always evaluate to true\\.$#"

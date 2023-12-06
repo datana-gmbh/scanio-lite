@@ -42,6 +42,6 @@ final class Sonstiges extends AbstractType implements FormTypeFactoryLoadableInt
     public function supports(Venture $venture, Type $type): bool
     {
         return $venture->equals(Venture::Default)
-            && $type->equals(Type::OTHER);
+            && $type->equals(Type::Other);
     }
 }

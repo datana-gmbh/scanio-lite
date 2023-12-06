@@ -57,6 +57,6 @@ final class Pending extends AbstractType implements FormTypeFactoryLoadableInter
     public function supports(Venture $venture, Type $type): bool
     {
         return $venture->equals(Venture::Default)
-            && $type->equals(Type::PENDING);
+            && $type->equals(Type::Pending);
     }
 }

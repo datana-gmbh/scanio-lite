@@ -32,7 +32,7 @@ class Letter implements \Stringable
     private Venture $venture = Venture::Default;
 
     #[ORM\Column(type: Types::STRING, enumType: Type::class)]
-    private Type $type = Type::PENDING;
+    private Type $type = Type::Pending;
 
     /**
      * @var array<mixed>

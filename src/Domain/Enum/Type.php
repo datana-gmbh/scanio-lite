@@ -14,16 +14,16 @@ enum Type: string
 {
     use Comparable;
 
-    case OTHER = 'other';
-    case PENDING = 'pending';
-    case UNKNOWN = 'unknown';
+    case Other = 'other';
+    case Pending = 'pending';
+    case Unknown = 'unknown';
 
     public function label(): string
     {
         return match ($this) {
-            self::OTHER => 'Sonstiges',
-            self::PENDING => 'Unbearbeitet',
-            self::UNKNOWN => 'Unbekannt',
+            self::Other => 'Sonstiges',
+            self::Pending => 'Unbearbeitet',
+            self::Unknown => 'Unbekannt',
             default => u($this->value)
                 ->replace('_', ' ')
                 ->title(true)
@@ -34,8 +34,8 @@ enum Type: string
     public function icon(): ?string
     {
         return match ($this) {
-            self::PENDING => 'fa-light fa-clipboard-list',
-            self::UNKNOWN => 'fa-light fa-square-question',
+            self::Pending => 'fa-light fa-clipboard-list',
+            self::Unknown => 'fa-light fa-square-question',
             default => null,
         };
     }

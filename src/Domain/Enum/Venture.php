@@ -13,7 +13,7 @@ enum Venture: string
 {
     use Comparable;
 
-    case Default = 'Standard';
+    case Default = 'default';
 
     public function label(): string
     {
