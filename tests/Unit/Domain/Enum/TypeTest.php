@@ -33,8 +33,6 @@ final class TypeTest extends EnumTestCase
         yield ['Unvollständig', Type::UNVOLLSTAENDIG];
     }
 
-
-
     /**
      * @test
      *
