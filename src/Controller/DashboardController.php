@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route(name: Routes::DASHBOARD, path: '/dashboard')]
+#[Route(name: Routes::DASHBOARD, path: '/')]
 final readonly class DashboardController
 {
     public function __construct(
