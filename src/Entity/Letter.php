@@ -13,6 +13,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Id;
+use Safe\DateTime;
 
 /**
  * @todo Rename all Letter stuff to Document
@@ -46,6 +47,9 @@ class Letter implements \Stringable
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
     private \DateTimeImmutable $createdAt;
 
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
+    private \DateTimeImmutable $inboxDate;
+
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
     private ?\DateTimeImmutable $deletedAt = null;
 
@@ -58,11 +62,22 @@ class Letter implements \Stringable
     ) {
         $this->id = new LetterId();
         $this->createdAt = new \DateTimeImmutable();
+        $this->inboxDate = clone $this->createdAt;
     }
 
     public function __toString(): string
     {
         return $this->id->toString();
+    }
+
+    public function getInboxDate(): \DateTimeImmutable
+    {
+        return $this->inboxDate;
+    }
+
+    public function setInboxDate(\DateTimeImmutable $inboxDate): void
+    {
+        $this->inboxDate = $inboxDate;
     }
 
     public function getVenture(): Venture

@@ -15,7 +15,7 @@ use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Range;
 
-final class UploadeFormType extends AbstractType
+final class UploadFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

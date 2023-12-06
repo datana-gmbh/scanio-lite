@@ -58,7 +58,8 @@ final class LetterFactory extends ModelFactory
         $filename = u($faker->sha1())->truncate(20)->append('.pdf')->toString();
 
         return [
-            'createdAt' => new DateTimeImmutable(),
+            'createdAt' => $createdAt = new DateTimeImmutable(),
+            'inboxDate' => clone $createdAt,
             'venture' => $faker->randomElement(Venture::cases()),
             'type' => $faker->randomElement(Type::cases()),
             'content' => $faker->text(),

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Form\UploadeFormType;
+use App\Form\UploadFormType;
 use App\Routing\Routes;
 use OskarStark\Symfony\Http\Responder;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -24,7 +24,7 @@ final readonly class UploadController
 
     public function __invoke(Request $request, RequestStack $requestStack): Response
     {
-        $form = $this->formFactory->create(UploadeFormType::class);
+        $form = $this->formFactory->create(UploadFormType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
