@@ -46,7 +46,7 @@
                                         </td>
                                     {% endfor %}
                                     <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:pr-8">
-                                        <a href="{{ path(constant('App\\Routing\\Routes::EDIT'), {venture: venture.value, type: type.value, id: item.id}) }}"
+                                        <a href="{{ path(constant('App\\Routing\\Routes::EDIT'), {venture: venture.value, type: type.value, letterId: item.id}) }}"
                                            class="text-primary-600 hover:opacity-80">Bearbeiten</a>
                                     </td>
                                 </tr>
