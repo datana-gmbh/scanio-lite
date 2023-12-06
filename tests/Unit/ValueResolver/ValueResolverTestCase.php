@@ -30,7 +30,7 @@ abstract class ValueResolverTestCase extends TestCase
     {
         $argumentResolver = static::createValueResolver();
 
-        self::assertSame([], $argumentResolver->resolve($request, $argument));
+        self::assertSame([], iterator_to_array($argumentResolver->resolve($request, $argument)));
     }
 
     /**
@@ -51,7 +51,7 @@ abstract class ValueResolverTestCase extends TestCase
             return;
         }
 
-        $argumentResolverResult = $argumentResolver->resolve($request, $argument);
+        $argumentResolverResult = iterator_to_array($argumentResolver->resolve($request, $argument));
         self::assertCount(1, $argumentResolverResult);
         self::assertContainsOnly(static::supportedClass(), $argumentResolverResult);
     }
