@@ -27,10 +27,9 @@ final class TypeTest extends EnumTestCase
      */
     public static function labelProvider(): iterable
     {
-        yield ['Sonstiges', Type::SONSTIGES];
-        yield ['Unbearbeitet', Type::UNBEARBEITET];
-        yield ['Unbekannt', Type::UNBEKANNT];
-        yield ['Unvollständig', Type::UNVOLLSTAENDIG];
+        yield ['Sonstiges', Type::OTHER];
+        yield ['Unbearbeitet', Type::PENDING];
+        yield ['Unbekannt', Type::UNKNOWN];
     }
 
     /**
@@ -48,9 +47,8 @@ final class TypeTest extends EnumTestCase
      */
     public static function iconProvider(): iterable
     {
-        yield ['fa-light fa-clipboard-list', Type::UNBEARBEITET];
-        yield ['fa-light fa-square-question', Type::UNBEKANNT];
-        yield ['fa-light fa-square-exclamation', Type::UNVOLLSTAENDIG];
+        yield ['fa-light fa-clipboard-list', Type::PENDING];
+        yield ['fa-light fa-square-question', Type::UNKNOWN];
     }
 
     /**
@@ -68,7 +66,7 @@ final class TypeTest extends EnumTestCase
      */
     public static function showCountInTreeProvider(): iterable
     {
-        yield [true, Type::UNBEARBEITET];
+        yield [true, Type::PENDING];
     }
 
     protected static function getClass(): string
@@ -78,6 +76,6 @@ final class TypeTest extends EnumTestCase
 
     protected static function getNumberOfValues(): int
     {
-        return 5;
+        return 3;
     }
 }

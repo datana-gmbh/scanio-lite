@@ -29,17 +29,17 @@ final class TypeValueResolverTest extends ValueResolverTestCase
     public static function unsupportedProvider(): iterable
     {
         yield 'not-supported: variadic' => [
-            new Request([], [], ['type' => Type::SONSTIGES->value]),
+            new Request([], [], ['type' => Type::OTHER->value]),
             new ArgumentMetadata('foo', Type::class, true, false, false, false),
         ];
 
         yield 'not-supported: wrong-route-placeholder' => [
-            new Request([], [], ['bar' => Type::SONSTIGES->value]),
+            new Request([], [], ['bar' => Type::OTHER->value]),
             new ArgumentMetadata('foo', Type::class, false, false, false, false),
         ];
 
         yield 'not-supported: wrong-typehint' => [
-            new Request([], [], ['type' => Type::SONSTIGES->value]),
+            new Request([], [], ['type' => Type::OTHER->value]),
             new ArgumentMetadata('foo', \stdClass::class, false, false, false, false),
         ];
     }
@@ -47,7 +47,7 @@ final class TypeValueResolverTest extends ValueResolverTestCase
     public static function resolveProvider(): \Generator
     {
         yield 'supported' => [
-            new Request([], [], ['type' => Type::SONSTIGES->value]),
+            new Request([], [], ['type' => Type::OTHER->value]),
             new ArgumentMetadata('foo', Type::class, false, false, false, false),
             null,
         ];

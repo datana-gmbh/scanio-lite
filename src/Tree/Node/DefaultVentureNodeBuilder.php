@@ -25,9 +25,9 @@ final class DefaultVentureNodeBuilder extends AbstractNodeBuilder
         $venture = Venture::Default;
 
         foreach ([
-            Type::SONSTIGES,
-            Type::UNBEKANNT,
-            Type::UNVOLLSTAENDIG,
+            Type::OTHER,
+            Type::UNKNOWN,
+            Type::INCOMPLETE,
         ] as $type) {
             $node->addChild(
                 $this->typeNodeFactory->create($venture, $type),

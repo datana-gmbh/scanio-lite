@@ -14,19 +14,16 @@ enum Type: string
 {
     use Comparable;
 
-    case KEINE_ZUORDNUNG_MOEGLICH = 'keine_zuordnung_moeglich';
-    case SONSTIGES = 'sonstiges';
-    case UNBEARBEITET = 'pending';
-    case UNBEKANNT = 'unknown';
-    case UNVOLLSTAENDIG = 'unvollstaendig';
+    case OTHER = 'other';
+    case PENDING = 'pending';
+    case UNKNOWN = 'unknown';
 
     public function label(): string
     {
         return match ($this) {
-            self::KEINE_ZUORDNUNG_MOEGLICH => 'Keine Zuordnung möglich',
-            self::UNBEARBEITET => 'Unbearbeitet',
-            self::UNBEKANNT => 'Unbekannt',
-            self::UNVOLLSTAENDIG => 'Unvollständig',
+            self::OTHER => 'Sonstiges',
+            self::PENDING => 'Unbearbeitet',
+            self::UNKNOWN => 'Unbekannt',
             default => u($this->value)
                 ->replace('_', ' ')
                 ->title(true)
@@ -37,9 +34,8 @@ enum Type: string
     public function icon(): ?string
     {
         return match ($this) {
-            self::UNBEARBEITET => 'fa-light fa-clipboard-list',
-            self::UNBEKANNT => 'fa-light fa-square-question',
-            self::UNVOLLSTAENDIG => 'fa-light fa-square-exclamation',
+            self::PENDING => 'fa-light fa-clipboard-list',
+            self::UNKNOWN => 'fa-light fa-square-question',
             default => null,
         };
     }
