@@ -27,37 +27,13 @@ final class TypeTest extends EnumTestCase
      */
     public static function labelProvider(): iterable
     {
-        yield ['Löschliste', Type::LOESCHLISTE];
         yield ['Sonstiges', Type::SONSTIGES];
         yield ['Unbearbeitet', Type::UNBEARBEITET];
         yield ['Unbekannt', Type::UNBEKANNT];
         yield ['Unvollständig', Type::UNVOLLSTAENDIG];
-        yield ['Übertragen', Type::UEBERTRAGEN];
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider statusProvider
-     */
-    public function status(string $expected, Type $belegtyp): void
-    {
-        self::assertSame($expected, $belegtyp->status());
-    }
 
-    /**
-     * @return \Generator<array{0: string, 1: Type}>
-     */
-    public static function statusProvider(): iterable
-    {
-        yield ['ktSync', Type::KT_SYNC];
-        yield ['pending', Type::UNBEARBEITET];
-        yield ['sonstiges', Type::SONSTIGES];
-        yield ['toBeDeleted', Type::LOESCHLISTE];
-        yield ['uebertragen', Type::UEBERTRAGEN];
-        yield ['unknown', Type::UNBEKANNT];
-        yield ['unvollstaendig', Type::UNVOLLSTAENDIG];
-    }
 
     /**
      * @test
@@ -74,9 +50,6 @@ final class TypeTest extends EnumTestCase
      */
     public static function iconProvider(): iterable
     {
-        yield ['fa-light fa-arrow-right-to-bracket', Type::KT_SYNC];
-        yield ['fa-light fa-trash', Type::LOESCHLISTE];
-        yield ['fa-light fa-square-check', Type::UEBERTRAGEN];
         yield ['fa-light fa-clipboard-list', Type::UNBEARBEITET];
         yield ['fa-light fa-square-question', Type::UNBEKANNT];
         yield ['fa-light fa-square-exclamation', Type::UNVOLLSTAENDIG];
@@ -97,8 +70,7 @@ final class TypeTest extends EnumTestCase
      */
     public static function showCountInTreeProvider(): iterable
     {
-        yield [false, Type::LOESCHLISTE];
-        yield [false, Type::UEBERTRAGEN];
+        yield [true, Type::UNBEARBEITET];
     }
 
     protected static function getClass(): string
@@ -108,6 +80,6 @@ final class TypeTest extends EnumTestCase
 
     protected static function getNumberOfValues(): int
     {
-        return 8;
+        return 5;
     }
 }
