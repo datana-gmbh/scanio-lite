@@ -16,14 +16,14 @@ parameters:
 			path: src/Bridge/Faker/Provider/ArrayProvider.php
 
 		-
-			message: "#^Parameter \\#2 \\$status of method App\\\\Workflow\\\\WorkflowExtractor\\:\\:getTransitionsByEntityAndStatus\\(\\) expects string, string\\|null given\\.$#"
+			message: "#^Call to an undefined method App\\\\Entity\\\\Letter\\:\\:getStatus\\(\\)\\.$#"
 			count: 1
 			path: src/Controller/EditController.php
 
 		-
 			message: "#^Call to an undefined method Symfony\\\\Component\\\\HttpFoundation\\\\Session\\\\SessionInterface\\:\\:getFlashBag\\(\\)\\.$#"
 			count: 1
-			path: src/Controller/UploadFileController.php
+			path: src/Controller/UploadController.php
 
 		-
 			message: "#^Readonly property App\\\\Crud\\\\Domain\\\\Value\\\\Field\\:\\:\\$isSortable is assigned outside of the constructor\\.$#"
