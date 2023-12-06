@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Crud\Edit\Form\Types\Default;
 
 use App\Crud\Edit\Form\FormTypeFactoryLoadableInterface;
+use App\Domain\Enum\Group;
 use App\Domain\Enum\Type;
-use App\Domain\Enum\Venture;
 use App\Form\Choices;
 use App\Form\Type\DatePickerType;
 use App\Form\Type\SearchableChoicesType;
@@ -54,9 +54,9 @@ final class Pending extends AbstractType implements FormTypeFactoryLoadableInter
         );
     }
 
-    public function supports(Venture $venture, Type $type): bool
+    public function supports(Group $group, Type $type): bool
     {
-        return $venture->equals(Venture::Default)
+        return $group->equals(Group::Default)
             && $type->equals(Type::Pending);
     }
 }

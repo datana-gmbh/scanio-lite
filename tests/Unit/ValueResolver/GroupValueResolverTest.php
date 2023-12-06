@@ -4,42 +4,42 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\ValueResolver;
 
-use App\Domain\Enum\Venture;
-use App\ValueResolver\VentureValueResolver;
+use App\Domain\Enum\Group;
+use App\ValueResolver\GroupValueResolver;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Controller\ValueResolverInterface;
 use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-final class VentureValueResolverTest extends ValueResolverTestCase
+final class GroupValueResolverTest extends ValueResolverTestCase
 {
     public static function supportedClass(): string
     {
-        return Venture::class;
+        return Group::class;
     }
 
     /**
-     * @return VentureValueResolver
+     * @return GroupValueResolver
      */
     public static function createValueResolver(): ValueResolverInterface
     {
-        return new VentureValueResolver();
+        return new GroupValueResolver();
     }
 
     public static function unsupportedProvider(): iterable
     {
         yield 'not-supported: variadic' => [
-            new Request([], [], ['venture' => Venture::Default->value]),
-            new ArgumentMetadata('foo', Venture::class, true, false, false, false),
+            new Request([], [], ['group' => Group::Default->value]),
+            new ArgumentMetadata('foo', Group::class, true, false, false, false),
         ];
 
         yield 'not-supported: wrong-route-placeholder' => [
-            new Request([], [], ['bar' => Venture::Default->value]),
-            new ArgumentMetadata('foo', Venture::class, false, false, false, false),
+            new Request([], [], ['bar' => Group::Default->value]),
+            new ArgumentMetadata('foo', Group::class, false, false, false, false),
         ];
 
         yield 'not-supported: wrong-typehint' => [
-            new Request([], [], ['venture' => Venture::Default->value]),
+            new Request([], [], ['group' => Group::Default->value]),
             new ArgumentMetadata('foo', \stdClass::class, false, false, false, false),
         ];
     }
@@ -47,8 +47,8 @@ final class VentureValueResolverTest extends ValueResolverTestCase
     public static function resolveProvider(): \Generator
     {
         yield 'supported' => [
-            new Request([], [], ['venture' => Venture::Default->value]),
-            new ArgumentMetadata('foo', Venture::class, false, false, false, false),
+            new Request([], [], ['group' => Group::Default->value]),
+            new ArgumentMetadata('foo', Group::class, false, false, false, false),
             null,
         ];
     }
@@ -63,8 +63,8 @@ final class VentureValueResolverTest extends ValueResolverTestCase
         self::expectException(NotFoundHttpException::class);
 
         $valueResolver->resolve(
-            new Request([], [], ['venture' => 'unknown-venture']),
-            new ArgumentMetadata('foo', Venture::class, false, false, false, false),
+            new Request([], [], ['group' => 'unknown-group']),
+            new ArgumentMetadata('foo', Group::class, false, false, false, false),
         );
     }
 }

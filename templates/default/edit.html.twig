@@ -1,12 +1,12 @@
 {# @var type \App\Domain\Enum\Belegtyp #}
-{# @var venture \App\Domain\Enum\Venture #}
+{# @var group \App\Domain\Enum\Group #}
 
 {% extends 'layout.html.twig' %}
 
 {# @TODO: move to twig.yaml when old code is gone. #}
 {% form_theme form 'form/tailwind_layout.html.twig' %}
 
-{% block title type.label() ~ ' - ' ~ venture.label() ~ ' - ' ~ parent() %}
+{% block title type.label() ~ ' - ' ~ group.label() ~ ' - ' ~ parent() %}
 
 {% block sidebar_content %}
     {{ form_start(form, {attr: {class: 'flex h-[94vh] flex-col divide-y divide-gray-200'}}) }}

@@ -4,22 +4,22 @@ declare(strict_types=1);
 
 namespace App\ValueResolver;
 
-use App\Domain\Enum\Venture;
+use App\Domain\Enum\Group;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Controller\ValueResolverInterface;
 use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-final readonly class VentureValueResolver implements ValueResolverInterface
+final readonly class GroupValueResolver implements ValueResolverInterface
 {
-    private const ROUTE_PLACEHOLDER = 'venture';
+    private const ROUTE_PLACEHOLDER = 'group';
 
     /**
-     * @return Venture[]
+     * @return Group[]
      */
     public function resolve(Request $request, ArgumentMetadata $argument): iterable
     {
-        if ($argument->isVariadic() || Venture::class !== $argument->getType()) {
+        if ($argument->isVariadic() || Group::class !== $argument->getType()) {
             return [];
         }
 
@@ -30,9 +30,9 @@ final readonly class VentureValueResolver implements ValueResolverInterface
         }
 
         try {
-            return [Venture::from($value)];
+            return [Group::from($value)];
         } catch (\ValueError) {
-            throw new NotFoundHttpException(sprintf('Venture "%s" not found.', $value));
+            throw new NotFoundHttpException(sprintf('Group "%s" not found.', $value));
         }
     }
 }

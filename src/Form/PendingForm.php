@@ -19,12 +19,12 @@ final class PendingForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add(
-            'venture',
+            'group',
             ChoiceType::class,
             [
-                'label' => 'Venture',
+                'label' => 'Group',
                 'mapped' => false,
-                'choices' => Choices::ventures(),
+                'choices' => Choices::groups(),
                 'placeholder' => Choices::PLACEHOLDER,
             ],
         );

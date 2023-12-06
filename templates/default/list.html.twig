@@ -2,11 +2,11 @@
 {# @var pagination \App\Crud\Domain\Value\Pagination #}
 {# @var sortings \App\Crud\Domain\Value\Sorting[] #}
 {# @var type \App\Domain\Enum\Belegtyp #}
-{# @var venture \App\Domain\Enum\Venture #}
+{# @var group \App\Domain\Enum\Group #}
 
 {% extends 'layout.html.twig' %}
 
-{% block title type.label() ~ ' - ' ~ venture.label() ~ ' - ' ~ parent() %}
+{% block title type.label() ~ ' - ' ~ group.label() ~ ' - ' ~ parent() %}
 
 {% block sidebar %}{% endblock %}
 
@@ -46,7 +46,7 @@
                                         </td>
                                     {% endfor %}
                                     <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:pr-8">
-                                        <a href="{{ path(constant('App\\Routing\\Routes::EDIT'), {venture: venture.value, type: type.value, letterId: item.id}) }}"
+                                        <a href="{{ path(constant('App\\Routing\\Routes::EDIT'), {group: group.value, type: type.value, letterId: item.id}) }}"
                                            class="text-primary-600 hover:opacity-80">Bearbeiten</a>
                                     </td>
                                 </tr>

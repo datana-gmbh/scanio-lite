@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Form;
 
+use App\Domain\Enum\Group;
 use App\Domain\Enum\Type;
-use App\Domain\Enum\Venture;
 
 final class Choices
 {
@@ -53,15 +53,15 @@ final class Choices
     /**
      * @return array<string, string>
      */
-    public static function ventures(): array
+    public static function groups(): array
     {
-        $ventures = [];
+        $groups = [];
 
-        foreach (Venture::cases() as $venture) {
-            $ventures[$venture->value] = $venture->label();
+        foreach (Group::cases() as $group) {
+            $groups[$group->value] = $group->label();
         }
 
-        return $ventures;
+        return $groups;
     }
 
     /**

@@ -39,9 +39,9 @@ final class UploadFormType extends AbstractType
                     new Range(max: new DateTimeImmutable()),
                 ],
             ])
-            ->add('venture_type', ChoiceType::class, [
-                'label' => 'Venture',
-                'choices' => Choices::ventures(),
+            ->add('group_type', ChoiceType::class, [
+                'label' => 'Group',
+                'choices' => Choices::groups(),
                 'required' => true,
                 'placeholder' => Choices::PLACEHOLDER,
                 'constraints' => [
