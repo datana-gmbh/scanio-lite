@@ -108,6 +108,6 @@ final class TypeTest extends EnumTestCase
 
     protected static function getNumberOfValues(): int
     {
-        return 96;
+        return 8;
     }
 }
