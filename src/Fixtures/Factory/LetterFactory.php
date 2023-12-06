@@ -70,7 +70,7 @@ final class LetterFactory extends ModelFactory
     protected function initialize(): self
     {
         return $this
-            ->afterInstantiate(function(Letter $letter, array $attributes): void {
+            ->afterInstantiate(function (Letter $letter, array $attributes): void {
                 // $object is the instantiated object
                 // $attributes contains the attributes used to instantiate the object and any extras
 
