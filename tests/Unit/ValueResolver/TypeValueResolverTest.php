@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Tests\Unit\ValueResolver;
 
 use App\Domain\Enum\Type;
-use App\Domain\Identifier\LetterId;
 use App\ValueResolver\TypeValueResolver;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Controller\ValueResolverInterface;

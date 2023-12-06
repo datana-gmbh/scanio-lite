@@ -4,13 +4,11 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\ValueResolver;
 
-use App\Domain\Enum\Type;
 use App\Domain\Identifier\LetterId;
 use App\ValueResolver\LetterIdValueResolver;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Controller\ValueResolverInterface;
 use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 final class LetterIdValueResolverTest extends ValueResolverTestCase
 {
@@ -55,5 +53,4 @@ final class LetterIdValueResolverTest extends ValueResolverTestCase
             null,
         ];
     }
-
 }

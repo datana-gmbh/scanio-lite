@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\ValueResolver;
 
-use App\Domain\Enum\Type;
 use App\Domain\Enum\Venture;
 use App\ValueResolver\VentureValueResolver;
 use Symfony\Component\HttpFoundation\Request;
@@ -44,7 +43,6 @@ final class VentureValueResolverTest extends ValueResolverTestCase
             new ArgumentMetadata('foo', \stdClass::class, false, false, false, false),
         ];
     }
-
 
     public static function resolveProvider(): \Generator
     {
