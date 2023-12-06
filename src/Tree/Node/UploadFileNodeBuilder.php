@@ -18,12 +18,12 @@ final class UploadFileNodeBuilder extends AbstractNodeBuilder
     {
         return $node
             ->icon('fa-light fa-upload')
-            ->route(Routes::UPLOAD_FILE);
+            ->route(Routes::UPLOAD);
     }
 
     protected static function name(): string
     {
-        return Routes::UPLOAD_FILE;
+        return Routes::UPLOAD;
     }
 
     protected static function label(): string

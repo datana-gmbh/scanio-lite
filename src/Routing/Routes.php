@@ -9,5 +9,5 @@ final readonly class Routes
     public const DASHBOARD = 'dashboard';
     public const LIST = 'list';
     public const EDIT = 'edit';
-    public const UPLOAD_FILE = 'upload_file';
+    public const UPLOAD = 'upload_file';
 }
