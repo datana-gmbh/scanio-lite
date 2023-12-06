@@ -30,7 +30,7 @@ final readonly class TypeValueResolver implements ValueResolverInterface
         }
 
         try {
-            yield Type::from($value);
+            return [Type::from($value)];
         } catch (\ValueError) {
             throw new NotFoundHttpException(sprintf('Type "%s" not found.', $value));
         }

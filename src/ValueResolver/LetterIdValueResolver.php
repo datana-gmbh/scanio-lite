@@ -30,7 +30,7 @@ final class LetterIdValueResolver implements ValueResolverInterface
         }
 
         try {
-            yield LetterId::fromString($value);
+            return [LetterId::fromString($value)];
         } catch (\InvalidArgumentException $e) {
             throw new NotFoundHttpException($e->getMessage());
         }

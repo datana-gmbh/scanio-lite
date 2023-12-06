@@ -30,7 +30,7 @@ final readonly class VentureValueResolver implements ValueResolverInterface
         }
 
         try {
-            yield Venture::from($value);
+            return [Venture::from($value)];
         } catch (\ValueError) {
             throw new NotFoundHttpException(sprintf('Venture "%s" not found.', $value));
         }

@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Integration\ValueResolver;
+namespace App\Tests\Unit\ValueResolver;
 
+use App\Domain\Enum\Type;
 use App\Domain\Enum\Venture;
 use App\ValueResolver\VentureValueResolver;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,6 +14,11 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 final class VentureValueResolverTest extends ValueResolverTestCase
 {
+    public static function supportedClass(): string
+    {
+        return Venture::class;
+    }
+
     /**
      * @return VentureValueResolver
      */
@@ -39,18 +45,14 @@ final class VentureValueResolverTest extends ValueResolverTestCase
         ];
     }
 
-    /**
-     * @test
-     */
-    public function resolve(): void
+
+    public static function resolveProvider(): \Generator
     {
-        $valueResolver = self::createValueResolver();
-        $resolvedValue = $valueResolver->resolve(
+        yield 'supported' => [
             new Request([], [], ['venture' => Venture::Default->value]),
             new ArgumentMetadata('foo', Venture::class, false, false, false, false),
-        );
-
-        self::assertEquals([Venture::Default], $resolvedValue);
+            null,
+        ];
     }
 
     /**
