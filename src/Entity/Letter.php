@@ -6,6 +6,7 @@ namespace App\Entity;
 
 use App\Bridge\Doctrine\DBAL\Types\Type\Identifier\LetterIdType;
 use App\Domain\Enum\Type;
+use App\Domain\Enum\Venture;
 use App\Domain\Identifier\LetterId;
 use App\Repository\LetterRepository;
 use Doctrine\DBAL\Types\Types;
@@ -26,6 +27,9 @@ class Letter implements \Stringable
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $content = null;
+
+    #[ORM\Column(type: Types::STRING, enumType: Venture::class)]
+    private Venture $venture = Venture::Default;
 
     #[ORM\Column(type: Types::STRING, enumType: Type::class)]
     private Type $type = Type::UNBEARBEITET;
@@ -59,6 +63,16 @@ class Letter implements \Stringable
     public function __toString(): string
     {
         return $this->id->toString();
+    }
+
+    public function getVenture(): Venture
+    {
+        return $this->venture;
+    }
+
+    public function setVenture(Venture $venture): void
+    {
+        $this->venture = $venture;
     }
 
     public function getContent(): ?string

@@ -74,7 +74,6 @@ final class TypeTest extends EnumTestCase
      */
     public static function iconProvider(): iterable
     {
-        yield ['fa-light fa-files', Type::FILEPACKS];
         yield ['fa-light fa-arrow-right-to-bracket', Type::KT_SYNC];
         yield ['fa-light fa-trash', Type::LOESCHLISTE];
         yield ['fa-light fa-square-check', Type::UEBERTRAGEN];

@@ -26,7 +26,6 @@ final class DefaultVentureNodeBuilder extends AbstractNodeBuilder
 
         foreach ([
             Type::SONSTIGES,
-            Type::FILEPACKS,
             Type::KT_SYNC,
             Type::UNBEKANNT,
             Type::UNVOLLSTAENDIG,

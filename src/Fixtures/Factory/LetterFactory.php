@@ -6,6 +6,7 @@ namespace App\Fixtures\Factory;
 
 use App\Bridge\Faker\ExtendedGenerator;
 use App\Domain\Enum\Type;
+use App\Domain\Enum\Venture;
 use App\Entity\Letter;
 use League\Flysystem\FilesystemOperator;
 use Safe\DateTimeImmutable;
@@ -24,6 +25,11 @@ final class LetterFactory extends ModelFactory
         private readonly FilesystemOperator $documentsStorage,
     ) {
         parent::__construct();
+    }
+
+    public function withVenture(Venture $venture): self
+    {
+        return $this->addState(['venture' => $venture]);
     }
 
     public function withType(Type $type): self
@@ -51,17 +57,14 @@ final class LetterFactory extends ModelFactory
 
         $filename = u($faker->sha1)->truncate(20)->append('.pdf')->toString();
 
-        $defaults = [
+        return [
             'createdAt' => new DateTimeImmutable(),
+            'venture' => $faker->randomElement(Venture::cases()),
             'type' => $faker->randomElement(Type::cases()),
             'content' => $faker->text(),
             'filename' => $filename,
             'user' => sprintf('%s %s', $faker->firstName(), $faker->lastName()),
         ];
-
-        $this->createDocument($defaults['filename'], $defaults['content']);
-
-        return $defaults;
     }
 
     /**
