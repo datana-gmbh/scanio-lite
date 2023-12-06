@@ -17,8 +17,8 @@ use Symfony\Component\Routing\Annotation\Route;
 final readonly class UploadFileController
 {
     public function __construct(
-        private Responder $responder,
         private FormFactoryInterface $formFactory,
+        private Responder $responder,
     ) {
     }
 

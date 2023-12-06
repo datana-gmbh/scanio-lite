@@ -54,7 +54,7 @@ final readonly class DefaultLetterQuery implements QueryInterface
         return new ListResult(
             [
                 (new Field(FieldType::ID, 'ID', 'id'))->sortable(),
-                (new Field(FieldType::DATETIME, 'Erstellungsdatum', 'createdTimestamp'))->sortable(),
+                (new Field(FieldType::DATETIME, 'Erstellungsdatum', 'createdAt'))->sortable(),
                 new Field(FieldType::TEXT, 'Benutzer', 'user'),
             ],
             $qb->getQuery()->getResult(),
