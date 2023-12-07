@@ -10,7 +10,6 @@ use App\Domain\Enum\Group;
 final class Choices
 {
     public const PLACEHOLDER = 'Bitte auswählen';
-    public const COMPANY_DEFAULT = 'Default Company';
 
     /**
      * Transforms an array like:
