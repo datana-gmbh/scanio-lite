@@ -31,11 +31,11 @@ interface DocumentRepositoryInterface
      * @throws ORMInvalidArgumentException
      * @throws UniqueConstraintViolationException
      */
-    public function save(Document $letter): void;
+    public function save(Document $document): void;
 
     /**
      * @throws ORMException
      * @throws ORMInvalidArgumentException
      */
-    public function delete(Document $letter): void;
+    public function delete(Document $document): void;
 }

@@ -10,9 +10,9 @@ use Symfony\Component\HttpKernel\Controller\ValueResolverInterface;
 use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-final class LetterIdValueResolver implements ValueResolverInterface
+final class DocumentIdValueResolver implements ValueResolverInterface
 {
-    private const ROUTE_PLACEHOLDER = 'letterId';
+    private const ROUTE_PLACEHOLDER = 'documentId';
 
     /**
      * @return iterable<DocumentId>

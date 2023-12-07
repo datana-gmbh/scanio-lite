@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\Unit\ValueResolver;
 
 use App\Domain\Identifier\DocumentId;
-use App\ValueResolver\LetterIdValueResolver;
+use App\ValueResolver\DocumentIdValueResolver;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Controller\ValueResolverInterface;
 use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
@@ -14,7 +14,7 @@ final class LetterIdValueResolverTest extends ValueResolverTestCase
 {
     public static function createValueResolver(): ValueResolverInterface
     {
-        return new LetterIdValueResolver();
+        return new DocumentIdValueResolver();
     }
 
     public static function supportedClass(): string

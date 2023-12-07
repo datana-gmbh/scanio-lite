@@ -28,12 +28,12 @@ final class PreviewExtension extends AbstractExtension
         ];
     }
 
-    public function pdfPreviewPath(Document $letter): string
+    public function pdfPreviewPath(Document $document): string
     {
         $absolutePath = sprintf(
             '%s/%s',
             $this->documentsDir,
-            $letter->getFilename(),
+            $document->getFilename(),
         );
 
         Assert::fileExists($absolutePath);
@@ -41,14 +41,14 @@ final class PreviewExtension extends AbstractExtension
         return sprintf(
             '%s/%s',
             str_replace($this->projectDir, '', $this->documentsDir),
-            $letter->getFilename(),
+            $document->getFilename(),
         );
     }
 
-    public function renderPdfPreview(Environment $twig, Document $letter): string
+    public function renderPdfPreview(Environment $twig, Document $document): string
     {
         return $twig->render('pdf/preview.html.twig', [
-            'path' => $this->pdfPreviewPath($letter),
+            'path' => $this->pdfPreviewPath($document),
         ]);
     }
 }

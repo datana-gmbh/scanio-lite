@@ -25,7 +25,7 @@ class Document implements \Stringable
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $content = null;
 
-    #[ORM\Column(type: Types::STRING, enumType: Group::class)]
+    #[ORM\Column(name: '`group`', type: Types::STRING, enumType: Group::class)]
     private Group $group = Group::Default;
 
     #[ORM\Column(type: Types::STRING, enumType: Category::class)]

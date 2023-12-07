@@ -22,25 +22,25 @@ final class DocumentRepository extends ServiceEntityRepository implements Docume
 
     public function get(DocumentId $id): Document
     {
-        /** @var null|Document $letter */
-        $letter = $this->find($id);
+        /** @var null|Document $document */
+        $document = $this->find($id);
 
-        if (null === $letter) {
+        if (null === $document) {
             throw DocumentNotFound::withId($id);
         }
 
-        return $letter;
+        return $document;
     }
 
-    public function save(Document $letter): void
+    public function save(Document $document): void
     {
-        $this->_em->persist($letter);
+        $this->_em->persist($document);
         $this->_em->flush();
     }
 
-    public function delete(Document $letter): void
+    public function delete(Document $document): void
     {
-        $this->_em->remove($letter);
+        $this->_em->remove($document);
         $this->_em->flush();
     }
 }

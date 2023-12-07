@@ -74,11 +74,11 @@ final class DocumentFactory extends ModelFactory
     protected function initialize(): self
     {
         return $this
-            ->afterInstantiate(function (Document $letter, array $attributes): void {
+            ->afterInstantiate(function (Document $document, array $attributes): void {
                 // $object is the instantiated object
                 // $attributes contains the attributes used to instantiate the object and any extras
 
-                $this->documentsStorage->write($letter->getFilename(), $letter->getContent() ?? '');
+                $this->documentsStorage->write($document->getFilename(), $document->getContent() ?? '');
             });
     }
 }
