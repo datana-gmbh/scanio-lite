@@ -1,6 +1,6 @@
 {
     "name": "datana-gmbh/scanio-lite",
-    "description": "A description here",
+    "description": "Scanio-Lite is a lightweight version of Scanio.",
     "license": "proprietary",
     "type": "project",
     "require": {
