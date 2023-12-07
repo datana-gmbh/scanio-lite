@@ -17,8 +17,6 @@ final readonly class UrlGenerator
 
     /**
      * This method handles the replacement of the absolute URLs with the configured CDN path.
-     *
-     * @see docker/nginx/rootfs/etc/nginx/conf.d/default.conf
      */
     public function relativeUrl(string $path): string
     {
