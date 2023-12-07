@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
-use App\Domain\Identifier\LetterId;
+use App\Domain\Identifier\DocumentId;
 use App\Entity\Letter;
 use App\Exception\LetterNotFound;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
@@ -24,7 +24,7 @@ interface LetterRepositoryInterface
     /**
      * @throws LetterNotFound
      */
-    public function get(LetterId $id): Letter;
+    public function get(DocumentId $id): Letter;
 
     /**
      * @throws ORMException

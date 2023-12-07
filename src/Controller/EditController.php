@@ -7,7 +7,7 @@ namespace App\Controller;
 use App\Crud\Edit\Form\FormTypeFactoryInterface;
 use App\Domain\Enum\Category;
 use App\Domain\Enum\Group;
-use App\Domain\Identifier\LetterId;
+use App\Domain\Identifier\DocumentId;
 use App\Repository\LetterRepositoryInterface;
 use App\Routing\Routes;
 use OskarStark\Symfony\Http\Responder;
@@ -27,7 +27,7 @@ final readonly class EditController
     ) {
     }
 
-    public function __invoke(Request $request, Group $group, Category $category, LetterId $id): Response
+    public function __invoke(Request $request, Group $group, Category $category, DocumentId $id): Response
     {
         $letter = $this->letters->get($id);
 

@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Bridge\Doctrine\DBAL\Types\Type\Identifier\LetterIdType;
+use App\Bridge\Doctrine\DBAL\Types\Type\Identifier\DocumentIdType;
 use App\Domain\Enum\Category;
 use App\Domain\Enum\Group;
-use App\Domain\Identifier\LetterId;
+use App\Domain\Identifier\DocumentId;
 use App\Repository\LetterRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -22,8 +22,8 @@ use Doctrine\ORM\Mapping\Id;
 class Letter implements \Stringable
 {
     #[Id]
-    #[Column(type: LetterIdType::class, unique: true)]
-    private LetterId $id;
+    #[Column(type: DocumentIdType::class, unique: true)]
+    private DocumentId $id;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $content = null;
@@ -71,7 +71,7 @@ class Letter implements \Stringable
         #[ORM\Column(type: Types::STRING, length: 255)]
         private string $filename,
     ) {
-        $this->id = new LetterId();
+        $this->id = new DocumentId();
         $this->createdAt = new \DateTimeImmutable();
         $this->inboxDate = clone $this->createdAt;
     }
@@ -111,7 +111,7 @@ class Letter implements \Stringable
         $this->content = $content;
     }
 
-    public function getId(): LetterId
+    public function getId(): DocumentId
     {
         return $this->id;
     }

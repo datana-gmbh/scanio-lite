@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
-use App\Domain\Identifier\LetterId;
+use App\Domain\Identifier\DocumentId;
 use App\Entity\Letter;
 use App\Exception\LetterNotFound;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -20,7 +20,7 @@ final class LetterRepository extends ServiceEntityRepository implements LetterRe
         parent::__construct($registry, Letter::class);
     }
 
-    public function get(LetterId $id): Letter
+    public function get(DocumentId $id): Letter
     {
         /** @var null|Letter $letter */
         $letter = $this->find($id);
