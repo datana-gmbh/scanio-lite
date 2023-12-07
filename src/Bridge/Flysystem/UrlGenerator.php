@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Storage;
+namespace App\Bridge\Flysystem;
 
 use OskarStark\Value\TrimmedNonEmptyString;
 use Webmozart\Assert\Assert;
