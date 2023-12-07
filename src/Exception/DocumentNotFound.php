@@ -6,12 +6,12 @@ namespace App\Exception;
 
 use App\Domain\Identifier\DocumentId;
 
-final class LetterNotFound extends NotFoundException
+final class DocumentNotFound extends NotFoundException
 {
     public static function withId(DocumentId $id): self
     {
         return new self(sprintf(
-            'Cannot find Letter with id: %s',
+            'Cannot find Document with id: %s',
             $id->toString(),
         ));
     }

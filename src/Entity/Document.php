@@ -14,11 +14,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Id;
 
-/**
- * @todo Rename all Letter stuff to Document
- */
 #[ORM\Entity(repositoryClass: DocumentRepository::class)]
-#[ORM\Table(name: 'letters')]
+#[ORM\Table(name: 'documents')]
 class Document implements \Stringable
 {
     #[Id]

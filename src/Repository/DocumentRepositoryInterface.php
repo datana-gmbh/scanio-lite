@@ -6,7 +6,7 @@ namespace App\Repository;
 
 use App\Domain\Identifier\DocumentId;
 use App\Entity\Document;
-use App\Exception\LetterNotFound;
+use App\Exception\DocumentNotFound;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Doctrine\ORM\ORMException;
 use Doctrine\ORM\ORMInvalidArgumentException;
@@ -22,7 +22,7 @@ use Doctrine\ORM\QueryBuilder;
 interface DocumentRepositoryInterface
 {
     /**
-     * @throws LetterNotFound
+     * @throws DocumentNotFound
      */
     public function get(DocumentId $id): Document;
 

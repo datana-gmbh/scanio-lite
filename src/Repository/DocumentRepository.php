@@ -6,7 +6,7 @@ namespace App\Repository;
 
 use App\Domain\Identifier\DocumentId;
 use App\Entity\Document;
-use App\Exception\LetterNotFound;
+use App\Exception\DocumentNotFound;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -26,7 +26,7 @@ final class DocumentRepository extends ServiceEntityRepository implements Docume
         $letter = $this->find($id);
 
         if (null === $letter) {
-            throw LetterNotFound::withId($id);
+            throw DocumentNotFound::withId($id);
         }
 
         return $letter;
