@@ -7,8 +7,8 @@ namespace App\Controller;
 use App\Crud\Edit\Form\FormTypeFactoryInterface;
 use App\Domain\Enum\Category;
 use App\Domain\Enum\Group;
-use App\Domain\Identifier\LetterId;
-use App\Repository\LetterRepositoryInterface;
+use App\Domain\Identifier\DocumentId;
+use App\Repository\DocumentRepositoryInterface;
 use App\Routing\Routes;
 use OskarStark\Symfony\Http\Responder;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -16,34 +16,34 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route(name: Routes::EDIT, path: '/edit/{group}/{category}/{letterId}')]
+#[Route(name: Routes::EDIT, path: '/edit/{group}/{category}/{documentId}')]
 final readonly class EditController
 {
     public function __construct(
-        private LetterRepositoryInterface $letters,
+        private DocumentRepositoryInterface $documents,
         private FormFactoryInterface $formFactory,
         private FormTypeFactoryInterface $formTypeFactory,
         private Responder $responder,
     ) {
     }
 
-    public function __invoke(Request $request, Group $group, Category $category, LetterId $id): Response
+    public function __invoke(Request $request, Group $group, Category $category, DocumentId $id): Response
     {
-        $letter = $this->letters->get($id);
+        $document = $this->documents->get($id);
 
         $formType = $this->formTypeFactory->create($group, $category);
 
         $form = $this->formFactory->create(
             $formType::class,
-            $letter,
+            $document,
             [
-                'submit_enabled' => !$letter->isFinished(),
+                'submit_enabled' => !$document->isFinished(),
             ],
         );
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->letters->save($letter);
+            $this->documents->save($document);
 
             return $this->responder->redirect($request->getUri());
         }
@@ -51,7 +51,7 @@ final readonly class EditController
         return $this->responder->render('default/edit.html.twig', [
             'group' => $group,
             'category' => $category,
-            'letter' => $letter,
+            'document' => $document,
             'form' => $form->createView(),
         ]);
     }

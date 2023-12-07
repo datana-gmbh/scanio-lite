@@ -7,17 +7,17 @@ namespace App\Crud\List\Query;
 use App\Crud\List\Query\Letter\DefaultLetterQuery;
 use App\Domain\Enum\Category;
 use App\Domain\Enum\Group;
-use App\Repository\LetterRepositoryInterface;
+use App\Repository\DocumentRepositoryInterface;
 
 final readonly class QueryFactory implements QueryFactoryInterface
 {
     public function __construct(
-        private LetterRepositoryInterface $letters,
+        private DocumentRepositoryInterface $documents,
     ) {
     }
 
     public function create(Group $group, Category $category): QueryInterface
     {
-        return new DefaultLetterQuery($this->letters, $category);
+        return new DefaultLetterQuery($this->documents, $category);
     }
 }

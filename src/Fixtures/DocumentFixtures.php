@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace App\Fixtures;
 
-use App\Fixtures\Factory\LetterFactory;
+use App\Fixtures\Factory\DocumentFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-final class LetterFixtures extends Fixture implements OrderedFixtureInterface
+final class DocumentFixtures extends Fixture implements OrderedFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
-        LetterFactory::createMany(10);
+        DocumentFactory::createMany(10);
     }
 
     public function getOrder(): int

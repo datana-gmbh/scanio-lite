@@ -7,7 +7,7 @@ namespace App\Crud\Edit\Form\Types\Default;
 use App\Crud\Edit\Form\FormTypeFactoryLoadableInterface;
 use App\Domain\Enum\Category;
 use App\Domain\Enum\Group;
-use App\Entity\Letter;
+use App\Entity\Document;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -22,8 +22,8 @@ final class Sonstiges extends AbstractType implements FormTypeFactoryLoadableInt
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        /** @var Letter $letter */
-        $letter = $options['data'];
+        /** @var Document $document */
+        $document = $options['data'];
 
         $builder->add(
             'name_der_datei',

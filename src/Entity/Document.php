@@ -4,31 +4,28 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Bridge\Doctrine\DBAL\Types\Type\Identifier\LetterIdType;
+use App\Bridge\Doctrine\DBAL\Types\Type\Identifier\DocumentIdType;
 use App\Domain\Enum\Category;
 use App\Domain\Enum\Group;
-use App\Domain\Identifier\LetterId;
-use App\Repository\LetterRepository;
+use App\Domain\Identifier\DocumentId;
+use App\Repository\DocumentRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Id;
 
-/**
- * @todo Rename all Letter stuff to Document
- */
-#[ORM\Entity(repositoryClass: LetterRepository::class)]
-#[ORM\Table(name: 'letters')]
-class Letter implements \Stringable
+#[ORM\Entity(repositoryClass: DocumentRepository::class)]
+#[ORM\Table(name: 'documents')]
+class Document implements \Stringable
 {
     #[Id]
-    #[Column(type: LetterIdType::class, unique: true)]
-    private LetterId $id;
+    #[Column(type: DocumentIdType::class, unique: true)]
+    private DocumentId $id;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $content = null;
 
-    #[ORM\Column(type: Types::STRING, enumType: Group::class)]
+    #[ORM\Column(name: '`group`', type: Types::STRING, enumType: Group::class)]
     private Group $group = Group::Default;
 
     #[ORM\Column(type: Types::STRING, enumType: Category::class)]
@@ -71,14 +68,14 @@ class Letter implements \Stringable
         #[ORM\Column(type: Types::STRING, length: 255)]
         private string $filename,
     ) {
-        $this->id = new LetterId();
+        $this->id = new DocumentId();
         $this->createdAt = new \DateTimeImmutable();
         $this->inboxDate = clone $this->createdAt;
     }
 
     public function __toString(): string
     {
-        return $this->id->toString();
+        return (string) $this->id->toString();
     }
 
     public function getInboxDate(): \DateTimeImmutable
@@ -111,7 +108,7 @@ class Letter implements \Stringable
         $this->content = $content;
     }
 
-    public function getId(): LetterId
+    public function getId(): DocumentId
     {
         return $this->id;
     }
