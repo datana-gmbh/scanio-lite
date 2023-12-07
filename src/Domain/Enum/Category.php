@@ -10,7 +10,7 @@ use function Symfony\Component\String\u;
 /**
  * @todo rename to Category
  */
-enum Type: string
+enum Category: string
 {
     use Comparable;
 

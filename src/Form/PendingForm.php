@@ -22,7 +22,7 @@ final class PendingForm extends AbstractType
             'group',
             ChoiceType::class,
             [
-                'label' => 'Group',
+                'label' => 'Gruppe',
                 'mapped' => false,
                 'choices' => Choices::groups(),
                 'placeholder' => Choices::PLACEHOLDER,

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Bridge\Doctrine\DBAL\Types\Type\Identifier\LetterIdType;
+use App\Domain\Enum\Category;
 use App\Domain\Enum\Group;
-use App\Domain\Enum\Type;
 use App\Domain\Identifier\LetterId;
 use App\Repository\LetterRepository;
 use Doctrine\DBAL\Types\Types;
@@ -31,8 +31,8 @@ class Letter implements \Stringable
     #[ORM\Column(type: Types::STRING, enumType: Group::class)]
     private Group $group = Group::Default;
 
-    #[ORM\Column(type: Types::STRING, enumType: Type::class)]
-    private Type $type = Type::Pending;
+    #[ORM\Column(type: Types::STRING, enumType: Category::class)]
+    private Category $category = Category::Pending;
 
     /**
      * @var array<mixed>
@@ -116,14 +116,14 @@ class Letter implements \Stringable
         return $this->id;
     }
 
-    public function getType(): Type
+    public function getCategory(): Category
     {
-        return $this->type;
+        return $this->category;
     }
 
-    public function setType(Type $type): void
+    public function setCategory(Category $category): void
     {
-        $this->type = $type;
+        $this->category = $category;
     }
 
     public function setFilename(string $filename): void

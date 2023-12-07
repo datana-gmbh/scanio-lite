@@ -28,13 +28,13 @@ final readonly class UrlPathVoter implements VoterInterface
 
         if (\is_array($parameters)
             && \array_key_exists('group', $parameters)
-            && \array_key_exists('type', $parameters)
+            && \array_key_exists('category', $parameters)
             && \is_array($nodeParameters)
             && \array_key_exists('group', $nodeParameters)
-            && \array_key_exists('type', $nodeParameters)
+            && \array_key_exists('category', $nodeParameters)
         ) {
             return $parameters['group'] === $nodeParameters['group']
-                && $parameters['type'] === $nodeParameters['type'];
+                && $parameters['category'] === $nodeParameters['category'];
         }
 
         return $item->getExtra('url_path') === $request->getPathInfo();

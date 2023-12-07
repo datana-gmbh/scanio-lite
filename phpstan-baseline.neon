@@ -31,14 +31,14 @@ parameters:
 			path: src/Crud/Edit/Form/FormTypeFactory.php
 
 		-
-			message: "#^Match arm comparison between \\$this\\(App\\\\Domain\\\\Enum\\\\Type\\)&App\\\\Domain\\\\Enum\\\\Type\\:\\:Unknown and App\\\\Domain\\\\Enum\\\\Type\\:\\:Unknown is always true\\.$#"
+			message: "#^Match arm comparison between \\$this\\(App\\\\Domain\\\\Enum\\\\Category\\)&App\\\\Domain\\\\Enum\\\\Category\\:\\:Unknown and App\\\\Domain\\\\Enum\\\\Category\\:\\:Unknown is always true\\.$#"
 			count: 1
-			path: src/Domain/Enum/Type.php
+			path: src/Domain/Enum/Category.php
 
 		-
 			message: "#^Match arm is unreachable because previous comparison is always true\\.$#"
 			count: 1
-			path: src/Domain/Enum/Type.php
+			path: src/Domain/Enum/Category.php
 
 		-
 			message: "#^Class DateTimeImmutable is unsafe to use\\. Its methods can return FALSE instead of throwing an exception\\. Please add 'use Safe\\\\DateTimeImmutable;' at the beginning of the file to use the variant provided by the 'thecodingmachine/safe' library\\.$#"

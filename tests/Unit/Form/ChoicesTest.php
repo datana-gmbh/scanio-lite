@@ -76,7 +76,7 @@ final class ChoicesTest extends UnitTestCase
                 'pending' => 'Unbearbeitet',
                 'unknown' => 'Unbekannt',
             ],
-            Choices::types(),
+            Choices::categories(),
         );
     }
 
