@@ -16,7 +16,7 @@ use function Symfony\Component\String\u;
 /**
  * @extends ModelFactory<Document>
  */
-final class LetterFactory extends ModelFactory
+final class DocumentFactory extends ModelFactory
 {
     /**
      * @see https://github.com/zenstruck/foundry#factories-as-services
