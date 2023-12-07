@@ -7,9 +7,6 @@ namespace App\Domain\Enum;
 use OskarStark\Enum\Trait\Comparable;
 use function Symfony\Component\String\u;
 
-/**
- * @todo rename to Category
- */
 enum Category: string
 {
     use Comparable;
