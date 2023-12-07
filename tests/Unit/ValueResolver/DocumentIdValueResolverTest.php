@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Controller\ValueResolverInterface;
 use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
 
-final class LetterIdValueResolverTest extends ValueResolverTestCase
+final class DocumentIdValueResolverTest extends ValueResolverTestCase
 {
     public static function createValueResolver(): ValueResolverInterface
     {
@@ -25,7 +25,7 @@ final class LetterIdValueResolverTest extends ValueResolverTestCase
     public static function unsupportedProvider(): \Generator
     {
         yield 'not-supported: variadic' => [
-            new Request([], [], ['letterId' => (new DocumentId())->toString()]),
+            new Request([], [], ['documentId' => (new DocumentId())->toString()]),
             new ArgumentMetadata('foo', DocumentId::class, true, false, false, false),
         ];
 
@@ -35,12 +35,12 @@ final class LetterIdValueResolverTest extends ValueResolverTestCase
         ];
 
         yield 'not-supported: wrong-typehint' => [
-            new Request([], [], ['letterId' => (new DocumentId())->toString()]),
+            new Request([], [], ['documentId' => (new DocumentId())->toString()]),
             new ArgumentMetadata('foo', \stdClass::class, false, false, false, false),
         ];
 
         yield 'not-supported: invalid-ulid' => [
-            new Request([], [], ['letterId' => 'unknown']),
+            new Request([], [], ['documentId' => 'unknown']),
             new ArgumentMetadata('foo', \stdClass::class, false, false, false, false),
         ];
     }
@@ -48,7 +48,7 @@ final class LetterIdValueResolverTest extends ValueResolverTestCase
     public static function resolveProvider(): \Generator
     {
         yield 'supported' => [
-            new Request([], [], ['letterId' => (new DocumentId())->toString()]),
+            new Request([], [], ['documentId' => (new DocumentId())->toString()]),
             new ArgumentMetadata('foo', DocumentId::class, false, false, false, false),
             null,
         ];
