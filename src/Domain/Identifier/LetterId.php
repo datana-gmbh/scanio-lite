@@ -7,7 +7,7 @@ namespace App\Domain\Identifier;
 use App\Domain\Identifier\Traits\IdTrait;
 use Symfony\Component\Uid\Ulid;
 
-final class DocumentId extends Ulid
+final class LetterId extends Ulid
 {
     use IdTrait;
 }

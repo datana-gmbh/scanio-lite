@@ -13,11 +13,11 @@ use Doctrine\ORM\ORMInvalidArgumentException;
 use Doctrine\ORM\QueryBuilder;
 
 /**
- * @method null|Document  find($id, $lockMode = null, $lockVersion = null)
- * @method null|Document  findOneBy(array $criteria, array $orderBy = null)
- * @method Document[]     findAll()
- * @method Document[]     findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
- * @method QueryBuilder createQueryBuilder($alias, $indexBy = null)
+ * @method null|Document find($id, $lockMode = null, $lockVersion = null)
+ * @method null|Document findOneBy(array $criteria, array $orderBy = null)
+ * @method Document[]    findAll()
+ * @method Document[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method QueryBuilder  createQueryBuilder($alias, $indexBy = null)
  */
 interface DocumentRepositoryInterface
 {
