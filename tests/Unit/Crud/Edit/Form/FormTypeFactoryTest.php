@@ -43,7 +43,7 @@ final class FormTypeFactoryTest extends UnitTestCase
         $factory = new FormTypeFactory([]);
 
         self::expectException(\InvalidArgumentException::class);
-        self::expectExceptionMessage('No form type found for group "default" and type "other".');
+        self::expectExceptionMessage('No form type found for group "default" and category "other".');
 
         $factory->create(Group::Default, Category::Other);
     }
@@ -69,7 +69,7 @@ final class FormTypeFactoryTest extends UnitTestCase
         ]);
 
         self::expectException(\InvalidArgumentException::class);
-        self::expectExceptionMessage('Multiple form types found for group "default" and type "other".');
+        self::expectExceptionMessage('Multiple form types found for group "default" and category "other".');
 
         $factory->create(Group::Default, Category::Other);
     }
