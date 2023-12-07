@@ -5,24 +5,24 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use App\Domain\Identifier\DocumentId;
-use App\Entity\Letter;
+use App\Entity\Document;
 use App\Exception\LetterNotFound;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @phpstan-extends ServiceEntityRepository<Letter>
+ * @phpstan-extends ServiceEntityRepository<Document>
  */
-final class LetterRepository extends ServiceEntityRepository implements LetterRepositoryInterface
+final class DocumentRepository extends ServiceEntityRepository implements DocumentRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Letter::class);
+        parent::__construct($registry, Document::class);
     }
 
-    public function get(DocumentId $id): Letter
+    public function get(DocumentId $id): Document
     {
-        /** @var null|Letter $letter */
+        /** @var null|Document $letter */
         $letter = $this->find($id);
 
         if (null === $letter) {
@@ -32,13 +32,13 @@ final class LetterRepository extends ServiceEntityRepository implements LetterRe
         return $letter;
     }
 
-    public function save(Letter $letter): void
+    public function save(Document $letter): void
     {
         $this->_em->persist($letter);
         $this->_em->flush();
     }
 
-    public function delete(Letter $letter): void
+    public function delete(Document $letter): void
     {
         $this->_em->remove($letter);
         $this->_em->flush();

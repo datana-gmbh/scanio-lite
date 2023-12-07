@@ -10,7 +10,7 @@ use App\Crud\Domain\Value\Pagination;
 use App\Crud\List\ListResult;
 use App\Crud\List\Query\QueryInterface;
 use App\Domain\Enum\Category;
-use App\Repository\LetterRepositoryInterface;
+use App\Repository\DocumentRepositoryInterface;
 use Doctrine\ORM\QueryBuilder;
 
 final readonly class DefaultLetterQuery implements QueryInterface
@@ -18,7 +18,7 @@ final readonly class DefaultLetterQuery implements QueryInterface
     private QueryBuilder $qb;
 
     public function __construct(
-        private LetterRepositoryInterface $repository,
+        private DocumentRepositoryInterface $repository,
         private Category $category,
     ) {
         $qb = $this->repository->createQueryBuilder('l');

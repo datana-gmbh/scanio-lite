@@ -7,14 +7,14 @@ namespace App\Fixtures\Factory;
 use App\Bridge\Faker\ExtendedGenerator;
 use App\Domain\Enum\Category;
 use App\Domain\Enum\Group;
-use App\Entity\Letter;
+use App\Entity\Document;
 use League\Flysystem\FilesystemOperator;
 use Safe\DateTimeImmutable;
 use Zenstruck\Foundry\ModelFactory;
 use function Symfony\Component\String\u;
 
 /**
- * @extends ModelFactory<Letter>
+ * @extends ModelFactory<Document>
  */
 final class LetterFactory extends ModelFactory
 {
@@ -44,7 +44,7 @@ final class LetterFactory extends ModelFactory
 
     public static function getClass(): string
     {
-        return Letter::class;
+        return Document::class;
     }
 
     /**
@@ -74,7 +74,7 @@ final class LetterFactory extends ModelFactory
     protected function initialize(): self
     {
         return $this
-            ->afterInstantiate(function (Letter $letter, array $attributes): void {
+            ->afterInstantiate(function (Document $letter, array $attributes): void {
                 // $object is the instantiated object
                 // $attributes contains the attributes used to instantiate the object and any extras
 

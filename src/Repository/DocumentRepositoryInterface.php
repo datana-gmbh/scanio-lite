@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use App\Domain\Identifier\DocumentId;
-use App\Entity\Letter;
+use App\Entity\Document;
 use App\Exception\LetterNotFound;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Doctrine\ORM\ORMException;
@@ -13,29 +13,29 @@ use Doctrine\ORM\ORMInvalidArgumentException;
 use Doctrine\ORM\QueryBuilder;
 
 /**
- * @method null|Letter  find($id, $lockMode = null, $lockVersion = null)
- * @method null|Letter  findOneBy(array $criteria, array $orderBy = null)
- * @method Letter[]     findAll()
- * @method Letter[]     findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method null|Document  find($id, $lockMode = null, $lockVersion = null)
+ * @method null|Document  findOneBy(array $criteria, array $orderBy = null)
+ * @method Document[]     findAll()
+ * @method Document[]     findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  * @method QueryBuilder createQueryBuilder($alias, $indexBy = null)
  */
-interface LetterRepositoryInterface
+interface DocumentRepositoryInterface
 {
     /**
      * @throws LetterNotFound
      */
-    public function get(DocumentId $id): Letter;
+    public function get(DocumentId $id): Document;
 
     /**
      * @throws ORMException
      * @throws ORMInvalidArgumentException
      * @throws UniqueConstraintViolationException
      */
-    public function save(Letter $letter): void;
+    public function save(Document $letter): void;
 
     /**
      * @throws ORMException
      * @throws ORMInvalidArgumentException
      */
-    public function delete(Letter $letter): void;
+    public function delete(Document $letter): void;
 }

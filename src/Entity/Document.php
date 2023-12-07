@@ -8,7 +8,7 @@ use App\Bridge\Doctrine\DBAL\Types\Type\Identifier\DocumentIdType;
 use App\Domain\Enum\Category;
 use App\Domain\Enum\Group;
 use App\Domain\Identifier\DocumentId;
-use App\Repository\LetterRepository;
+use App\Repository\DocumentRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Column;
@@ -17,9 +17,9 @@ use Doctrine\ORM\Mapping\Id;
 /**
  * @todo Rename all Letter stuff to Document
  */
-#[ORM\Entity(repositoryClass: LetterRepository::class)]
+#[ORM\Entity(repositoryClass: DocumentRepository::class)]
 #[ORM\Table(name: 'letters')]
-class Letter implements \Stringable
+class Document implements \Stringable
 {
     #[Id]
     #[Column(type: DocumentIdType::class, unique: true)]

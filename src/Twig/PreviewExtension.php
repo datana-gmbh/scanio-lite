@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Twig;
 
-use App\Entity\Letter;
+use App\Entity\Document;
 use Twig\Environment;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
@@ -28,7 +28,7 @@ final class PreviewExtension extends AbstractExtension
         ];
     }
 
-    public function pdfPreviewPath(Letter $letter): string
+    public function pdfPreviewPath(Document $letter): string
     {
         $absolutePath = sprintf(
             '%s/%s',
@@ -45,7 +45,7 @@ final class PreviewExtension extends AbstractExtension
         );
     }
 
-    public function renderPdfPreview(Environment $twig, Letter $letter): string
+    public function renderPdfPreview(Environment $twig, Document $letter): string
     {
         return $twig->render('pdf/preview.html.twig', [
             'path' => $this->pdfPreviewPath($letter),
