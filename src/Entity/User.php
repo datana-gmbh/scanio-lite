@@ -40,8 +40,7 @@ class User implements PasswordAuthenticatedUserInterface, UserInterface
     public function __construct(
         #[ORM\Column(length: 180, unique: true)]
         private string $username,
-    )
-    {
+    ) {
         $this->id = new UserId();
     }
 
