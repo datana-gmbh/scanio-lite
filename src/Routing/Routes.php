@@ -10,4 +10,5 @@ final readonly class Routes
     public const LIST = 'list';
     public const EDIT = 'edit';
     public const UPLOAD = 'upload_file';
+    public const LOGIN = 'login';
 }
