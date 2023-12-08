@@ -7,7 +7,6 @@ namespace App\Tests\Functional;
 use App\Tests\Util\FakerTrait;
 use Behat\Mink\Exception\ExpectationException;
 use Symfony\Component\HttpKernel\DataCollector\RequestDataCollector;
-use Symfony\Component\Security\Core\User\InMemoryUser;
 use Webmozart\Assert\Assert;
 use Zenstruck\Browser\KernelBrowser;
 use function Safe\json_decode;
@@ -16,13 +15,6 @@ use function Symfony\Component\String\u;
 final class AppBrowser extends KernelBrowser
 {
     use FakerTrait;
-
-    public function actingAsMandantencockpitUser(): self
-    {
-        $this->actingAs(new InMemoryUser('mandantencockpit', 'foobar', ['ROLE_USER']), 'api');
-
-        return $this;
-    }
 
     public function visitWithQueryParameters(string $url, array $queryParameters = []): self
     {

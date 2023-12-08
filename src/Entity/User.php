@@ -22,9 +22,6 @@ class User implements PasswordAuthenticatedUserInterface, UserInterface
     #[Column(type: UserIdType::class, unique: true)]
     private UserId $id;
 
-    #[Column(type: Types::STRING, length: 180, unique: true)]
-    private string $email;
-
     /**
      * @var string[]
      */
@@ -38,8 +35,8 @@ class User implements PasswordAuthenticatedUserInterface, UserInterface
     private ?string $password = null;
 
     public function __construct(
-        #[ORM\Column(length: 180, unique: true)]
-        private string $username,
+        #[Column(type: Types::STRING, length: 180, unique: true)]
+        private string $email,
     ) {
         $this->id = new UserId();
     }
@@ -59,22 +56,12 @@ class User implements PasswordAuthenticatedUserInterface, UserInterface
         $this->email = $email;
     }
 
-    public function getUsername(): string
-    {
-        return $this->username;
-    }
-
-    public function setUsername(string $username): void
-    {
-        $this->username = $username;
-    }
-
     /**
      * A visual identifier that represents this user.
      */
     public function getUserIdentifier(): string
     {
-        return $this->username;
+        return $this->email;
     }
 
     /**

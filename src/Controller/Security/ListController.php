@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controller;
+namespace App\Controller\Security;
 
 use App\Crud\Domain\Enum\SortDirection;
 use App\Crud\Domain\Value\Pagination;

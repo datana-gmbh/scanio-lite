@@ -31,8 +31,8 @@ security:
         main:
             provider: app_user_provider
             form_login:
-                login_path: app_login
-                check_path: app_login
+                login_path: !php/const App\Routing\Routes::LOGIN
+                check_path: !php/const App\Routing\Routes::LOGIN
                 enable_csrf: true
                 remember_me: true
 

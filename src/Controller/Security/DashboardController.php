@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controller;
+namespace App\Controller\Security;
 
 use App\Routing\Routes;
 use OskarStark\Symfony\Http\Responder;
@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route(name: Routes::DASHBOARD, path: '/')]
+#[Route(name: Routes::DASHBOARD, path: '/dashboard')]
 final readonly class DashboardController
 {
     public function __construct(
