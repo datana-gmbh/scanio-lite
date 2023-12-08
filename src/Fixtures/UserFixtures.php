@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Fixtures;
 
-use App\Fixtures\Factory\DocumentFactory;
 use App\Fixtures\Factory\UserFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
