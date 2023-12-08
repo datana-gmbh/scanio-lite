@@ -59,6 +59,21 @@ parameters:
 			path: src/Entity/Document.php
 
 		-
+			message: "#^Method App\\\\Entity\\\\User\\:\\:getPassword\\(\\) should return string but returns string\\|null\\.$#"
+			count: 1
+			path: src/Entity/User.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\User\\:\\:\\$password type mapping mismatch\\: property can contain string\\|null but database expects string\\.$#"
+			count: 1
+			path: src/Entity/User.php
+
+		-
+			message: "#^Instanceof between App\\\\Entity\\\\User and App\\\\Entity\\\\User will always evaluate to true\\.$#"
+			count: 1
+			path: src/Repository/UserRepository.php
+
+		-
 			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertTrue\\(\\) with true will always evaluate to true\\.$#"
 			count: 1
 			path: tests/Acceptance/AcceptanceDummyTest.php
