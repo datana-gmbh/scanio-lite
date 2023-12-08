@@ -3,7 +3,6 @@ security:
         App\Entity\User:
             algorithm: auto
 
-
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         # used to reload user from session & other features (e.g. switch_user)
@@ -12,20 +11,25 @@ security:
                 class: App\Entity\User
                 property: username
 
+        api_users:
+            memory:
+                users:
+                    admin:
+                        password: '897645hriuherh8974234'
+                        roles: [ ROLE_ADMIN ]
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
         api:
-            provider: app_user_provider
+            provider: api_users
             http_basic:
                 realm: Authenticated Area
 
         main:
-            lazy: true
-            # activate different ways to authenticate
-            # https://symfony.com/doc/current/security.html#firewalls-authentication
+            provider: app_user_provider
 
     role_hierarchy:
         ROLE_ADMIN: [ ROLE_USER ]
