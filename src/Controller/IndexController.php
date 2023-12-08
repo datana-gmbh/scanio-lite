@@ -15,7 +15,7 @@ use Symfony\Component\Security\Http\Attribute\CurrentUser;
 class IndexController extends AbstractController
 {
     public function __construct(
-        private Responder $responder,
+        private readonly Responder $responder,
     ) {
     }
 
