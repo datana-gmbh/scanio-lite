@@ -120,7 +120,7 @@ final class AppBrowser extends KernelBrowser
             ->visit('/login')
             ->fillField('E-Mail', $email)
             ->fillField('Passwort', $password)
-            ->click('Weiter');
+            ->click('Anmelden');
     }
 
     public function clickSpeichernUndWeiter(): self

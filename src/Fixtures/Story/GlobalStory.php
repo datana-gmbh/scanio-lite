@@ -12,7 +12,6 @@ final class GlobalStory extends Story
     public function build(): void
     {
         UserFactory::new([
-            'username' => 'admin',
             'email' => 'admin@scanio.wip',
             'password' => 'admin',
         ])->asAdmin()->create();

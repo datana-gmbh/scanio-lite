@@ -63,13 +63,14 @@ final class LoginControllerTest extends FunctionalTestCase
      */
     public function userWillBeRedirectedToDashboard(): void
     {
-        $user = UserFactory::create()
-            ->create();
+        $user = UserFactory::createOne();
 
         $this->browser()
             ->visit('/login')
-            ->fillField('Username', $user->getUsername())
-            ->fillField('Passwort', $user->getPassword())
+            ->loginAs(
+                $user->getEmail(),
+                $user->getPassword(),
+            )
             ->click('Anmelden')
             ->assertSuccessful()
             ->assertOn('/dashboard');

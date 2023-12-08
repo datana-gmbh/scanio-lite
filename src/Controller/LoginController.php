@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
-class LoginController extends AbstractController
+final class LoginController extends AbstractController
 {
     #[Route(path: '/login', name: Routes::LOGIN)]
     public function login(AuthenticationUtils $authenticationUtils): Response

@@ -33,6 +33,7 @@ security:
             form_login:
                 login_path: !php/const App\Routing\Routes::LOGIN
                 check_path: !php/const App\Routing\Routes::LOGIN
+                default_target_path: !php/const App\Routing\Routes::DASHBOARD
                 enable_csrf: true
                 remember_me: true
 
