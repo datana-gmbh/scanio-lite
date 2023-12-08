@@ -124,6 +124,11 @@ parameters:
 			path: tests/Unit/Routing/RoutesTest.php
 
 		-
+			message: "#^Call to static method App\\\\Tests\\\\Unit\\\\UnitTestCase\\:\\:assertSame\\(\\) with 'login' and 'login' will always evaluate to true\\.$#"
+			count: 1
+			path: tests/Unit/Routing/RoutesTest.php
+
+		-
 			message: "#^Method App\\\\Tests\\\\Util\\\\DataProvider\\\\GenericProvider\\:\\:allKindsOfValues\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: tests/Util/DataProvider/GenericProvider.php
