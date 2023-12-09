@@ -52,3 +52,8 @@ services:
         resource: '../src/ValueResolver/'
         tags:
             - { name: controller.argument_value_resolver, priority: 150 }
+
+    App\ExpressionLanguage\FieldExpressionLanguage:
+        arguments:
+            $providers:
+                - '@App\ExpressionLanguage\ExpressionFunctionProviders\DocumentExpressionLanguageProvider'

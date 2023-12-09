@@ -15,12 +15,12 @@ final class FieldFixtures extends Fixture implements OrderedFixtureInterface
     {
         FieldFactory::createOne([
             'name' => 'posteingangsdatum',
-            'condition' => null,
+            'condition' => 'true',
         ]);
 
         FieldFactory::createOne([
             'name' => 'category',
-            'condition' => 'document.group == "default"',
+            'condition' => 'isGroup("foo")',
         ]);
     }
 

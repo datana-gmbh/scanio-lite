@@ -7,15 +7,24 @@ namespace App\Crud\Edit\Form\Types\Default;
 use App\Crud\Edit\Form\FormTypeFactoryLoadableInterface;
 use App\Domain\Enum\Category;
 use App\Domain\Enum\Group;
+use App\Entity\Document;
+use App\ExpressionLanguage\FieldExpressionLanguage;
 use App\Form\Choices;
 use App\Form\Type\DatePickerType;
 use App\Form\Type\SearchableChoicesType;
+use App\Repository\FieldRepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 final class Pending extends AbstractType implements FormTypeFactoryLoadableInterface
 {
+    public function __construct(
+        private readonly FieldRepositoryInterface $fields,
+        private readonly FieldExpressionLanguage $expressionLanguage,
+    ) {
+    }
+
     public function getParent(): string
     {
         return BaseForm::class;
@@ -23,35 +32,50 @@ final class Pending extends AbstractType implements FormTypeFactoryLoadableInter
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder->add(
-            'posteingangsdatum',
-            DatePickerType::class,
-            [
-                'label' => 'Posteingangsdatum',
-                'property_path' => 'data[posteingangsdatum]',
-                'widget' => 'single_text',
-                'required' => true,
-                'constraints' => [
-                    new NotBlank(),
-                ],
-            ],
-        );
+        $fields = $this->fields->findAll();
 
-        $builder->add(
-            'category',
-            SearchableChoicesType::class,
-            [
-                'label' => 'Typ',
-                'required' => true,
-                'choices' => Choices::categories(),
-                'placeholder' => Choices::PLACEHOLDER,
-                'property_path' => 'data[category]',
-                'attr' => ['class' => 'js-advanced-select-custom'],
-                'constraints' => [
-                    new NotBlank(),
+        $conditions = [];
+
+        foreach ($fields as $field) {
+            $conditions[$field->getName()] = $field->getCondition();
+        }
+
+        /** @var Document $document */
+        $document = $options['data'];
+
+        if ($this->expressionLanguage->evaluateDocument($document, $conditions['posteingangsdatum'])) {
+            $builder->add(
+                'posteingangsdatum',
+                DatePickerType::class,
+                [
+                    'label' => 'Posteingangsdatum',
+                    'property_path' => 'data[posteingangsdatum]',
+                    'widget' => 'single_text',
+                    'required' => true,
+                    'constraints' => [
+                        new NotBlank(),
+                    ],
                 ],
-            ],
-        );
+            );
+        }
+
+        if ($this->expressionLanguage->evaluateDocument($document, $conditions['category'])) {
+            $builder->add(
+                'category',
+                SearchableChoicesType::class,
+                [
+                    'label' => 'Typ',
+                    'required' => true,
+                    'choices' => Choices::categories(),
+                    'placeholder' => Choices::PLACEHOLDER,
+                    'property_path' => 'data[category]',
+                    'attr' => ['class' => 'js-advanced-select-custom'],
+                    'constraints' => [
+                        new NotBlank(),
+                    ],
+                ],
+            );
+        }
     }
 
     public function supports(Group $group, Category $category): bool
