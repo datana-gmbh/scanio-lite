@@ -75,7 +75,7 @@ class Document implements \Stringable
 
     public function __toString(): string
     {
-        return (string) $this->id->toString();
+        return $this->id->toString();
     }
 
     public function getInboxDate(): \DateTimeImmutable
