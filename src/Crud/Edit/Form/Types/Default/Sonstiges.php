@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace App\Crud\Edit\Form\Types\Default;
 
+use App\Condition\ConditionProviderInterface;
 use App\Crud\Edit\Form\FormTypeFactoryLoadableInterface;
 use App\Domain\Enum\Category;
 use App\Domain\Enum\Group;
 use App\Entity\Document;
+use App\ExpressionLanguage\FieldExpressionLanguage;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -15,6 +17,12 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 final class Sonstiges extends AbstractType implements FormTypeFactoryLoadableInterface
 {
+    public function __construct(
+        private readonly ConditionProviderInterface $conditionProvider,
+        private readonly FieldExpressionLanguage $expressionLanguage,
+    ) {
+    }
+
     public function getParent(): string
     {
         return BaseForm::class;
@@ -25,18 +33,20 @@ final class Sonstiges extends AbstractType implements FormTypeFactoryLoadableInt
         /** @var Document $document */
         $document = $options['data'];
 
-        $builder->add(
-            'name_der_datei',
-            TextType::class,
-            [
-                'label' => 'Name der PDF',
-                'required' => true,
-                'property_path' => 'data[name_der_datei]',
-                'constraints' => [
-                    new NotBlank(),
+        if ($this->expressionLanguage->evaluateDocument($document, $this->conditionProvider->getCondition('name_der_datei'))) {
+            $builder->add(
+                'name_der_datei',
+                TextType::class,
+                [
+                    'label' => 'Name der PDF',
+                    'required' => true,
+                    'property_path' => 'data[name_der_datei]',
+                    'constraints' => [
+                        new NotBlank(),
+                    ],
                 ],
-            ],
-        );
+            );
+        }
     }
 
     public function supports(Group $group, Category $category): bool

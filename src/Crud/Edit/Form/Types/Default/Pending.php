@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Crud\Edit\Form\Types\Default;
 
+use App\Condition\ConditionProviderInterface;
 use App\Crud\Edit\Form\FormTypeFactoryLoadableInterface;
 use App\Domain\Enum\Category;
 use App\Domain\Enum\Group;
@@ -20,7 +21,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 final class Pending extends AbstractType implements FormTypeFactoryLoadableInterface
 {
     public function __construct(
-        private readonly FieldRepositoryInterface $fields,
+        private readonly ConditionProviderInterface $conditionProvider,
         private readonly FieldExpressionLanguage $expressionLanguage,
     ) {
     }
@@ -32,18 +33,10 @@ final class Pending extends AbstractType implements FormTypeFactoryLoadableInter
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $fields = $this->fields->findAll();
-
-        $conditions = [];
-
-        foreach ($fields as $field) {
-            $conditions[$field->getName()] = $field->getCondition();
-        }
-
         /** @var Document $document */
         $document = $options['data'];
 
-        if ($this->expressionLanguage->evaluateDocument($document, $conditions['posteingangsdatum'])) {
+        if ($this->expressionLanguage->evaluateDocument($document, $this->conditionProvider->getCondition('posteingangsdatum'))) {
             $builder->add(
                 'posteingangsdatum',
                 DatePickerType::class,
@@ -59,7 +52,7 @@ final class Pending extends AbstractType implements FormTypeFactoryLoadableInter
             );
         }
 
-        if ($this->expressionLanguage->evaluateDocument($document, $conditions['category'])) {
+        if ($this->expressionLanguage->evaluateDocument($document, $this->conditionProvider->getCondition('category'))) {
             $builder->add(
                 'category',
                 SearchableChoicesType::class,

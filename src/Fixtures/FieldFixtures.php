@@ -20,7 +20,12 @@ final class FieldFixtures extends Fixture implements OrderedFixtureInterface
 
         FieldFactory::createOne([
             'name' => 'category',
-            'condition' => 'isGroup("foo")',
+            'condition' => 'isCategory("pending")',
+        ]);
+
+        FieldFactory::createOne([
+            'name' => 'name_der_datei',
+            'condition' => 'isCategory("other")'
         ]);
     }
 
