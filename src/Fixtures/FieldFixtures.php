@@ -25,7 +25,7 @@ final class FieldFixtures extends Fixture implements OrderedFixtureInterface
 
         FieldFactory::createOne([
             'name' => 'name_der_datei',
-            'condition' => 'isCategory("other")'
+            'condition' => 'isCategory("other")',
         ]);
     }
 
