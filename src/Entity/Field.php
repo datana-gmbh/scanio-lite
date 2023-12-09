@@ -20,10 +20,10 @@ class Field
     #[Column(type: FieldIdType::class, unique: true)]
     private FieldId $id;
 
-    #[ORM\Column(type: Types::STRING, nullable: false)]
+    #[ORM\Column(type: Types::STRING)]
     private string $name;
 
-    #[ORM\Column(type: Types::STRING)]
+    #[ORM\Column(type: Types::STRING, nullable: true)]
     private ?string $condition = null;
 
     public function __construct()
@@ -51,10 +51,8 @@ class Field
         return $this->condition;
     }
 
-    public function setCondition(string $condition): self
+    public function setCondition(string $condition): void
     {
         $this->condition = $condition;
-
-        return $this;
     }
 }
