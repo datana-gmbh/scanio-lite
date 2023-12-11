@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Fixtures\Factory;
 
-use function Safe\file_get_contents;
 use App\Bridge\Faker\ExtendedGenerator;
 use App\Domain\Enum\Category;
 use App\Domain\Enum\Group;
@@ -12,6 +11,7 @@ use App\Entity\Document;
 use League\Flysystem\FilesystemOperator;
 use Safe\DateTimeImmutable;
 use Zenstruck\Foundry\ModelFactory;
+use function Safe\file_get_contents;
 use function Symfony\Component\String\u;
 
 /**
