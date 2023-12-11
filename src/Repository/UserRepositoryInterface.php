@@ -25,6 +25,11 @@ interface UserRepositoryInterface
     public function get(UserId $id): User;
 
     /**
+     * @throws UserNotFound
+     */
+    public function getByEmail(string $email): User;
+
+    /**
      * @throws ORMException
      * @throws ORMInvalidArgumentException
      * @throws UniqueConstraintViolationException

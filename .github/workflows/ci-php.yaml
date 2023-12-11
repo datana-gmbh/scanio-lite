@@ -303,14 +303,13 @@ jobs:
                 name: "Execute Doctrine migrations"
                 run: "bin/console doctrine:migrations:migrate --no-interaction"
 
-# MUST BE ENABLED AGAIN IF WE HAVE A FIRST ENTITY!
-#            -
-#                name: "Show Doctrine mapping information"
-#                run: "bin/console doctrine:mapping:info --em=${{ env.ENTITY_MANAGER_NAME_DEFAULT }}"
-#
-#            -
-#                name: "Validate Doctrine mapping"
-#                run: "bin/console doctrine:schema:validate --em=${{ env.ENTITY_MANAGER_NAME_DEFAULT }}"
+            -
+                name: "Show Doctrine mapping information"
+                run: "bin/console doctrine:mapping:info --em=${{ env.ENTITY_MANAGER_NAME_DEFAULT }}"
+
+            -
+                name: "Validate Doctrine mapping"
+                run: "bin/console doctrine:schema:validate --em=${{ env.ENTITY_MANAGER_NAME_DEFAULT }}"
 
     tests:
         name: "Tests"
@@ -388,9 +387,31 @@ jobs:
                 run: "vendor/bin/phpunit --testsuite=unit"
 
             -
+                name: "Install Node.js"
+                uses: "actions/setup-node@v4.0.0"
+                with:
+                    node-version: "18.18"
+                    cache: "yarn" # use 'npm' for npm commands
+
+            -
+                name: "Show node version"
+                run: "node --version"
+
+            -
+                name: "Show yarn version"
+                run: "yarn --version"
+
+            -
+                name: "Install dependencies with yarn"
+                run: "yarn install"
+
+            -
+                name: "Build application for production environment with webpack"
+                run: "yarn run build"
+
+            -
                 name: "Run integration tests with phpunit/phpunit"
                 run: "vendor/bin/phpunit --testsuite=integration"
-
             -
                 name: "Run functional tests with phpunit/phpunit"
                 run: "vendor/bin/phpunit --testsuite=functional"

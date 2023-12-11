@@ -31,7 +31,6 @@ final class UserFactory extends ModelFactory
             'email' => self::faker()->email(),
             'password' => self::faker()->password(),
             'roles' => [],
-            'username' => self::faker()->userName(),
         ];
     }
 

@@ -13,18 +13,10 @@ final class RoutesTest extends UnitTestCase
     /**
      * @test
      */
-    public function constants(): void
-    {
-        self::assertSame('dashboard', Routes::DASHBOARD);
-    }
-
-    /**
-     * @test
-     */
     public function numberOfRoutes(): void
     {
         $class = new ReflectionClass(Routes::class);
 
-        self::assertCount(4, $class->getConstants());
+        self::assertCount(6, $class->getConstants());
     }
 }

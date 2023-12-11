@@ -5,12 +5,15 @@ declare(strict_types=1);
 namespace App\Bridge\Faker;
 
 use App\Bridge\Faker\Provider\ArrayProvider;
+use App\Bridge\Faker\Provider\EmailProvider;
 use Faker\Factory;
 use Faker\Generator;
 
 /**
- * @method array array()
- * @method array arrayOrEmptyArray()
+ * @method array  array()
+ * @method array  arrayOrEmptyArray()
+ * @method string emailOrNonCanonicalEmail()
+ * @method string nonCanonicalEmail()
  */
 final class ExtendedGenerator extends Generator
 {
@@ -25,6 +28,7 @@ final class ExtendedGenerator extends Generator
 
         // Add custom providers
         $generator->addProvider(new ArrayProvider($generator));
+        $generator->addProvider(new EmailProvider($generator));
 
         // copy default and custom providers to this custom generator
         foreach ($generator->getProviders() as $provider) {

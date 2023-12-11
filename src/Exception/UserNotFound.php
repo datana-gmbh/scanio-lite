@@ -15,4 +15,12 @@ final class UserNotFound extends NotFoundException
             $id->toString(),
         ));
     }
+
+    public static function withEmail(string $email): self
+    {
+        return new self(sprintf(
+            'Cannot find User with email: %s',
+            $email,
+        ));
+    }
 }

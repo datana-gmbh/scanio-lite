@@ -27,3 +27,7 @@
     --vc-accent-800: #003641;
     --vc-accent-900: #002127;
 }
+
+.btn-primary {
+    @apply bg-primary-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-600 transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed;
+}
