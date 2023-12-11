@@ -40,7 +40,7 @@ final class PreviewExtension extends AbstractExtension
 
         return sprintf(
             '%s/%s',
-            str_replace($this->projectDir, '', $this->documentsDir),
+            str_replace(sprintf('%s/public', $this->projectDir), '', $this->documentsDir),
             $document->getFilename(),
         );
     }
