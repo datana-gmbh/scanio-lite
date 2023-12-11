@@ -117,7 +117,7 @@ final class AppBrowser extends KernelBrowser
     public function loginAs(string $email, string $password): self
     {
         return $this
-            ->visit('/login')
+            ->visit('/')
             ->fillField('E-Mail', $email)
             ->fillField('Passwort', $password)
             ->click('Anmelden');

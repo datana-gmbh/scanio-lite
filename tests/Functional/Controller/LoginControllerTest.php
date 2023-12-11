@@ -17,9 +17,9 @@ final class LoginControllerTest extends FunctionalTestCase
     public function visit(): void
     {
         $this->browser()
-            ->visit('/login')
+            ->visit('/')
             ->assertSuccessful()
-            ->assertSeeIn('h1', 'Anmeldung');
+            ->assertSeeIn('p', 'Melden Sie sich jetzt in Ihrem Nutzerbereich an.');
     }
 
     /**
@@ -34,29 +34,31 @@ final class LoginControllerTest extends FunctionalTestCase
                 $faker->email(),
                 $faker->password(8),
             )
-            ->assertOn('/login')
-            ->assertSeeIn('#login-form-error', 'Fehlerhafte Zugangsdaten.');
+            ->assertOn('/')
+            ->assertSeeIn('#login-form-error', 'Invalid Credentials.');
     }
 
-    //    /**
-    //     * @test
-    //     */
-    //    public function loginShouldBeCaseInsensitive(): void
-    //    {
-    //        $faker = self::faker();
-    //
-    //        $user = UserFactory::createOne([
-    //            'email' => $faker->nonCanonicalEmail(),
-    //        ]);
-    //
-    //        $this->browser()
-    //            ->visit('/login')
-    //            ->fillField('E-Mail', u($user->getEmail())->lower()->toString())
-    //            ->fillField('Passwort', $user->getPassword())
-    //            ->click('Weiter')
-    //            ->assertSuccessful()
-    //            ->assertOn('/user/dashboard');
-    //    }
+    /**
+     * @test
+     */
+    public function loginShouldBeCaseInsensitive(): void
+    {
+        $faker = self::faker();
+
+        /** @var User $user */
+        $user = UserFactory::createOne([
+            'email' => $faker->nonCanonicalEmail(),
+        ])->object();
+
+        $this->browser()
+            ->visit('/login')
+            ->loginAs(
+                u($user->getEmail())->lower()->toString(),
+                $user->getPassword(),
+            )
+            ->assertSuccessful()
+            ->assertOn('/dashboard');
+    }
 
     /**
      * @test
@@ -66,12 +68,11 @@ final class LoginControllerTest extends FunctionalTestCase
         $user = UserFactory::createOne();
 
         $this->browser()
-            ->visit('/login')
+            ->visit('/')
             ->loginAs(
                 $user->getEmail(),
                 $user->getPassword(),
             )
-            ->click('Anmelden')
             ->assertSuccessful()
             ->assertOn('/dashboard');
     }

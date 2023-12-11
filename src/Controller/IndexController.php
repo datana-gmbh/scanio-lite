@@ -4,28 +4,32 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Entity\User;
 use App\Routing\Routes;
 use OskarStark\Symfony\Http\Responder;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Http\Attribute\CurrentUser;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
-class IndexController extends AbstractController
+#[Route(path: '/', name: Routes::INDEX)]
+final readonly class IndexController
 {
     public function __construct(
-        private readonly Responder $responder,
+        private Responder $responder,
+        private AuthenticationUtils $authenticationUtils,
     ) {
     }
 
-    #[Route(path: '/', name: Routes::LOGIN)]
-    public function login(#[CurrentUser] ?User $user): Response
+    public function __invoke(): Response
     {
-        if ($user instanceof User) {
-            return $this->responder->route(Routes::DASHBOARD);
-        }
+        // get the login error if there is one
+        $error = $this->authenticationUtils->getLastAuthenticationError();
 
-        return $this->responder->route(Routes::LOGIN);
+        // last username entered by the user
+        $lastUsername = $this->authenticationUtils->getLastUsername();
+
+        return $this->responder->render('page/index.html.twig', [
+            'last_username' => $lastUsername,
+            'error' => $error,
+        ]);
     }
 }

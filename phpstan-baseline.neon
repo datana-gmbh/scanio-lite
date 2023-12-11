@@ -23,7 +23,7 @@ parameters:
 		-
 			message: "#^Call to an undefined method Symfony\\\\Component\\\\HttpFoundation\\\\Session\\\\SessionInterface\\:\\:getFlashBag\\(\\)\\.$#"
 			count: 1
-			path: src/Controller/UploadController.php
+			path: src/Controller/Security/UploadController.php
 
 		-
 			message: "#^Method App\\\\Crud\\\\Edit\\\\Form\\\\FormTypeFactory\\:\\:create\\(\\) should return App\\\\Crud\\\\Edit\\\\Form\\\\FormTypeFactoryLoadableInterface but returns App\\\\Crud\\\\Edit\\\\Form\\\\FormTypeFactoryLoadableInterface\\|false\\.$#"
@@ -94,11 +94,6 @@ parameters:
 			path: tests/Functional/AppBrowser.php
 
 		-
-			message: "#^Call to static method App\\\\Tests\\\\Functional\\\\FunctionalTestCase\\:\\:assertTrue\\(\\) with true will always evaluate to true\\.$#"
-			count: 1
-			path: tests/Functional/FunctionalDummyTest.php
-
-		-
 			message: "#^Method App\\\\Tests\\\\Integration\\\\IntegrationTestCase\\:\\:createKernel\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: tests/Integration/IntegrationTestCase.php
@@ -117,16 +112,6 @@ parameters:
 			message: "#^Call to static method App\\\\Tests\\\\Unit\\\\UnitTestCase\\:\\:assertSame\\(\\) with 'admin_dashboard' and 'admin_dashboard' will always evaluate to true\\.$#"
 			count: 1
 			path: tests/Unit/Routing/AdminRoutesTest.php
-
-		-
-			message: "#^Call to static method App\\\\Tests\\\\Unit\\\\UnitTestCase\\:\\:assertSame\\(\\) with 'dashboard' and 'dashboard' will always evaluate to true\\.$#"
-			count: 1
-			path: tests/Unit/Routing/RoutesTest.php
-
-		-
-			message: "#^Call to static method App\\\\Tests\\\\Unit\\\\UnitTestCase\\:\\:assertSame\\(\\) with 'login' and 'login' will always evaluate to true\\.$#"
-			count: 1
-			path: tests/Unit/Routing/RoutesTest.php
 
 		-
 			message: "#^Method App\\\\Tests\\\\Util\\\\DataProvider\\\\GenericProvider\\:\\:allKindsOfValues\\(\\) return type has no value type specified in iterable type array\\.$#"

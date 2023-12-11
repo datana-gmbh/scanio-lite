@@ -1,4 +1,5 @@
 security:
+    enable_authenticator_manager: true
     password_hashers:
         App\Entity\User:
             algorithm: auto
@@ -9,7 +10,7 @@ security:
         app_user_provider:
             entity:
                 class: App\Entity\User
-                property: username
+                property: email
 
         api_users:
             memory:
@@ -24,14 +25,19 @@ security:
             security: false
 
         main:
+            lazy: true
             provider: app_user_provider
+            custom_authenticators:
+                - App\Security\UserAuthenticator
             form_login:
-                login_path: !php/const App\Routing\Routes::LOGIN
-                check_path: !php/const App\Routing\Routes::LOGIN
-                default_target_path: !php/const App\Routing\Routes::DASHBOARD
-                enable_csrf: true
-                remember_me: true
-
+                login_path: !php/const App\Routing\Routes::INDEX
+                check_path: !php/const App\Routing\Routes::INDEX
+                username_parameter: 'email'
+                password_parameter: 'password'
+            logout:
+                path: !php/const App\Routing\Routes::LOGOUT
+                target: !php/const App\Routing\Routes::INDEX # where to redirect after logout
+            switch_user: true
         api:
             provider: api_users
             http_basic:
@@ -46,11 +52,5 @@ security:
     access_control:
         - { path: ^/admin, allow_if: "is_granted('ROLE_ADMIN')" }
         - { path: ^/api, role: ROLE_API_USER }
-        - { path: ^/login, role: PUBLIC_ACCESS }
+        - { path: ^/$, role: PUBLIC_ACCESS }
         - { path: ^/, role: ROLE_USER }
-
-when@test:
-    security:
-        password_hashers:
-            App\Entity\User:
-                algorithm: plaintext

@@ -1,0 +1,128 @@
+{% extends 'page/layout.html.twig' %}
+
+{% block title %}
+    {{ parent() }}
+{% endblock %}
+
+{% block logo_text %}{% endblock %}
+
+{% block content %}
+    <div class="relative bg-white my-12">
+        <div class="mx-auto max-w-7xl lg:grid lg:grid-cols-12 lg:gap-x-8 lg:px-8">
+            <div class="px-6 pb-24 pt-16 lg:col-span-5 lg:px-0">
+                <div class="flex flex-col justify-between">
+                    <h1 class="mt-24 text-4xl font-bold tracking-wide text-primary-500 sm:mt-18 sm:text-5xl text-center">
+                        Willkommen bei <br/>scan.io
+                    </h1>
+                    <p class="mt-6 text-lg leading-8 text-gray-800 text-center">
+                        Melden Sie sich jetzt in Ihrem Nutzerbereich an.
+                    </p>
+                    {% if app.user is null %}
+                        <form class="mt-16 space-y-6" method="POST">
+                            {% if error %}
+                                <div class="bg-red-400 rounded-md p-4">
+                                    <div class="flex">
+                                        <div class="flex-shrink-0">
+                                            <svg class="h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg"
+                                                 viewBox="0 0 20 20"
+                                                 fill="currentColor" aria-hidden="true">
+                                                <path fill-rule="evenodd"
+                                                      d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                                                      clip-rule="evenodd"/>
+                                            </svg>
+                                        </div>
+                                        <div class="ml-3">
+                                            <p class="text-sm text-white" id="login-form-error">
+                                                {{ error.messageKey|trans(error.messageData, 'security') }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            <input type="hidden" name="remember" value="true">
+                            <div class="rounded-md shadow-sm space-y-4">
+                                <div>
+                                    <label for="email" class="sr-only">E-Mail</label>
+                                    <input id="email" name="email" type="email" autocomplete="email" required autofocus
+                                           value="{{ last_username }}"
+                                           class="appearance-none block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-primary-500 focus:border-primary-500 focus:z-10 sm:text-sm rounded-md"
+                                           placeholder="E-Mail"/>
+                                </div>
+                                <div>
+                                    <label for="password" class="sr-only">Passwort</label>
+                                    <input id="password" name="password" type="password" autocomplete="current-password"
+                                           required
+                                           class="appearance-none block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-primary-500 focus:border-primary-500 focus:z-10 sm:text-sm rounded-md"
+                                           placeholder="Passwort"/>
+                                </div>
+
+                                <input type="hidden" name="_target_path"
+                                       value="{{ path(constant('App\\Routing\\Routes::DASHBOARD')) }}"/>
+                                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
+                            </div>
+
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <input id="remember_me" name="_remember_me" type="checkbox"
+                                           class="h-4 w-4 text-primary-500 focus:ring-primary-400 border-gray-300 rounded">
+                                    <label for="remember_me" class="ml-2 block text-sm text-gray-900">
+                                        Eingeloggt bleiben
+                                    </label>
+                                </div>
+
+{#                                <div class="text-sm">#}
+{#                                    <a href="{{ path(constant('App\\Routing\\Routes::PASSWORD_FORGOTTEN')) }}"#}
+{#                                       class="btn-link-secondary">#}
+{#                                        Passwort vergessen?#}
+{#                                    </a>#}
+{#                                </div>#}
+                            </div>
+                            <div>
+                                <button type="submit" class="group relative w-full flex justify-center btn-primary">
+                                    <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+                                        <svg class="h-5 w-5 text-primary-100 group-hover:text-primary-50"
+                                             xmlns="http://www.w3.org/2000/svg"
+                                             viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                            <path fill-rule="evenodd"
+                                                  d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                                                  clip-rule="evenodd"/>
+                                        </svg>
+                                    </span>
+                                    Anmelden
+                                </button>
+                            </div>
+                        </form>
+
+{#                        <div class="w-full text-center py-8 justify-end mt-4">#}
+{#                            <div class="mx-auto text-sm">#}
+{#                                Sie haben noch kein Konto?#}
+{#                                <a href="{{ path(constant('App\\Routing\\Routes::REGISTER')) }}"#}
+{#                                   class="group relative justify-center btn-link-secondary items-center">#}
+{#                                    Jetzt kostenlos registrieren <i class="ml-1 far fa-arrow-right"></i>#}
+{#                                </a>#}
+{#                            </div>#}
+{#                        </div>#}
+                    {% else %}
+                        <div class="mx-auto mt-12">
+                            <a href="{{ path(constant('App\\Routing\\Routes::DASHBOARD')) }}"
+                               class="bg-secondary border border-transparent rounded-md shadow-sm py-3 px-6 inline-flex justify-center text-base font-medium text-white hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed">
+                                Zur Übersicht
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="relative lg:col-span-7 md:-mr-8 lg:absolute lg:inset-0 lg:left-1/2">
+                    <div class="max-w-3xl flex-none sm:max-w-5xl lg:max-w-none">
+                        <img
+                            src="https://tailwindui.com/img/component-images/dark-project-app-screenshot.png"
+                            alt="App screenshot"
+                            width="2432"
+                            height="1442"
+                            class="w-[76rem] rounded-md bg-white/5 shadow-2xl ring-1 ring-white/10"
+                        >
+                    </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

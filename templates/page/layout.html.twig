@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <nav class="bg-transparent z-10 absolute inset-x-0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-0">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <a href="{{ path(constant('App\\Routing\\Routes::DASHBOARD')) }}"
+                       class="flex-shrink-0 flex items-center text-white text-md font-bold ">
+                        <img alt="Logo" src="{{ asset('build/images/logo.png') }}" class="h-10 mr-2"/>
+                    </a>
+
+                    <div class="hidden md:ml-6 md:flex md:items-center md:space-x-4">
+                    </div>
+                </div>
+                <div class="flex items-center">
+                    <div class="ml-4 flex-shrink-0 flex items-center">
+                        {% if app.user %}
+                            <a href="{{ path(constant('App\\Routing\\Routes::DASHBOARD')) }}"
+                               class="bg-secondary border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed">
+                                Zur Übersicht
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="bg-gray-50">
+        <div class="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
+            <nav class="-mx-5 -my-2 flex flex-wrap justify-center" aria-label="Footer">
+                <div class="px-5 py-2">
+{#                    {{ path(constant('App\\Routing\\Routes::PAGE_IMPRESSUM')) }}#}
+                    <a href="#"
+                       class="text-base text-gray-500 hover:text-gray-900">
+                        Impressum
+                    </a>
+                </div>
+
+                <div class="px-5 py-2">
+{#                    {{ path(constant('App\\Routing\\Routes::PAGE_DATENSCHUTZ')) }}#}
+                    <a href="#"
+                       class="text-base text-gray-500 hover:text-gray-900">
+                        Datenschutz
+                    </a>
+                </div>
+
+                <div class="px-5 py-2">
+{#                    {{ path(constant('App\\Routing\\Routes::PAGE_AGB')) }}#}
+                    <a href="#"
+                       class="text-base text-gray-500 hover:text-gray-900">
+                        AGB
+                    </a>
+                </div>
+
+{#                <div class="px-5 py-2">#}
+{#                    <a href="{{ technical_support_url(app.user) }}" target="_blank"#}
+{#                       class="text-base text-gray-500 hover:text-gray-900">#}
+{#                        Problem melden#}
+{#                    </a>#}
+{#                </div>#}
+            </nav>
+
+            <p class="mt-8 text-center text-base text-gray-400">
+                &copy; Copyright datana GmbH {{ date()|date('Y') }} Berlin. All Rights reserved.
+            </p>
+        </div>
+    </footer>
+{% endblock %}
