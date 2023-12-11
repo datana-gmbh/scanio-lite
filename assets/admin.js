@@ -1,3 +1,3 @@
-import './scss/admin/admin-styles.scss'
+import './css/tailwind.css'
 
 import './js/admin/custom'

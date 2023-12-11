@@ -27,8 +27,8 @@ Encore
     to: 'pdfviewer/[path][name].[ext]',
   })
   .copyFiles({
-      from: './assets/css/pdfviewer',
-      to: 'pdfviewer/css/[name].[ext]',
+    from: './assets/css/pdfviewer',
+    to: 'pdfviewer/css/[name].[ext]',
   })
 // only needed for CDN's or subdirectory deploy
 // .setManifestKeyPrefix('build/')
@@ -41,11 +41,6 @@ Encore
      */
   .addEntry('app', './assets/app.js')
   .addEntry('admin', './assets/admin.js')
-  .addEntry('form', './assets/form.js')
-  .addEntry('rsv', './assets/rsv.js')
-  .addEntry('billing', './assets/billing.js')
-  .addEntry('keen', './assets/keen.js')
-  .addEntry('new', './assets/new.js')
 
 // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
   .splitEntryChunks()
@@ -79,7 +74,7 @@ Encore
   })
 
 // enables Sass/SCSS support
-  .enableSassLoader()
+//   .enableSassLoader()
 
 // uncomment if you use TypeScript
 // .enableTypeScriptLoader()

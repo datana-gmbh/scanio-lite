@@ -99,7 +99,7 @@
 
 {% block file_widget %}
     {%- set class = attribute(attr, 'class') is defined ? attr.class : '' %}
-    {%- set class = (class ~ 'px-0 py-0 appearance-none block w-full w-full sm:text-sm border border-gray-300 focus:outline-none text-gray-500 file:mr-4 file:py-3 file:px-4 file:rounded-l-md file:border-y-0 file:border-l-0 file:border-r file:border-gray-100 file:sm:text-sm file:font-semibold file:bg-gray-100 file:text-black file:cursor-pointer hover:file:bg-opacity-80')|trim %}
+    {%- set class = (class ~ 'file:-my-3 file:-mx-4 appearance-none block w-full w-full sm:text-sm border border-gray-300 focus:outline-none text-gray-500 file:mr-4 file:py-3 file:px-4 file:rounded-l-md file:border-y-0 file:border-l-0 file:border-r file:border-gray-100 file:sm:text-sm file:font-semibold file:bg-gray-100 file:text-black file:cursor-pointer hover:file:bg-opacity-80')|trim %}
     {%- set attr = attr|merge({class}) -%}
     {% with {attr: attr} %}{{ block('form_widget') }}{% endwith %}
 {% endblock file_widget %}
