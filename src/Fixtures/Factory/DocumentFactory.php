@@ -23,6 +23,7 @@ final class DocumentFactory extends ModelFactory
      */
     public function __construct(
         private readonly FilesystemOperator $documentsStorage,
+        private readonly string $projectDir,
     ) {
         parent::__construct();
     }
@@ -78,7 +79,7 @@ final class DocumentFactory extends ModelFactory
                 // $object is the instantiated object
                 // $attributes contains the attributes used to instantiate the object and any extras
 
-                $this->documentsStorage->write($document->getFilename(), $document->getContent() ?? '');
+                $this->documentsStorage->write($document->getFilename(), file_get_contents(sprintf('%s/src/Fixtures/Factory/files/test.pdf', $this->projectDir)));
             });
     }
 }
