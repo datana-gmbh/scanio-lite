@@ -7,7 +7,7 @@ namespace App\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
-final class SearchableChoicesType extends AbstractType
+final class SearchableChoiceType extends AbstractType
 {
     public function getParent(): string
     {

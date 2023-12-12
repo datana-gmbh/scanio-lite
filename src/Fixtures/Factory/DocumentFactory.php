@@ -61,8 +61,7 @@ final class DocumentFactory extends ModelFactory
         $filename = u($faker->sha1())->truncate(20)->append('.pdf')->toString();
 
         return [
-            'createdAt' => $createdAt = new DateTimeImmutable(),
-            'inboxDate' => clone $createdAt,
+            'createdAt' => $faker->dateTimeBetween('-1 year', '-1 day'),
             'group' => $faker->randomElement(Group::cases()),
             'category' => $faker->randomElement(Category::cases()),
             'content' => $faker->text(),
@@ -80,6 +79,11 @@ final class DocumentFactory extends ModelFactory
             ->afterInstantiate(function (Document $document, array $attributes): void {
                 // $object is the instantiated object
                 // $attributes contains the attributes used to instantiate the object and any extras
+
+                if ($document->getCategory()->equals(Category::Pending)) {
+                    $document->setInboxDate(null);
+                    $document->setUser(null);
+                }
 
                 $fixtureFilepath = sprintf(
                     '%s/src/Fixtures/Resources/files/invoice%s.pdf',

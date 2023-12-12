@@ -9,8 +9,8 @@ use App\Domain\Enum\Category;
 use App\Domain\Enum\Group;
 use App\Form\Choices;
 use App\Form\Type\DatePickerType;
-use App\Form\Type\SearchableChoicesType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
@@ -24,11 +24,10 @@ final class Pending extends AbstractType implements FormTypeFactoryLoadableInter
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add(
-            'posteingangsdatum',
+            'inboxDate',
             DatePickerType::class,
             [
                 'label' => 'Posteingangsdatum',
-                'property_path' => 'data[posteingangsdatum]',
                 'widget' => 'single_text',
                 'required' => true,
                 'constraints' => [
@@ -39,14 +38,13 @@ final class Pending extends AbstractType implements FormTypeFactoryLoadableInter
 
         $builder->add(
             'category',
-            SearchableChoicesType::class,
+            EnumType::class,
             [
+                'class' => Category::class,
                 'label' => 'Kategorie',
                 'required' => true,
-                'choices' => Choices::categories(),
                 'placeholder' => Choices::PLACEHOLDER,
-                'property_path' => 'data[category]',
-                'attr' => ['class' => 'js-advanced-select-custom'],
+                'choice_label' => fn(Category $category) => $category->label(),
                 'constraints' => [
                     new NotBlank(),
                 ],

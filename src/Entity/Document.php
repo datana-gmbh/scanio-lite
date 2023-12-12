@@ -43,8 +43,11 @@ class Document implements \Stringable
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
     private \DateTimeImmutable $createdAt;
 
-    #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
-    private \DateTimeImmutable $inboxDate;
+    /**
+     * Das Posteingangsdatum des Dokuments.
+     */
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
+    private ?\DateTimeImmutable $inboxDate = null;
 
     /**
      * Das Dokument wurde gelöscht (soft delete) und kann wiederhergestellt werden.
@@ -70,20 +73,19 @@ class Document implements \Stringable
     ) {
         $this->id = new DocumentId();
         $this->createdAt = new \DateTimeImmutable();
-        $this->inboxDate = clone $this->createdAt;
     }
 
     public function __toString(): string
     {
-        return (string) $this->id->toString();
+        return $this->id->toString();
     }
 
-    public function getInboxDate(): \DateTimeImmutable
+    public function getInboxDate(): ?\DateTimeImmutable
     {
         return $this->inboxDate;
     }
 
-    public function setInboxDate(\DateTimeImmutable $inboxDate): void
+    public function setInboxDate(?\DateTimeImmutable $inboxDate): void
     {
         $this->inboxDate = $inboxDate;
     }
