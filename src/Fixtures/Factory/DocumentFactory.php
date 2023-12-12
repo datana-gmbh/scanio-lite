@@ -10,6 +10,7 @@ use App\Domain\Enum\Group;
 use App\Entity\Document;
 use League\Flysystem\FilesystemOperator;
 use Safe\DateTimeImmutable;
+use Webmozart\Assert\Assert;
 use Zenstruck\Foundry\ModelFactory;
 use function Safe\file_get_contents;
 use function Symfony\Component\String\u;
@@ -80,7 +81,17 @@ final class DocumentFactory extends ModelFactory
                 // $object is the instantiated object
                 // $attributes contains the attributes used to instantiate the object and any extras
 
-                $this->documentsStorage->write($document->getFilename(), file_get_contents(sprintf('%s/src/Fixtures/Factory/files/test.pdf', $this->projectDir)));
+                $fixtureFilepath = sprintf(
+                    '%s/src/Fixtures/Resources/files/invoice%s.pdf',
+                    $this->projectDir,
+                    self::faker()->numberBetween(1, 4),
+                );
+                Assert::fileExists($fixtureFilepath);
+
+                $this->documentsStorage->write(
+                    $document->getFilename(),
+                    file_get_contents($fixtureFilepath),
+                );
             });
     }
 }
