@@ -5,7 +5,7 @@ services:
     Inpsyde\LogzIoMonolog\Handler\LogzIoHandler:
         arguments:
             $token: '%env(LOGZ_IO_TOKEN)%'
-            $host: 'listener-eu.logz.io'
+            $host: !php/enum Inpsyde\LogzIoMonolog\Enum\Host::EuCentral1
 
     Datana\LogzIo\Handler\Logger\Processor\AddApplicationNameProcessor:
         arguments:
