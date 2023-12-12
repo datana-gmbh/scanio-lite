@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Form;
 
+use App\Domain\Enum\Group;
 use Safe\DateTimeImmutable;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -30,7 +31,7 @@ final class UploadFormType extends AbstractType
                 ],
                 'help' => 'Folgende Formate werden unterstützt: .pdf',
             ])
-            ->add('inbox_date', DateType::class, [
+            ->add('inboxDate', DateType::class, [
                 'label' => 'Posteingangsdatum',
                 'required' => true,
                 'widget' => 'single_text',
@@ -42,6 +43,7 @@ final class UploadFormType extends AbstractType
             ->add('group', ChoiceType::class, [
                 'label' => 'Gruppe',
                 'choices' => Choices::groups(),
+                'data' => Group::Default->value,
                 'required' => true,
                 'placeholder' => Choices::PLACEHOLDER,
                 'constraints' => [
