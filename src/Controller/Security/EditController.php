@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controller\Security;
 
 use App\Crud\Edit\Form\FormTypeFactoryInterface;
+use App\Crud\Edit\Form\Types\Default\Pending;
 use App\Domain\Enum\Category;
 use App\Domain\Enum\Group;
 use App\Domain\Identifier\DocumentId;
@@ -43,9 +44,16 @@ final readonly class EditController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if (Pending::class !== $formType::class) {
+                $document->markFinished();
+            }
+
             $this->documents->save($document);
 
-            return $this->responder->redirect($request->getUri());
+            return $this->responder->route(Routes::LIST, [
+                'group' => $group->value,
+                'category' => $category->value,
+            ]);
         }
 
         return $this->responder->render('default/edit.html.twig', [
