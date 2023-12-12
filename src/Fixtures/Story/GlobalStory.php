@@ -11,16 +11,11 @@ use Zenstruck\Foundry\Story;
 
 final class GlobalStory extends Story
 {
-    public function __construct(
-        private readonly PasswordHasherFactoryInterface $passwordHasherFactory,
-    ) {
-    }
-
     public function build(): void
     {
         UserFactory::new([
             'email' => 'admin@scanio.wip',
-            'password' => $this->passwordHasherFactory->getPasswordHasher(User::class)->hash('admin'),
+            'password' => 'admin',
         ])->asAdmin()->create();
     }
 }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Fixtures\Factory;
 
 use App\Entity\User;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Zenstruck\Foundry\ModelFactory;
 
 /**
@@ -12,6 +13,13 @@ use Zenstruck\Foundry\ModelFactory;
  */
 final class UserFactory extends ModelFactory
 {
+    public function __construct(
+        private readonly UserPasswordHasherInterface $passwordHasher
+    )
+    {
+        parent::__construct();
+    }
+
     public function asAdmin(): self
     {
         return $this->addState(['roles' => ['ROLE_ADMIN']]);
@@ -39,8 +47,10 @@ final class UserFactory extends ModelFactory
      */
     protected function initialize(): self
     {
-        return $this;
-        // ->afterInstantiate(function(User $user): void {})
+        return $this
+            ->afterInstantiate(function(User $user): void {
+                $user->setPassword($this->passwordHasher->hashPassword($user, $user->getPassword()));
+            });
     }
 
     protected static function getClass(): string
