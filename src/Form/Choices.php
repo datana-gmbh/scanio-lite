@@ -57,7 +57,7 @@ final class Choices
         $groups = [];
 
         foreach (Group::cases() as $group) {
-            $groups[$group->value] = $group->label();
+            $groups[$group->label()] = $group->value;
         }
 
         return $groups;
@@ -71,7 +71,7 @@ final class Choices
         $categories = [];
 
         foreach (Category::cases() as $category) {
-            $categories[$category->value] = $category->label();
+            $categories[$category->label()] = $category->value;
         }
 
         return $categories;

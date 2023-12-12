@@ -68,13 +68,13 @@ final class ChoicesTest extends UnitTestCase
     /**
      * @test
      */
-    public function types(): void
+    public function categories(): void
     {
         self::assertSame(
             [
-                'other' => 'Sonstiges',
-                'pending' => 'Unbearbeitet',
-                'unknown' => 'Unbekannt',
+                'Sonstiges' => 'other',
+                'Unbearbeitet' => 'pending',
+                'Unbekannt' => 'unknown',
             ],
             Choices::categories(),
         );
@@ -87,7 +87,7 @@ final class ChoicesTest extends UnitTestCase
     {
         self::assertSame(
             [
-                'default' => 'Standard',
+                'Standard' => 'default',
             ],
             Choices::groups(),
         );

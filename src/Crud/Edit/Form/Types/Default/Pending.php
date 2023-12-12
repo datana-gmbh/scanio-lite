@@ -41,7 +41,7 @@ final class Pending extends AbstractType implements FormTypeFactoryLoadableInter
             'category',
             SearchableChoicesType::class,
             [
-                'label' => 'Typ',
+                'label' => 'Kategorie',
                 'required' => true,
                 'choices' => Choices::categories(),
                 'placeholder' => Choices::PLACEHOLDER,
