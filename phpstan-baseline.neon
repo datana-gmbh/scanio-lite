@@ -41,11 +41,6 @@ parameters:
 			path: src/Domain/Enum/Category.php
 
 		-
-			message: "#^Casting to string something that's already string\\.$#"
-			count: 1
-			path: src/Entity/Document.php
-
-		-
 			message: "#^Class DateTimeImmutable is unsafe to use\\. Its methods can return FALSE instead of throwing an exception\\. Please add 'use Safe\\\\DateTimeImmutable;' at the beginning of the file to use the variant provided by the 'thecodingmachine/safe' library\\.$#"
 			count: 1
 			path: src/Entity/Document.php
