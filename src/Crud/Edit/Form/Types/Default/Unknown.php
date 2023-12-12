@@ -9,32 +9,22 @@ use App\Domain\Enum\Category;
 use App\Domain\Enum\Group;
 use App\Entity\Document;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Validator\Constraints\NotBlank;
 
-final class Sonstiges extends AbstractType implements FormTypeFactoryLoadableInterface
+final class Unknown extends AbstractType implements FormTypeFactoryLoadableInterface
 {
-    public function getParent(): string
-    {
-        return BaseForm::class;
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         /** @var Document $document */
         $document = $options['data'];
 
         $builder->add(
-            'name_der_datei',
-            TextType::class,
+            'important',
+            CheckboxType::class,
             [
-                'label' => 'Name der PDF',
-                'required' => true,
-                'property_path' => 'data[name_der_datei]',
-                'constraints' => [
-                    new NotBlank(),
-                ],
+                'label' => 'Wichtiges Dokument?',
+                'property_path' => 'data[important]',
             ],
         );
     }
@@ -42,6 +32,6 @@ final class Sonstiges extends AbstractType implements FormTypeFactoryLoadableInt
     public function supports(Group $group, Category $category): bool
     {
         return $group->equals(Group::Default)
-            && $category->equals(Category::Other);
+            && $category->equals(Category::Unknown);
     }
 }

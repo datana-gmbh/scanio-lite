@@ -16,11 +16,6 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 final class Pending extends AbstractType implements FormTypeFactoryLoadableInterface
 {
-    public function getParent(): string
-    {
-        return BaseForm::class;
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add(

@@ -34,13 +34,7 @@ final readonly class EditController
 
         $formType = $this->formTypeFactory->create($group, $category);
 
-        $form = $this->formFactory->create(
-            $formType::class,
-            $document,
-            [
-                'submit_enabled' => !$document->isFinished(),
-            ],
-        );
+        $form = $this->formFactory->create($formType::class, $document);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -61,6 +55,7 @@ final readonly class EditController
             'category' => $category,
             'document' => $document,
             'form' => $form->createView(),
+            'submit_enabled' => !$document->isFinished(),
         ]);
     }
 }
