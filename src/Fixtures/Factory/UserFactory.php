@@ -14,9 +14,8 @@ use Zenstruck\Foundry\ModelFactory;
 final class UserFactory extends ModelFactory
 {
     public function __construct(
-        private readonly UserPasswordHasherInterface $passwordHasher
-    )
-    {
+        private readonly UserPasswordHasherInterface $passwordHasher,
+    ) {
         parent::__construct();
     }
 
@@ -48,7 +47,7 @@ final class UserFactory extends ModelFactory
     protected function initialize(): self
     {
         return $this
-            ->afterInstantiate(function(User $user): void {
+            ->afterInstantiate(function (User $user): void {
                 $user->setPassword($this->passwordHasher->hashPassword($user, $user->getPassword()));
             });
     }
