@@ -25,6 +25,9 @@ final readonly class DefaultLetterQuery implements QueryInterface
         $qb->where(
             $qb->expr()->eq('l.category', ':category'),
         );
+        $qb->andWhere(
+            $qb->expr()->isNull('l.finishedAt'),
+        );
         $qb->setParameter('category', $this->category->value);
 
         $this->qb = $qb;

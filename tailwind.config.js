@@ -22,6 +22,17 @@ module.exports = {
           900: '#000b0e',
         },
         secondary: '#F0C81A',
+        green: {
+          100: '#e6f5e6',
+          200: '#ccf0cc',
+          300: '#b3e6b3',
+          400: '#99e099',
+          500: '#80d980',
+          600: '#66cc66',
+          700: '#4db84d',
+          800: '#33ad33',
+          900: '#1a991a',
+        },
       },
       extend: {
         transitionProperty: {

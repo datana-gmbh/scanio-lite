@@ -165,6 +165,11 @@ class Document implements \Stringable
         $this->finishedAt = $finishedAt;
     }
 
+    public function markFinished(): void
+    {
+        $this->finishedAt = new \DateTimeImmutable();
+    }
+
     public function getExportedAt(): ?\DateTimeImmutable
     {
         return $this->exportedAt;
