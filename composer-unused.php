@@ -12,6 +12,7 @@ return static fn (Configuration $config): Configuration => $config
     ->addNamedFilter(NamedFilter::fromString('datana-gmbh/logz-io-handler'))
     ->addNamedFilter(NamedFilter::fromString('ext-pdo_pgsql'))
     ->addNamedFilter(NamedFilter::fromString('symfony/flex'))
+    ->addNamedFilter(NamedFilter::fromString('symfony/mime'))
     ->addNamedFilter(NamedFilter::fromString('symfony/var-dumper'))
     ->setAdditionalFilesFor('datana-gmbh/scanio-lite', [
         __FILE__,
