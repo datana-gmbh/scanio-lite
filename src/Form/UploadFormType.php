@@ -24,11 +24,11 @@ final class UploadFormType extends AbstractType
                 'label' => 'Datei',
                 'constraints' => [
                     new File(
-                        mimeTypes: ['application/zip', 'application/pdf'],
+                        mimeTypes: ['application/pdf'],
                         mimeTypesMessage: 'Der Dateityp der hochgeladenen Datei ist nicht unterstützt ({{ type }}). Erlaubte Typen sind {{ types }}',
                     ),
                 ],
-                'help' => 'Folgende Formate werden unterstützt .pdf, .zip',
+                'help' => 'Folgende Formate werden unterstützt: .pdf',
             ])
             ->add('inbox_date', DateType::class, [
                 'label' => 'Posteingangsdatum',
