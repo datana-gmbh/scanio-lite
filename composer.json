@@ -42,6 +42,7 @@
         "symfony/framework-bundle": "^6.4.1",
         "symfony/http-foundation": "^6.4.0",
         "symfony/http-kernel": "^6.4.1",
+        "symfony/mime": "^6.4",
         "symfony/monolog-bundle": "^3.10",
         "symfony/options-resolver": "^6.4",
         "symfony/password-hasher": "^6.4",
