@@ -9,7 +9,6 @@ use App\Domain\Enum\Category;
 use App\Domain\Enum\Group;
 use App\Entity\Document;
 use League\Flysystem\FilesystemOperator;
-use Safe\DateTimeImmutable;
 use Webmozart\Assert\Assert;
 use Zenstruck\Foundry\ModelFactory;
 use function Safe\file_get_contents;

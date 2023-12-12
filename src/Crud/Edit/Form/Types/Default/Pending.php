@@ -44,7 +44,7 @@ final class Pending extends AbstractType implements FormTypeFactoryLoadableInter
                 'label' => 'Kategorie',
                 'required' => true,
                 'placeholder' => Choices::PLACEHOLDER,
-                'choice_label' => fn(Category $category) => $category->label(),
+                'choice_label' => static fn (Category $category) => $category->label(),
                 'constraints' => [
                     new NotBlank(),
                 ],
