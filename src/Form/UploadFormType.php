@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App\Form;
 
 use App\Domain\Enum\Group;
+use App\Form\Type\DatePickerType;
 use Safe\DateTimeImmutable;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -31,8 +31,9 @@ final class UploadFormType extends AbstractType
                 ],
                 'help' => 'Folgende Formate werden unterstützt: .pdf',
             ])
-            ->add('inboxDate', DateType::class, [
+            ->add('inboxDate', DatePickerType::class, [
                 'label' => 'Posteingangsdatum',
+
                 'required' => true,
                 'widget' => 'single_text',
                 'constraints' => [
