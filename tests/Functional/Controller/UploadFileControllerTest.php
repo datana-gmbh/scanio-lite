@@ -13,13 +13,13 @@ final class UploadFileControllerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function anUnauthenticatedUserWillRedirectToLoginPage(): void
+    public function anUnauthenticatedUserWillRedirectToLogin(): void
     {
         $this->browser()
             ->interceptRedirects()
-            ->visit('/upload/file')
+            ->visit('/upload')
             ->assertRedirected()
-            ->assertRedirectedTo('/login');
+            ->assertRedirectedTo('/');
     }
 
     /**
@@ -37,13 +37,13 @@ final class UploadFileControllerTest extends FunctionalTestCase
 
         $this->browser()
             ->login($user)
-            ->visit('/upload/file')
+            ->visit('/upload')
             ->visit('/dashboard')
             ->assertSee($user->getEmail())
-            ->visit('/upload/file')
-            ->assertOn('/upload/file')
+            ->visit('/upload')
+            ->assertOn('/upload')
             ->assertSee('Datei Hochladen')
-            ->fillField('upload_form[inbox_date]', $faker->date())
+            ->fillField('upload_form[inboxDate]', $faker->date())
             ->selectFieldOptionByEnum('upload_form[group]', Group::Default)
             ->attachFile('upload_form[file]', self::fixtureFile($fixtureFile))
             ->click('Hochladen')

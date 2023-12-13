@@ -247,6 +247,10 @@
     >
         <div class="{{ class }} cursor-not-allowed opacity-60">&nbsp;</div>
     </div>
+
+    <noscript>
+        {{ block('choice_widget') }}
+    </noscript>
 {%- endblock searchable_choices_widget -%}
 
 {%- block searchable_enum_widget -%}
@@ -268,6 +272,10 @@
     >
         <div class="{{ class }} cursor-not-allowed opacity-60">&nbsp;</div>
     </div>
+
+    <noscript>
+        {{ block('date_widget') }}
+    </noscript>
 {%- endblock date_picker_widget -%}
 
 {%- block aktensuche_widget -%}
