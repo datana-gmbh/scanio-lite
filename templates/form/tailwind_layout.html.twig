@@ -249,6 +249,11 @@
     </div>
 {%- endblock searchable_choices_widget -%}
 
+{%- block searchable_enum_widget -%}
+    {{ block('searchable_choices_widget') }}
+{%- endblock searchable_enum_widget -%}
+
+
 {%- block date_picker_widget -%}
     {%- set class = attribute(attr, 'class') is defined ? attr.class : '' %}
     {%- set class = (class ~ ' appearance-none block w-full py-3 pl-9 pr-4 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-primary-600 focus:border-primary-600 sm:text-sm rounded-md')|trim %}
