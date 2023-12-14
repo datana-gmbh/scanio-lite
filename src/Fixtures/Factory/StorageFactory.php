@@ -38,6 +38,7 @@ final class StorageFactory extends ModelFactory
         return [
             'storageType' => StorageType::Local,
             'path' => self::faker()->filePath(),
+            'enabled' => self::faker()->boolean(),
         ];
     }
 

@@ -42,6 +42,9 @@ class Storage implements \Stringable
     )]
     private ?string $path = null;
 
+    #[ORM\Column(type: Types::BOOLEAN)]
+    private bool $enabled = false;
+
     public function __construct()
     {
         $this->id = new StorageId();
@@ -91,5 +94,15 @@ class Storage implements \Stringable
     public function setPath(?string $path): void
     {
         $this->path = $path;
+    }
+
+    public function isEnabled(): bool
+    {
+        return $this->enabled;
+    }
+
+    public function setEnabled(bool $enabled): void
+    {
+        $this->enabled = $enabled;
     }
 }

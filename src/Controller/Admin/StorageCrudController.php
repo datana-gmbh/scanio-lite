@@ -8,6 +8,7 @@ use App\Entity\Storage;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
@@ -38,6 +39,8 @@ final class StorageCrudController extends AbstractCrudController
     {
         yield TextField::new('id')
             ->setFormTypeOption('disabled', true);
+
+        yield BooleanField::new('enabled');
 
         yield ChoiceField::new('storageType');
 
