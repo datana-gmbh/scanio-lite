@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Enum;
+namespace App\Source\Value;
 
 use OskarStark\Enum\Trait\Comparable;
 use function Symfony\Component\String\u;
 
-enum StorageType: string
+enum Type: string
 {
     use Comparable;
 

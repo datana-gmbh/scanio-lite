@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Admin;
 
-use App\Entity\Storage;
+use App\Entity\Source;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
@@ -12,11 +12,11 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
-final class StorageCrudController extends AbstractCrudController
+final class SourceCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return Storage::class;
+        return Source::class;
     }
 
     public function configureCrud(Crud $crud): Crud
@@ -25,8 +25,8 @@ final class StorageCrudController extends AbstractCrudController
             ->setDefaultSort([
                 'id' => 'DESC',
             ])
-            ->setEntityLabelInSingular('Speicher')
-            ->setEntityLabelInPlural('Speicher')
+            ->setEntityLabelInSingular('Quelle')
+            ->setEntityLabelInPlural('Quellen')
             ->setPaginatorPageSize(100);
     }
 
@@ -41,7 +41,7 @@ final class StorageCrudController extends AbstractCrudController
             ->hideOnIndex()
             ->setFormTypeOption('disabled', true);
 
-        yield ChoiceField::new('storageType', 'Type');
+        yield ChoiceField::new('type');
 
         yield TextField::new('path');
 
@@ -50,7 +50,10 @@ final class StorageCrudController extends AbstractCrudController
 
         yield BooleanField::new('enabled');
 
-        yield BooleanField::new('recursive')
+        yield BooleanField::new('importRecursive')
             ->setHelp('Sollen Dateien ebenfalls aus Unterordnern importiert werden?');
+
+        yield BooleanField::new('deleteAfterImport')
+            ->setHelp('Sollen Dateien nach einem erfolgreichen Import gelöscht werden?');
     }
 }

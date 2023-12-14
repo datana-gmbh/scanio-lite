@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace App\Import;
+namespace App\Source\Import;
 
 use App\Entity\Document;
-use App\Entity\Storage;
+use App\Entity\Source;
 
 interface ImporterInterface
 {
     /**
      * @return Document[]
      */
-    public function import(Storage $storage): array;
+    public function import(Source $storage): array;
 }

@@ -4,22 +4,22 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Entity;
 
-use App\Domain\Enum\StorageType;
-use App\Fixtures\Factory\StorageFactory;
+use App\Fixtures\Factory\SourceFactory;
+use App\Source\Value\Type;
 use App\Tests\Unit\UnitTestCase;
 
 /**
- * @covers \App\Entity\Storage
+ * @covers \App\Entity\Source
  */
-final class StorageTest extends UnitTestCase
+final class SourceTest extends UnitTestCase
 {
     /**
      * @test
      */
     public function stringableWithPath(): void
     {
-        $storage = StorageFactory::new([
-            'storageType' => StorageType::Dropbox,
+        $storage = SourceFactory::new([
+            'type' => Type::Dropbox,
             'path' => '/foo/bar',
         ])
             ->create()

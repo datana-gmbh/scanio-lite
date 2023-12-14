@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Command;
+namespace App\Source\Command;
 
-use App\Domain\Enum\StorageType;
-use App\Import\DropboxImporter;
-use App\Repository\StorageRepositoryInterface;
+use App\Repository\SourceRepositoryInterface;
+use App\Source\Import\DropboxImporter;
+use App\Source\Value\Type;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -15,12 +15,12 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
     name: 'import:dropbox',
-    description: 'Imports files from configured Storages of type dropbox',
+    description: 'Imports files from configured Sources of type dropbox',
 )]
 final class ImportDropboxCommand extends Command
 {
     public function __construct(
-        private readonly StorageRepositoryInterface $storages,
+        private readonly SourceRepositoryInterface $sources,
         private readonly DropboxImporter $dropboxImporter,
     ) {
         parent::__construct();
@@ -31,15 +31,15 @@ final class ImportDropboxCommand extends Command
         $io = new SymfonyStyle($input, $output);
         $io->title($this->getDescription());
 
-        $storages = $this->storages->byType(StorageType::Dropbox);
+        $sources = $this->sources->byType(Type::Dropbox);
 
-        foreach ($storages as $storage) {
-            $documents = $this->dropboxImporter->import($storage);
+        foreach ($sources as $source) {
+            $documents = $this->dropboxImporter->import($source);
 
             $io->text(sprintf(
                 'Imported <info>%s</> documents from <info>%s</>',
                 \count($documents),
-                (string) $storage,
+                $source,
             ));
         }
 

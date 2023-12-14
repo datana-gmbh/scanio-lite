@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Import;
+namespace App\Source\Import;
 
 use App\Bridge\Dropbox\Domain\Value\DropboxResource;
 use App\Creator\DocumentCreatorInterface;
-use App\Entity\Storage;
+use App\Entity\Source;
 use Psr\Log\LoggerInterface;
 use Spatie\Dropbox\Client;
 
@@ -18,12 +18,12 @@ final readonly class DropboxImporter implements ImporterInterface
     ) {
     }
 
-    public function import(Storage $storage): array
+    public function import(Source $storage): array
     {
         if (!$storage->isEnabled()) {
             $this->logger->info(sprintf(
                 'Storage %s: %s is not enabled.',
-                $storage->getStorageType()->label(),
+                $storage->getType()->label(),
                 $storage->getPath(),
             ));
 
@@ -38,7 +38,7 @@ final readonly class DropboxImporter implements ImporterInterface
 
         // removes all values which are no array. Somehow it can happen that there are strings.
         $response = array_filter(
-            $client->listFolder($path, $storage->isRecursive()),
+            $client->listFolder($path, $storage->recursiveImport()),
             static fn (array|string $item): bool => \is_array($item),
         );
 
