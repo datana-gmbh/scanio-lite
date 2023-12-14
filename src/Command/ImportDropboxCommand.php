@@ -16,7 +16,6 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use function Safe\json_encode;
 
 #[AsCommand(
     name: 'import:dropbox',
@@ -35,7 +34,7 @@ final class ImportDropboxCommand extends Command
     protected function configure(): void
     {
         $this
-            ->addOption('dry-run', null, InputOption::VALUE_NONE, 'Gives a preview how the command would run without doing actually something.');
+            ->addOption('delete-after-import', null, InputOption::VALUE_NONE, 'Deletes files after importing from configured dropbox');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -45,10 +44,10 @@ final class ImportDropboxCommand extends Command
 
         $storages = $this->storages->byType(StorageType::Dropbox);
 
-        $dryRun = false;
+        $deleteAfterImport = false;
 
-        if ($input->getOption('dry-run')) {
-            $dryRun = true;
+        if ($input->getOption('delete-after-import')) {
+            $deleteAfterImport = true;
         }
 
         $io->text(sprintf('Found %s storages with dropbox', \count($storages)));
@@ -81,8 +80,6 @@ final class ImportDropboxCommand extends Command
                     try {
                         $element = FilesystemElement::fromResponse($file);
                     } catch (\InvalidArgumentException) {
-                        $io->error(sprintf('Invalid Dropbox response %s', json_encode($file)));
-
                         $this->logger->error('Invalid Dropbox response', [
                             'response' => $file,
                         ]);
@@ -90,7 +87,15 @@ final class ImportDropboxCommand extends Command
                         continue;
                     }
 
-                    if ($element->isDir || !$element->isDownloadable) {
+                    if (!$element->isDir && !$element->isDownloadable) {
+                        $io->warning(sprintf('File %s is not downloadable', $element->name));
+
+                        continue;
+                    }
+
+                    if ($element->isDir) {
+                        // @TODO: Do some recursion here
+
                         continue;
                     }
 
@@ -106,9 +111,10 @@ final class ImportDropboxCommand extends Command
                             $document->getOriginalFilename(),
                         ));
 
-                        //                        if ($dryRun) {
-                        //                            $client->delete($element->path);
-                        //                        }
+                        if ($deleteAfterImport) {
+                            $client->delete($element->path);
+                            $io->text(sprintf('Deleted remote file <info>%s</info>', $element->path));
+                        }
                     } catch (\Throwable $e) {
                         $this->logger->error($e->getMessage());
                     }

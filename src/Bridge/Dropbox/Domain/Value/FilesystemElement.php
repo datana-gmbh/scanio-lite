@@ -14,12 +14,12 @@ use Webmozart\Assert\Assert;
  *       'path_lower': string,
  *       'path_display': string,
  *       'id': string,
- *       'client_modified': string,
- *       'server_modified': string,
- *       'rev': string,
- *       'size': int,
- *       'is_downloadable': bool,
- *       'content_hash': string
+ *       'client_modified'?: string,
+ *       'server_modified'?: string,
+ *       'rev'?: string,
+ *       'size'?: int,
+ *       'is_downloadable'?: bool,
+ *       'content_hash'?: string
  * }
  */
 final readonly class FilesystemElement
@@ -28,7 +28,6 @@ final readonly class FilesystemElement
         public string $name,
         public bool $isDir,
         public string $path,
-        public int $size,
         public bool $isDownloadable,
     ) {
     }
@@ -50,21 +49,18 @@ final readonly class FilesystemElement
         Assert::notNull($response['path_lower']);
         $path = TrimmedNonEmptyString::fromString($response['path_lower']);
 
-        Assert::keyExists($response, 'size');
-        Assert::notNull($response['size']);
-        Assert::integer($response['size']);
-        $size = $response['size'];
-
-        Assert::keyExists($response, 'is_downloadable');
-        Assert::notNull($response['is_downloadable']);
-        Assert::boolean($response['is_downloadable']);
-        $isDownloadable = $response['is_downloadable'];
+        $isDownloadable = false;
+        if (!$isDir) {
+            Assert::keyExists($response, 'is_downloadable');
+            Assert::notNull($response['is_downloadable']);
+            Assert::boolean($response['is_downloadable']);
+            $isDownloadable = $response['is_downloadable'];
+        }
 
         return new self(
             $name->toString(),
             $isDir,
             $path->toString(),
-            $size,
             $isDownloadable,
         );
     }
