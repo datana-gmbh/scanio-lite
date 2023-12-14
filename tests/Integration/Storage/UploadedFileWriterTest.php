@@ -29,7 +29,7 @@ final class UploadedFileWriterTest extends IntegrationTestCase
         $writer = self::getContainer()->get(UploadedFileWriter::class);
 
         $file = new UploadedFile(
-            path: $filepath = __DIR__.'/../../Fixtures/blank.pdf',
+            path: $filepath = self::fixtureFile('blank.pdf'),
             originalName: $filename = basename($filepath),
         );
 
@@ -46,7 +46,7 @@ final class UploadedFileWriterTest extends IntegrationTestCase
         $writer = self::getContainer()->get(UploadedFileWriter::class);
 
         $file = new UploadedFile(
-            path: $filepath = __DIR__.'/../../Fixtures/blank.pdf',
+            path: $filepath = self::fixtureFile('blank.pdf'),
             originalName: $filename = basename($filepath),
         );
 
