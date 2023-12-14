@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Storage;
 
-use function Safe\fopen;
-use function Safe\fclose;
 use League\Flysystem\FilesystemOperator;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use function Safe\fclose;
+use function Safe\fopen;
 
 final readonly class UploadedFileWriter implements UploadedFileWriterInterface
 {
