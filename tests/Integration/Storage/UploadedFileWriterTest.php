@@ -15,7 +15,10 @@ final class UploadedFileWriterTest extends IntegrationTestCase
     {
         parent::setUp();
 
-        shell_exec('rm -rf '.self::getContainer()->getParameter('documents_dir').'/*');
+        try {
+            shell_exec('rm -rf '.self::getContainer()->getParameter('documents_dir').'/*');
+        } catch (\Throwable) {
+        }
     }
 
     /**
