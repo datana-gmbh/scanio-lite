@@ -44,7 +44,7 @@ final class StorageCrudController extends AbstractCrudController
 
         yield ChoiceField::new('storageType');
 
-        if ($pageName !== Crud::PAGE_INDEX) {
+        if (Crud::PAGE_INDEX !== $pageName) {
             yield TextField::new('token');
         }
 
