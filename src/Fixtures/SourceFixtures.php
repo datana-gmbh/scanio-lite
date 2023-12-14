@@ -14,7 +14,8 @@ use Symfony\Component\DependencyInjection\Attribute\Autowire;
 final class SourceFixtures extends Fixture implements OrderedFixtureInterface
 {
     public function __construct(
-        #[Autowire('%env(DROPBOX_ACCESS_TOKEN)%')]private readonly string $dropboxAccessToken,
+        #[Autowire('%env(DROPBOX_ACCESS_TOKEN)%')]
+        private readonly string $dropboxAccessToken,
     ) {
     }
 
