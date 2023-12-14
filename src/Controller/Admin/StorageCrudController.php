@@ -38,17 +38,17 @@ final class StorageCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         yield TextField::new('id')
+            ->hideOnIndex()
             ->setFormTypeOption('disabled', true);
-
-        yield BooleanField::new('enabled');
 
         yield ChoiceField::new('storageType', 'Type');
 
-        if (Crud::PAGE_INDEX !== $pageName) {
-            yield TextField::new('token');
-        }
-
         yield TextField::new('path');
+
+        yield TextField::new('token')
+            ->hideOnIndex();
+
+        yield BooleanField::new('enabled');
 
         yield BooleanField::new('recursive')
             ->setHelp('Sollen Dateien ebenfalls aus Unterordnern importiert werden?');
