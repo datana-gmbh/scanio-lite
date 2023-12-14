@@ -10,11 +10,11 @@ use App\Entity\Storage;
 use Psr\Log\LoggerInterface;
 use Spatie\Dropbox\Client;
 
-final class DropboxImporter implements ImporterInterface
+final readonly class DropboxImporter implements ImporterInterface
 {
     public function __construct(
-        private readonly DocumentCreatorInterface $documentCreator,
-        private readonly LoggerInterface $logger,
+        private DocumentCreatorInterface $documentCreator,
+        private LoggerInterface $logger,
     ) {
     }
 
