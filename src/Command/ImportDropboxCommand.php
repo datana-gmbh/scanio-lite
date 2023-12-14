@@ -54,13 +54,23 @@ final class ImportDropboxCommand extends Command
         $io->text(sprintf('Found %s storages with dropbox', \count($storages)));
 
         foreach ($storages as $storage) {
+            if (!$storage->isEnabled()) {
+                $io->warning(sprintf(
+                        'Storage %s: %s is not enabled.',
+                        $storage->getStorageType()->label(),
+                        $storage->getPath())
+                );
+
+                continue;
+            }
+
             $client = new Client($storage->getToken());
             /** @var string $path */
             $path = $storage->getPath();
 
             // removes all values which are no array. Somehow it can happen that there are strings.
             $response = array_filter(
-                $client->listFolder($path),
+                $client->listFolder($path, $storage->isRecursive()),
                 static fn (array|string $item): bool => \is_array($item),
             );
 
