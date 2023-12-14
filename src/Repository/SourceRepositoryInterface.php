@@ -6,7 +6,7 @@ namespace App\Repository;
 
 use App\Domain\Identifier\SourceId;
 use App\Entity\Source;
-use App\Exception\StorageNotFound;
+use App\Exception\SourceNotFound;
 use App\Source\Value\Type;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Doctrine\ORM\Exception\ORMException;
@@ -23,7 +23,7 @@ use Doctrine\ORM\QueryBuilder;
 interface SourceRepositoryInterface
 {
     /**
-     * @throws StorageNotFound
+     * @throws SourceNotFound
      */
     public function get(SourceId $id): Source;
 

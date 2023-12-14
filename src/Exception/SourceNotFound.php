@@ -6,7 +6,7 @@ namespace App\Exception;
 
 use App\Domain\Identifier\SourceId;
 
-final class StorageNotFound extends NotFoundException
+final class SourceNotFound extends NotFoundException
 {
     public static function withId(SourceId $id): self
     {

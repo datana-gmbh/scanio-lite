@@ -6,7 +6,7 @@ namespace App\Repository;
 
 use App\Domain\Identifier\SourceId;
 use App\Entity\Source;
-use App\Exception\StorageNotFound;
+use App\Exception\SourceNotFound;
 use App\Source\Value\Type;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -27,7 +27,7 @@ final class SourceRepository extends ServiceEntityRepository implements SourceRe
         $storage = $this->find($id);
 
         if (null === $storage) {
-            throw StorageNotFound::withId($id);
+            throw SourceNotFound::withId($id);
         }
 
         return $storage;
