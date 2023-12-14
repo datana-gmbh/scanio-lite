@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional;
 
+use App\Entity\User;
 use App\Tests\Util\FakerTrait;
 use Behat\Mink\Exception\ExpectationException;
 use Symfony\Component\HttpKernel\DataCollector\RequestDataCollector;
 use Webmozart\Assert\Assert;
 use Zenstruck\Browser\KernelBrowser;
+use Zenstruck\Foundry\Proxy as FoundryProxy;
 use function Safe\json_decode;
 use function Symfony\Component\String\u;
 
@@ -120,6 +122,23 @@ final class AppBrowser extends KernelBrowser
             ->visit('/')
             ->fillField('E-Mail', $email)
             ->fillField('Passwort', $password)
+            ->click('Anmelden');
+    }
+
+    /**
+     * @param FoundryProxy<User>|User $user
+     */
+    public function login(FoundryProxy|User $user): self
+    {
+        if ($user instanceof FoundryProxy) {
+            /** @var User $user */
+            $user = $user->object();
+        }
+
+        return $this
+            ->visit('/')
+            ->fillField('E-Mail', $user->getEmail())
+            ->fillField('Passwort', $user->getPassword())
             ->click('Anmelden');
     }
 
