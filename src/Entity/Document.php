@@ -34,9 +34,6 @@ class Document implements \Stringable
     #[ORM\Column(name: '`user`', type: Types::TEXT, nullable: true)]
     private ?string $user = null;
 
-    #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
-    private ?string $originalFilename = null;
-
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
     private \DateTimeImmutable $createdAt;
 
@@ -67,6 +64,8 @@ class Document implements \Stringable
     public function __construct(
         #[ORM\Column(type: Types::STRING, length: 255)]
         private string $filename,
+        #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
+        private ?string $originalFilename = null,
         #[ORM\Column(name: '`group`', type: Types::STRING, enumType: Group::class)]
         private Group $group = Group::Default,
         #[ORM\Column(type: Types::STRING, enumType: Category::class)]
