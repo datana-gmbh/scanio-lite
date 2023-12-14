@@ -51,6 +51,16 @@ parameters:
 			path: src/Controller/Security/UploadController.php
 
 		-
+			message: "#^Call to function is_string\\(\\) with string will always evaluate to true\\.$#"
+			count: 1
+			path: src/Creator/DocumentCreator.php
+
+		-
+			message: "#^Result of && is always false\\.$#"
+			count: 1
+			path: src/Creator/DocumentCreator.php
+
+		-
 			message: "#^Method App\\\\Crud\\\\Edit\\\\Form\\\\FormTypeFactory\\:\\:create\\(\\) should return App\\\\Crud\\\\Edit\\\\Form\\\\FormTypeFactoryLoadableInterface but returns App\\\\Crud\\\\Edit\\\\Form\\\\FormTypeFactoryLoadableInterface\\|false\\.$#"
 			count: 1
 			path: src/Crud/Edit/Form/FormTypeFactory.php
@@ -92,11 +102,6 @@ parameters:
 			message: "#^Property App\\\\Entity\\\\User\\:\\:\\$password type mapping mismatch\\: property can contain string\\|null but database expects string\\.$#"
 			count: 1
 			path: src/Entity/User.php
-
-		-
-			message: "#^Call to method \\$this\\(App\\\\Repository\\\\SourceRepository\\)\\:\\:findBy\\(\\) \\- entity App\\\\Entity\\\\Source does not have a field named \\$storageType\\.$#"
-			count: 1
-			path: src/Repository/SourceRepository.php
 
 		-
 			message: "#^Instanceof between App\\\\Entity\\\\User and App\\\\Entity\\\\User will always evaluate to true\\.$#"
