@@ -56,7 +56,11 @@ class Storage implements \Stringable
 
     public function __toString(): string
     {
-        return $this->id->toString();
+        $string = $this->getStorageType()->value;
+
+        $string .= ':'.($this->getPath() ?? 'null');
+
+        return $string;
     }
 
     public function getId(): StorageId
