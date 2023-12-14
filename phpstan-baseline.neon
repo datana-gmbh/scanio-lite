@@ -3,27 +3,27 @@ parameters:
 		-
 			message: "#^Call to static method Webmozart\\\\Assert\\\\Assert\\:\\:keyExists\\(\\) with array\\{\\.tag\\: string, name\\: string, path_lower\\: string, path_display\\: string, id\\: string, client_modified\\?\\: string, server_modified\\?\\: string, rev\\?\\: string, \\.\\.\\.\\} and '\\.tag' will always evaluate to true\\.$#"
 			count: 1
-			path: src/Bridge/Dropbox/Domain/Value/FilesystemElement.php
+			path: src/Bridge/Dropbox/Domain/Value/DropboxResource.php
 
 		-
 			message: "#^Call to static method Webmozart\\\\Assert\\\\Assert\\:\\:keyExists\\(\\) with array\\{\\.tag\\: string, name\\: string, path_lower\\: string, path_display\\: string, id\\: string, client_modified\\?\\: string, server_modified\\?\\: string, rev\\?\\: string, \\.\\.\\.\\} and 'name' will always evaluate to true\\.$#"
 			count: 1
-			path: src/Bridge/Dropbox/Domain/Value/FilesystemElement.php
+			path: src/Bridge/Dropbox/Domain/Value/DropboxResource.php
 
 		-
 			message: "#^Call to static method Webmozart\\\\Assert\\\\Assert\\:\\:keyExists\\(\\) with array\\{\\.tag\\: string, name\\: string, path_lower\\: string, path_display\\: string, id\\: string, client_modified\\?\\: string, server_modified\\?\\: string, rev\\?\\: string, \\.\\.\\.\\} and 'path_lower' will always evaluate to true\\.$#"
 			count: 1
-			path: src/Bridge/Dropbox/Domain/Value/FilesystemElement.php
+			path: src/Bridge/Dropbox/Domain/Value/DropboxResource.php
 
 		-
 			message: "#^Call to static method Webmozart\\\\Assert\\\\Assert\\:\\:notNull\\(\\) with bool will always evaluate to true\\.$#"
 			count: 1
-			path: src/Bridge/Dropbox/Domain/Value/FilesystemElement.php
+			path: src/Bridge/Dropbox/Domain/Value/DropboxResource.php
 
 		-
 			message: "#^Call to static method Webmozart\\\\Assert\\\\Assert\\:\\:notNull\\(\\) with string will always evaluate to true\\.$#"
 			count: 3
-			path: src/Bridge/Dropbox/Domain/Value/FilesystemElement.php
+			path: src/Bridge/Dropbox/Domain/Value/DropboxResource.php
 
 		-
 			message: "#^Method App\\\\Bridge\\\\Faker\\\\Provider\\\\ArrayProvider\\:\\:array\\(\\) return type has no value type specified in iterable type array\\.$#"
@@ -46,11 +46,6 @@ parameters:
 			path: src/Bridge/Flysystem/UrlGenerator.php
 
 		-
-			message: "#^Parameter \\#1 \\$response of static method App\\\\Bridge\\\\Dropbox\\\\Domain\\\\Value\\\\FilesystemElement\\:\\:fromResponse\\(\\) expects array\\{\\.tag\\: string, name\\: string, path_lower\\: string, path_display\\: string, id\\: string, client_modified\\?\\: string, server_modified\\?\\: string, rev\\?\\: string, \\.\\.\\.\\}, array given\\.$#"
-			count: 1
-			path: src/Command/ImportDropboxCommand.php
-
-		-
 			message: "#^Call to an undefined method Symfony\\\\Component\\\\HttpFoundation\\\\Session\\\\SessionInterface\\:\\:getFlashBag\\(\\)\\.$#"
 			count: 1
 			path: src/Controller/Security/UploadController.php
@@ -71,16 +66,6 @@ parameters:
 			path: src/Domain/Enum/Category.php
 
 		-
-			message: "#^Match arm comparison between \\$this\\(App\\\\Domain\\\\Enum\\\\StorageType\\)&App\\\\Domain\\\\Enum\\\\StorageType\\:\\:Dropbox and App\\\\Domain\\\\Enum\\\\StorageType\\:\\:Dropbox is always true\\.$#"
-			count: 2
-			path: src/Domain/Enum/StorageType.php
-
-		-
-			message: "#^Match arm is unreachable because previous comparison is always true\\.$#"
-			count: 2
-			path: src/Domain/Enum/StorageType.php
-
-		-
 			message: "#^Class DateTimeImmutable is unsafe to use\\. Its methods can return FALSE instead of throwing an exception\\. Please add 'use Safe\\\\DateTimeImmutable;' at the beginning of the file to use the variant provided by the 'thecodingmachine/safe' library\\.$#"
 			count: 2
 			path: src/Entity/Document.php
@@ -96,7 +81,7 @@ parameters:
 		-
 			message: "#^Class DateTimeImmutable is unsafe to use\\. Its methods can return FALSE instead of throwing an exception\\. Please add 'use Safe\\\\DateTimeImmutable;' at the beginning of the file to use the variant provided by the 'thecodingmachine/safe' library\\.$#"
 			count: 1
-			path: src/Entity/Storage.php
+			path: src/Entity/Source.php
 
 		-
 			message: "#^Method App\\\\Entity\\\\User\\:\\:getPassword\\(\\) should return string but returns string\\|null\\.$#"
@@ -109,9 +94,29 @@ parameters:
 			path: src/Entity/User.php
 
 		-
+			message: "#^Call to method \\$this\\(App\\\\Repository\\\\SourceRepository\\)\\:\\:findBy\\(\\) \\- entity App\\\\Entity\\\\Source does not have a field named \\$storageType\\.$#"
+			count: 1
+			path: src/Repository/SourceRepository.php
+
+		-
 			message: "#^Instanceof between App\\\\Entity\\\\User and App\\\\Entity\\\\User will always evaluate to true\\.$#"
 			count: 1
 			path: src/Repository/UserRepository.php
+
+		-
+			message: "#^Parameter \\#1 \\$response of static method App\\\\Bridge\\\\Dropbox\\\\Domain\\\\Value\\\\DropboxResource\\:\\:fromResponse\\(\\) expects array\\{\\.tag\\: string, name\\: string, path_lower\\: string, path_display\\: string, id\\: string, client_modified\\?\\: string, server_modified\\?\\: string, rev\\?\\: string, \\.\\.\\.\\}, array given\\.$#"
+			count: 1
+			path: src/Source/Import/DropboxImporter.php
+
+		-
+			message: "#^Match arm comparison between \\$this\\(App\\\\Source\\\\Value\\\\Type\\)&App\\\\Source\\\\Value\\\\Type\\:\\:Dropbox and App\\\\Source\\\\Value\\\\Type\\:\\:Dropbox is always true\\.$#"
+			count: 2
+			path: src/Source/Value/Type.php
+
+		-
+			message: "#^Match arm is unreachable because previous comparison is always true\\.$#"
+			count: 2
+			path: src/Source/Value/Type.php
 
 		-
 			message: "#^Call to function is_resource\\(\\) with resource will always evaluate to true\\.$#"
