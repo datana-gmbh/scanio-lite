@@ -50,6 +50,7 @@ final readonly class FilesystemElement
         $path = TrimmedNonEmptyString::fromString($response['path_lower']);
 
         $isDownloadable = false;
+
         if (!$isDir) {
             Assert::keyExists($response, 'is_downloadable');
             Assert::notNull($response['is_downloadable']);

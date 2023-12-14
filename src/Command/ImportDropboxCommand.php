@@ -54,10 +54,12 @@ final class ImportDropboxCommand extends Command
 
         foreach ($storages as $storage) {
             if (!$storage->isEnabled()) {
-                $io->warning(sprintf(
+                $io->warning(
+                    sprintf(
                         'Storage %s: %s is not enabled.',
                         $storage->getStorageType()->label(),
-                        $storage->getPath())
+                        $storage->getPath(),
+                    ),
                 );
 
                 continue;
