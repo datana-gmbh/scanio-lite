@@ -32,6 +32,6 @@ final class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToRoute('Zurück', 'fas fa-arrow-left', Routes::DASHBOARD);
         yield MenuItem::linkToDashboard('Dashboard', 'fas fa-home');
-        yield MenuItem::linkToCrud('Speicher', 'fas fa-database', Source::class);
+        yield MenuItem::linkToCrud('Quellen', 'fas fa-database', Source::class);
     }
 }
