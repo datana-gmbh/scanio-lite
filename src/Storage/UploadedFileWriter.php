@@ -19,10 +19,6 @@ final readonly class UploadedFileWriter implements UploadedFileWriterInterface
 
     public function write(UploadedFile $file): string
     {
-        if ($file->isValid()) {
-            throw new \RuntimeException('Invalid file');
-        }
-
         $targetFilename = $this->filenameGenerator->generate($file);
 
         if ($this->documentsStorage->fileExists($targetFilename)) {
