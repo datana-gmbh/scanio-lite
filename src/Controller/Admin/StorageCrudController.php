@@ -50,6 +50,5 @@ final class StorageCrudController extends AbstractCrudController
 
         yield BooleanField::new('recursive')
             ->setHelp('Sollen Dateien ebenfalls aus Unterordnern importiert werden?');
-
     }
 }
