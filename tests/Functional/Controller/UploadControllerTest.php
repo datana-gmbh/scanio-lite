@@ -8,7 +8,7 @@ use App\Domain\Enum\Group;
 use App\Fixtures\Factory\UserFactory;
 use App\Tests\Functional\FunctionalTestCase;
 
-final class UploadFileControllerTest extends FunctionalTestCase
+final class UploadControllerTest extends FunctionalTestCase
 {
     /**
      * @test
