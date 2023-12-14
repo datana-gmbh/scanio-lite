@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace App\Fixtures\Factory;
 
-use App\Domain\Enum\StorageType;
-use App\Entity\Storage;
+use App\Entity\Source;
+use App\Source\Value\Type;
 use Zenstruck\Foundry\ModelFactory;
 
 /**
- * @extends ModelFactory<Storage>
+ * @extends ModelFactory<Source>
  */
-final class StorageFactory extends ModelFactory
+final class SourceFactory extends ModelFactory
 {
     public function dropbox(): self
     {
         return $this->addState([
-            'storageType' => StorageType::Dropbox,
+            'type' => Type::Dropbox,
             'token' => self::faker()->md5(),
             'path' => self::faker()->filePath(),
         ]);
@@ -25,7 +25,7 @@ final class StorageFactory extends ModelFactory
     public function local(): self
     {
         return $this->addState([
-            'storageType' => StorageType::Local,
+            'type' => Type::Local,
             'path' => self::faker()->filePath(),
         ]);
     }
@@ -36,15 +36,16 @@ final class StorageFactory extends ModelFactory
     protected function getDefaults(): array
     {
         return [
-            'storageType' => StorageType::Local,
+            'type' => Type::Local,
             'path' => self::faker()->filePath(),
             'enabled' => self::faker()->boolean(),
-            'recursive' => self::faker()->boolean(),
+            'recursiveImport' => self::faker()->boolean(),
+            'deleteAfterImport' => self::faker()->boolean(),
         ];
     }
 
     protected static function getClass(): string
     {
-        return Storage::class;
+        return Source::class;
     }
 }

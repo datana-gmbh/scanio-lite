@@ -4,40 +4,40 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Bridge\Doctrine\DBAL\Types\Type\Identifier\StorageIdType;
-use App\Domain\Enum\StorageType;
-use App\Domain\Identifier\StorageId;
-use App\Repository\StorageRepository;
+use App\Bridge\Doctrine\DBAL\Types\Type\Identifier\SourceIdType;
+use App\Domain\Identifier\SourceId;
+use App\Repository\SourceRepository;
+use App\Source\Value\Type;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Id;
 use Symfony\Component\Validator\Constraints as Assert;
 
-#[ORM\Entity(repositoryClass: StorageRepository::class)]
-#[ORM\Table(name: 'storages')]
-class Storage implements \Stringable
+#[ORM\Entity(repositoryClass: SourceRepository::class)]
+#[ORM\Table(name: 'sources')]
+class Source implements \Stringable
 {
     #[Id]
-    #[Column(type: StorageIdType::class, unique: true)]
-    private StorageId $id;
+    #[Column(type: SourceIdType::class, unique: true)]
+    private SourceId $id;
 
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
     private \DateTimeImmutable $createdAt;
 
-    #[ORM\Column(type: Types::STRING, enumType: StorageType::class)]
-    private StorageType $storageType;
+    #[ORM\Column(type: Types::STRING, enumType: Type::class)]
+    private Type $type;
 
     #[ORM\Column(type: Types::STRING, nullable: true)]
     #[Assert\When(
-        expression: 'this.getStorageType().value in ["dropbox"]',
+        expression: 'this.getType().value in ["dropbox"]',
         constraints: [new Assert\NotBlank()],
     )]
     private ?string $token = null;
 
     #[ORM\Column(type: Types::STRING, nullable: true)]
     #[Assert\When(
-        expression: 'this.getStorageType().value in ["dropbox", "local"]',
+        expression: 'this.getType().value in ["dropbox", "local"]',
         constraints: [new Assert\NotBlank()],
     )]
     private ?string $path = null;
@@ -46,20 +46,27 @@ class Storage implements \Stringable
     private bool $enabled = false;
 
     #[ORM\Column(type: Types::BOOLEAN)]
-    private bool $recursive = false;
+    private bool $recursiveImport = false;
+
+    #[ORM\Column(type: Types::BOOLEAN)]
+    private bool $deleteAfterImport = false;
 
     public function __construct()
     {
-        $this->id = new StorageId();
+        $this->id = new SourceId();
         $this->createdAt = new \DateTimeImmutable();
     }
 
     public function __toString(): string
     {
-        return $this->id->toString();
+        $string = $this->getType()->value;
+
+        $string .= ':'.($this->getPath() ?? 'null');
+
+        return $string;
     }
 
-    public function getId(): StorageId
+    public function getId(): SourceId
     {
         return $this->id;
     }
@@ -69,14 +76,14 @@ class Storage implements \Stringable
         return $this->createdAt;
     }
 
-    public function getStorageType(): StorageType
+    public function getType(): Type
     {
-        return $this->storageType;
+        return $this->type;
     }
 
-    public function setStorageType(StorageType $storageType): void
+    public function setType(Type $type): void
     {
-        $this->storageType = $storageType;
+        $this->type = $type;
     }
 
     public function getToken(): ?string
@@ -109,13 +116,23 @@ class Storage implements \Stringable
         $this->enabled = $enabled;
     }
 
-    public function isRecursive(): bool
+    public function recursiveImport(): bool
     {
-        return $this->recursive;
+        return $this->recursiveImport;
     }
 
-    public function setRecursive(bool $recursive): void
+    public function setRecursiveImport(bool $recursiveImport): void
     {
-        $this->recursive = $recursive;
+        $this->recursiveImport = $recursiveImport;
+    }
+
+    public function deleteAfterImport(): bool
+    {
+        return $this->deleteAfterImport;
+    }
+
+    public function setDeleteAfterImport(bool $deleteAfterImport): void
+    {
+        $this->deleteAfterImport = $deleteAfterImport;
     }
 }

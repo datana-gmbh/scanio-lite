@@ -9,9 +9,13 @@ use Symfony\Component\Uid\Ulid;
 
 final readonly class UniqueFilenameGenerator implements FilenameGeneratorInterface
 {
-    public function generate(string|UploadedFile $file): string
+    public function generate(null|string|UploadedFile $file = null): string
     {
         $hash = (new Ulid())->toBase32();
+
+        if (null === $file) {
+            return $hash;
+        }
 
         if ($file instanceof UploadedFile) {
             return sprintf('%s.%s', $hash, $file->guessExtension());

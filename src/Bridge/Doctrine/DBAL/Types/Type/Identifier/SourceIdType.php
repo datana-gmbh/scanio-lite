@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Bridge\Doctrine\DBAL\Types\Type\Identifier;
 
-use App\Domain\Identifier\StorageId;
+use App\Domain\Identifier\SourceId;
 use Symfony\Bridge\Doctrine\Types\AbstractUidType;
 
-final class StorageIdType extends AbstractUidType
+final class SourceIdType extends AbstractUidType
 {
     public function getName(): string
     {
@@ -16,6 +16,6 @@ final class StorageIdType extends AbstractUidType
 
     protected function getUidClass(): string
     {
-        return StorageId::class;
+        return SourceId::class;
     }
 }

@@ -8,5 +8,8 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 interface UploadedFileWriterInterface
 {
+    /**
+     * Return the filename without any path.
+     */
     public function write(UploadedFile $file): string;
 }
