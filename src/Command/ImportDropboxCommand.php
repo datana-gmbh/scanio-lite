@@ -75,54 +75,40 @@ final class ImportDropboxCommand extends Command
                 static fn (array|string $item): bool => \is_array($item),
             );
 
-            foreach ($response as $files) {
-                $io->text(sprintf('Found <info>%s</info> files in <info>%s</info>', \count($files), $path));
+            $io->text(sprintf('Found <info>%s</info> files in <info>%s</info>', \count($response['entries']), $path));
 
-                foreach ($files as $file) {
-                    try {
-                        $element = FilesystemElement::fromResponse($file);
-                    } catch (\InvalidArgumentException) {
-                        $this->logger->error('Invalid Dropbox response', [
-                            'response' => $file,
-                        ]);
+            // Maps all entries to FilesystemElement and filter by only files. Dropbox returns already flattened array
+            // of all files in subdirectories.
+            $elements = array_filter(
+                array_map(static fn (array $entry): FilesystemElement => FilesystemElement::fromResponse($entry), $response['entries']),
+                static fn (FilesystemElement $element): bool => !$element->isDir,
+            );
 
-                        continue;
+            foreach ($elements as $element) {
+                if (!$element->isDownloadable) {
+                    $io->warning(sprintf('File %s is not downloadable', $element->name));
+
+                    continue;
+                }
+
+                try {
+                    $document = $this->creator->fromResource(
+                        $element->name,
+                        $client->download($element->path),
+                    );
+
+                    $io->text(sprintf(
+                        'Created Document with ID <info>%s</info> from <info>%s</info>',
+                        $document->getId()->toString(),
+                        $element->path,
+                    ));
+
+                    if ($deleteAfterImport) {
+                        $client->delete($element->path);
+                        $io->text(sprintf('Deleted remote file <info>%s</info>', $element->path));
                     }
-
-                    if (!$element->isDir && !$element->isDownloadable) {
-                        $io->warning(sprintf('File %s is not downloadable', $element->name));
-
-                        continue;
-                    }
-
-                    if ($element->isDir) {
-                        if ($element->path === $path) {
-                            continue;
-                        }
-
-                        dump($element);
-                        // do recursion here
-                    }
-
-                    try {
-                        $document = $this->creator->fromResource(
-                            $element->name,
-                            $client->download($element->path),
-                        );
-
-                        $io->text(sprintf(
-                            'Created Document with ID <info>%s</info> from <info>%s</info>',
-                            $document->getId()->toString(),
-                            $element->path,
-                        ));
-
-                        if ($deleteAfterImport) {
-                            $client->delete($element->path);
-                            $io->text(sprintf('Deleted remote file <info>%s</info>', $element->path));
-                        }
-                    } catch (\Throwable $e) {
-                        $this->logger->error($e->getMessage());
-                    }
+                } catch (\Throwable $e) {
+                    $this->logger->error($e->getMessage());
                 }
             }
         }
