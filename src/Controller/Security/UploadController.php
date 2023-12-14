@@ -53,6 +53,7 @@ final readonly class UploadController
             try {
                 $file->move($this->documentsDir, $filename);
 
+                $document->setOriginalFilename($file->getClientOriginalName());
                 $document->setCategory(Category::Pending);
                 $document->setGroup($group);
                 $document->setInboxDate(\DateTimeImmutable::createFromMutable($inboxDate));
