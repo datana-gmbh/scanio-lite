@@ -95,7 +95,7 @@ final class ImportDropboxCommand extends Command
                         continue;
                     }
 
-                    if ($element->isDir ) {
+                    if ($element->isDir) {
                         if ($element->path === $path) {
                             continue;
                         }
