@@ -25,12 +25,6 @@ class Document implements \Stringable
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $content = null;
 
-    #[ORM\Column(name: '`group`', type: Types::STRING, enumType: Group::class)]
-    private Group $group = Group::Default;
-
-    #[ORM\Column(type: Types::STRING, enumType: Category::class)]
-    private Category $category = Category::Pending;
-
     /**
      * @var array<mixed>
      */
@@ -73,6 +67,10 @@ class Document implements \Stringable
     public function __construct(
         #[ORM\Column(type: Types::STRING, length: 255)]
         private string $filename,
+        #[ORM\Column(name: '`group`', type: Types::STRING, enumType: Group::class)]
+        private Group $group = Group::Default,
+        #[ORM\Column(type: Types::STRING, enumType: Category::class)]
+        private Category $category = Category::Pending,
     ) {
         $this->id = new DocumentId();
         $this->createdAt = new \DateTimeImmutable();
