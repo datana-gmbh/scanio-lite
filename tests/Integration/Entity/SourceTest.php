@@ -24,7 +24,7 @@ final class SourceTest extends IntegrationTestCase
         $violations = self::validator()->validate($source);
 
         self::assertViolationsForPropertyPath('token', $violations, [
-            'This value should not be blank.',
+            'Dieser Wert sollte nicht leer sein.',
         ]);
     }
 
@@ -59,7 +59,7 @@ final class SourceTest extends IntegrationTestCase
         $violations = self::validator()->validate($source);
 
         self::assertViolationsForPropertyPath('path', $violations, [
-            'This value should not be blank.',
+            'Dieser Wert sollte nicht leer sein.',
         ]);
     }
 
@@ -94,7 +94,7 @@ final class SourceTest extends IntegrationTestCase
         $violations = self::validator()->validate($source);
 
         self::assertViolationsForPropertyPath('path', $violations, [
-            'This value should not be blank.',
+            'Dieser Wert sollte nicht leer sein.',
         ]);
     }
 
