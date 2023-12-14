@@ -39,6 +39,7 @@ final class StorageFactory extends ModelFactory
             'storageType' => StorageType::Local,
             'path' => self::faker()->filePath(),
             'enabled' => self::faker()->boolean(),
+            'recursive' => self::faker()->boolean(),
         ];
     }
 
