@@ -35,7 +35,7 @@ interface SourceRepositoryInterface
     /**
      * @return Source[]
      */
-    public function findAllEnabled(): array;
+    public function findEnabled(): array;
 
     /**
      * @throws ORMException

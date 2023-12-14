@@ -38,7 +38,7 @@ final class SourceRepository extends ServiceEntityRepository implements SourceRe
         return $this->findBy(['type' => $type]);
     }
 
-    public function findAllEnabled(): array
+    public function findEnabled(): array
     {
         return $this->findBy(['enabled' => true]);
     }

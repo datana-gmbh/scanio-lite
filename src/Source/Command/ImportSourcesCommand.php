@@ -30,7 +30,7 @@ final class ImportSourcesCommand extends Command
         $io = new SymfonyStyle($input, $output);
         $io->title($this->getDescription());
 
-        foreach ($this->sources->findAllEnabled() as $source) {
+        foreach ($this->sources->findEnabled() as $source) {
             try {
                 $importer = $this->importerFactory->forSource($source);
             } catch (\InvalidArgumentException $e) {
