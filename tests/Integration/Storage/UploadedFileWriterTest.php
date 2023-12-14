@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Integration\Storage;
 
+use function Safe\shell_exec;
 use App\Storage\UploadedFileWriter;
 use App\Tests\Integration\IntegrationTestCase;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
