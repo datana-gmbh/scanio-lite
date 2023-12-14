@@ -120,21 +120,24 @@
                                 <li class="space-y-1">
                                     <a
                                         class="hover:bg-white/5 text-white/70 group items-center flex gap-x-3 rounded-md p-2 text-base leading-6 font-semibold"
-                                        href="#"
-                                    >
-                                        <i class="fa-light fa-gear shrink-0 text-xl text-white/20 group-hover:text-white/50"></i>
-                                        <span class="flex-1">Einstellungen</span>
-                                    </a>
-                                </li>
-                                <li class="space-y-1">
-                                    <a
-                                        class="hover:bg-white/5 text-white/70 group items-center flex gap-x-3 rounded-md p-2 text-base leading-6 font-semibold"
                                         href="{{ path(constant('App\\Routing\\Routes::LOGOUT')) }}"
                                     >
                                         <i class="fa-light fa-arrow-right-from-bracket shrink-0 text-xl text-white/20 group-hover:text-white/50"></i>
                                         <span class="flex-1">Abmelden</span>
                                     </a>
                                 </li>
+
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <li class="space-y-1">
+                                        <a
+                                            class="hover:bg-white/5 text-white/70 group items-center flex gap-x-3 rounded-md p-2 text-base leading-6 font-semibold"
+                                            href="{{ path(constant('App\\Routing\\AdminRoutes::DASHBOARD')) }}"
+                                        >
+                                            <i class="fa-light fa-sliders shrink-0 text-xl text-white/20 group-hover:text-white/50"></i>
+                                            <span class="flex-1">Adminbereich</span>
+                                        </a>
+                                    </li>
+                                {% endif %}
                             </ul>
                         </li>
                     </ul>
