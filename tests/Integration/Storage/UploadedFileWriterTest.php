@@ -7,7 +7,6 @@ namespace App\Tests\Integration\Storage;
 use App\Storage\UploadedFileWriter;
 use App\Tests\Integration\IntegrationTestCase;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use function Safe\shell_exec;
 
 final class UploadedFileWriterTest extends IntegrationTestCase
 {
@@ -15,10 +14,7 @@ final class UploadedFileWriterTest extends IntegrationTestCase
     {
         parent::setUp();
 
-        try {
-            shell_exec('rm -rf '.self::getContainer()->getParameter('documents_dir').'/*');
-        } catch (\Throwable) {
-        }
+        self::removeFiles();
     }
 
     /**

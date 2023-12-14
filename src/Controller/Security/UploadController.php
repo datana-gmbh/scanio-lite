@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace App\Controller\Security;
 
-use App\Domain\Enum\Category;
 use App\Domain\Enum\Group;
 use App\Entity\Document;
 use App\Form\UploadFormType;
 use App\Repository\DocumentRepositoryInterface;
 use App\Routing\Routes;
-use App\Storage\FilenameGeneratorInterface;
+use App\Storage\UploadedFileWriterInterface;
 use OskarStark\Symfony\Http\Responder;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -25,8 +24,7 @@ final readonly class UploadController
     public function __construct(
         private FormFactoryInterface $formFactory,
         private DocumentRepositoryInterface $documents,
-        private string $documentsDir,
-        private FilenameGeneratorInterface $filenameGenerator,
+        private UploadedFileWriterInterface $fileWriter,
         private Responder $responder,
         private LoggerInterface $logger,
     ) {
@@ -40,22 +38,20 @@ final readonly class UploadController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var UploadedFile $file */
-            $file = $form->get('file')->getData();
-            /** @var Group $group */
-            $group = $form->get('group')->getData();
-            /** @var \DateTime $inboxDate */
-            $inboxDate = $form->get('inboxDate')->getData();
-            $filename = $this->filenameGenerator->generate($file);
-
-            $document = new Document($filename);
-
             try {
-                $file->move($this->documentsDir, $filename);
+                /** @var UploadedFile $file */
+                $file = $form->get('file')->getData();
 
-                $document->setOriginalFilename($file->getClientOriginalName());
-                $document->setCategory(Category::Pending);
-                $document->setGroup($group);
+                /** @var Group $group */
+                $group = $form->get('group')->getData();
+                /** @var \DateTime $inboxDate */
+                $inboxDate = $form->get('inboxDate')->getData();
+
+                $document = new Document(
+                    filename: $this->fileWriter->write($file),
+                    originalFilename: $file->getClientOriginalName(),
+                    group: $group,
+                );
                 $document->setInboxDate(\DateTimeImmutable::createFromMutable($inboxDate));
 
                 $this->documents->save($document);
@@ -66,10 +62,7 @@ final readonly class UploadController
             } catch (\Throwable $e) {
                 $flashBag->add('error', 'Die Datei konnte nicht hochgeladen werden.');
 
-                $this->logger->error(sprintf('Upload failed with message: %s', $e->getMessage()), [
-                    'filename' => $document->getFilename(),
-                    'documentId' => $document->getId()->toString(),
-                ]);
+                $this->logger->error(sprintf('Upload failed with message: %s', $e->getMessage()));
             }
         }
 

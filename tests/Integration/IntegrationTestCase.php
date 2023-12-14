@@ -19,6 +19,7 @@ use Webmozart\Assert\Assert;
 use Zenstruck\Console\Test\InteractsWithConsole;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
+use function Safe\shell_exec;
 
 abstract class IntegrationTestCase extends KernelTestCase
 {
@@ -91,5 +92,13 @@ abstract class IntegrationTestCase extends KernelTestCase
         Assert::fileExists($file);
 
         return $file;
+    }
+
+    final protected static function removeFiles(): void
+    {
+        try {
+            shell_exec('rm -rf '.self::getContainer()->getParameter('documents_dir').'/*');
+        } catch (\Throwable) {
+        }
     }
 }
