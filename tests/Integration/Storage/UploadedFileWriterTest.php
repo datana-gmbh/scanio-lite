@@ -10,6 +10,13 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 final class UploadedFileWriterTest extends IntegrationTestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        shell_exec('rm -rf '.self::getContainer()->getParameter('documents_dir').'/*');
+    }
+
     /**
      * @test
      */
