@@ -33,6 +33,11 @@ interface SourceRepositoryInterface
     public function byType(Type $type): array;
 
     /**
+     * @return Source[]
+     */
+    public function findAllEnabled(): array;
+
+    /**
      * @throws ORMException
      * @throws ORMInvalidArgumentException
      * @throws UniqueConstraintViolationException
