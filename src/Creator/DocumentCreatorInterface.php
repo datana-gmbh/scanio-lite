@@ -8,5 +8,8 @@ use App\Entity\Document;
 
 interface DocumentCreatorInterface
 {
-    public function fromResource(string $originalFilename, mixed $content): Document;
+    /**
+     * @param resource|string $content
+     */
+    public function create(string $originalFilename, mixed $content): Document;
 }

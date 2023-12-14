@@ -20,13 +20,10 @@ final readonly class DocumentCreator implements DocumentCreatorInterface
     ) {
     }
 
-    public function fromResource(string $originalFilename, mixed $content): Document
+    public function create(string $originalFilename, mixed $content): Document
     {
-        if (!\is_resource($content)) {
-            throw new \BadMethodCallException(sprintf(
-                'Given content of file "%s" is not a resource.',
-                $originalFilename,
-            ));
+        if (!\is_resource($content) && !\is_string($content)) {
+            throw new \InvalidArgumentException('$content must be a resource or a string');
         }
 
         $tempFilepath = $this->tempFileWriter->write($content);
