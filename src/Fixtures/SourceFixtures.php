@@ -17,7 +17,7 @@ final class SourceFixtures extends Fixture implements OrderedFixtureInterface
         SourceFactory::createOne([
             'enabled' => true,
             'type' => Type::Dropbox,
-            'token' => 'gOEi0xByodQAAAAAAABp1ylpqFG1oLVItQRWo-O3GGXi5csXTxRcnlmkMz1l1vG4',
+            'token' => 'gOEi0xByodQAAAAAAABp1ylpqFG1oLVItQRWo-O3GGXi5csXTxRcnlmkMz1l1vG', // add 4 at the end to make it work
             'path' => '/scanbot',
             'recursiveImport' => true,
             'deleteAfterImport' => false,
