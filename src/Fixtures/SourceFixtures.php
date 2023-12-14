@@ -19,6 +19,8 @@ final class SourceFixtures extends Fixture implements OrderedFixtureInterface
             'type' => Type::Dropbox,
             'token' => 'gOEi0xByodQAAAAAAABp1ylpqFG1oLVItQRWo-O3GGXi5csXTxRcnlmkMz1l1vG4',
             'path' => '/scanbot',
+            'recursiveImport' => true,
+            'deleteAfterImport' => false,
         ]);
     }
 
