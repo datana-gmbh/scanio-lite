@@ -9,15 +9,22 @@ use App\Source\Value\Type;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 
 final class SourceFixtures extends Fixture implements OrderedFixtureInterface
 {
+    public function __construct(
+        #[Autowire('%env(DROPBOX_ACCESS_TOKEN)%')]
+        private string $dropboxAccessToken,
+    ) {
+    }
+
     public function load(ObjectManager $manager): void
     {
         SourceFactory::createOne([
             'enabled' => true,
             'type' => Type::Dropbox,
-            'token' => 'gOEi0xByodQAAAAAAABp1ylpqFG1oLVItQRWo-O3GGXi5csXTxRcnlmkMz1l1vG', // add 4 at the end to make it work
+            'token' => $this->dropboxAccessToken,
             'path' => '/scanbot',
             'recursiveImport' => true,
             'deleteAfterImport' => false,
