@@ -45,7 +45,7 @@ final readonly class UploadController
             $group = $form->get('group')->getData();
             /** @var \DateTime $inboxDate */
             $inboxDate = $form->get('inboxDate')->getData();
-            $filename = sprintf('%s.%s', (new Ulid())->toBase32(), $file->guessExtension());
+            // $filename = sprintf('%s.%s', (new Ulid())->toBase32(), $file->guessExtension());
 
             $document = new Document($filename);
 
