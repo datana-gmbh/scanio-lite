@@ -41,6 +41,16 @@ parameters:
 			path: src/Domain/Enum/Category.php
 
 		-
+			message: "#^Match arm comparison between \\$this\\(App\\\\Domain\\\\Enum\\\\StorageType\\)&App\\\\Domain\\\\Enum\\\\StorageType\\:\\:Dropbox and App\\\\Domain\\\\Enum\\\\StorageType\\:\\:Dropbox is always true\\.$#"
+			count: 2
+			path: src/Domain/Enum/StorageType.php
+
+		-
+			message: "#^Match arm is unreachable because previous comparison is always true\\.$#"
+			count: 2
+			path: src/Domain/Enum/StorageType.php
+
+		-
 			message: "#^Class DateTimeImmutable is unsafe to use\\. Its methods can return FALSE instead of throwing an exception\\. Please add 'use Safe\\\\DateTimeImmutable;' at the beginning of the file to use the variant provided by the 'thecodingmachine/safe' library\\.$#"
 			count: 2
 			path: src/Entity/Document.php
@@ -52,6 +62,11 @@ parameters:
 			"""
 			count: 1
 			path: src/Entity/Document.php
+
+		-
+			message: "#^Class DateTimeImmutable is unsafe to use\\. Its methods can return FALSE instead of throwing an exception\\. Please add 'use Safe\\\\DateTimeImmutable;' at the beginning of the file to use the variant provided by the 'thecodingmachine/safe' library\\.$#"
+			count: 1
+			path: src/Entity/Storage.php
 
 		-
 			message: "#^Method App\\\\Entity\\\\User\\:\\:getPassword\\(\\) should return string but returns string\\|null\\.$#"

@@ -6,11 +6,10 @@ namespace App\Fixtures\Factory;
 
 use App\Domain\Enum\StorageType;
 use App\Entity\Storage;
-use App\Entity\User;
 use Zenstruck\Foundry\ModelFactory;
 
 /**
- * @extends ModelFactory<User>
+ * @extends ModelFactory<Storage>
  */
 final class StorageFactory extends ModelFactory
 {
