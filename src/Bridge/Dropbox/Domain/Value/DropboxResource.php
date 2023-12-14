@@ -22,7 +22,7 @@ use Webmozart\Assert\Assert;
  *       'content_hash'?: string
  * }
  */
-final readonly class FilesystemElement
+final readonly class DropboxResource
 {
     private function __construct(
         public string $name,

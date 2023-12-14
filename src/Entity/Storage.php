@@ -48,6 +48,9 @@ class Storage implements \Stringable
     #[ORM\Column(type: Types::BOOLEAN)]
     private bool $recursive = false;
 
+    #[ORM\Column(type: Types::BOOLEAN)]
+    private bool $deleteAfterImport = false;
+
     public function __construct()
     {
         $this->id = new StorageId();
@@ -121,5 +124,15 @@ class Storage implements \Stringable
     public function setRecursive(bool $recursive): void
     {
         $this->recursive = $recursive;
+    }
+
+    public function deleteAfterImport(): bool
+    {
+        return $this->deleteAfterImport;
+    }
+
+    public function setDeleteAfterImport(bool $deleteAfterImport): void
+    {
+        $this->deleteAfterImport = $deleteAfterImport;
     }
 }

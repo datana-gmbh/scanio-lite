@@ -4,37 +4,26 @@ declare(strict_types=1);
 
 namespace App\Command;
 
-use App\Bridge\Dropbox\Domain\Value\FilesystemElement;
-use App\Creator\DocumentCreatorInterface;
 use App\Domain\Enum\StorageType;
+use App\Import\DropboxImporter;
 use App\Repository\StorageRepositoryInterface;
-use Psr\Log\LoggerInterface;
-use Spatie\Dropbox\Client;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
     name: 'import:dropbox',
-    description: 'Imports files from configured Storages of type dropbox.',
+    description: 'Imports files from configured Storages of type dropbox',
 )]
 final class ImportDropboxCommand extends Command
 {
     public function __construct(
         private readonly StorageRepositoryInterface $storages,
-        private readonly DocumentCreatorInterface $creator,
-        private readonly LoggerInterface $logger,
+        private readonly DropboxImporter $dropboxImporter,
     ) {
         parent::__construct();
-    }
-
-    protected function configure(): void
-    {
-        $this
-            ->addOption('delete-after-import', null, InputOption::VALUE_NONE, 'Deletes files after importing from configured dropbox');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -44,73 +33,14 @@ final class ImportDropboxCommand extends Command
 
         $storages = $this->storages->byType(StorageType::Dropbox);
 
-        $deleteAfterImport = false;
-
-        if ($input->getOption('delete-after-import')) {
-            $deleteAfterImport = true;
-        }
-
-        $io->text(sprintf('Found %s storages with dropbox', \count($storages)));
-
         foreach ($storages as $storage) {
-            if (!$storage->isEnabled()) {
-                $io->warning(
-                    sprintf(
-                        'Storage %s: %s is not enabled.',
-                        $storage->getStorageType()->label(),
-                        $storage->getPath(),
-                    ),
-                );
+            $documents = $this->dropboxImporter->import($storage);
 
-                continue;
-            }
-
-            $client = new Client($storage->getToken());
-            /** @var string $path */
-            $path = $storage->getPath();
-
-            // removes all values which are no array. Somehow it can happen that there are strings.
-            $response = array_filter(
-                $client->listFolder($path, $storage->isRecursive()),
-                static fn (array|string $item): bool => \is_array($item),
-            );
-
-            $io->text(sprintf('Found <info>%s</info> files in <info>%s</info>', \count($response['entries']), $path));
-
-            // Maps all entries to FilesystemElement and filter by only files. Dropbox returns already flattened array
-            // of all files in subdirectories.
-            $elements = array_filter(
-                array_map(static fn (array $entry): FilesystemElement => FilesystemElement::fromResponse($entry), $response['entries']),
-                static fn (FilesystemElement $element): bool => !$element->isDir,
-            );
-
-            foreach ($elements as $element) {
-                if (!$element->isDownloadable) {
-                    $io->warning(sprintf('File %s is not downloadable', $element->name));
-
-                    continue;
-                }
-
-                try {
-                    $document = $this->creator->fromResource(
-                        $element->name,
-                        $client->download($element->path),
-                    );
-
-                    $io->text(sprintf(
-                        'Created Document with ID <info>%s</info> from <info>%s</info>',
-                        $document->getId()->toString(),
-                        $element->path,
-                    ));
-
-                    if ($deleteAfterImport) {
-                        $client->delete($element->path);
-                        $io->text(sprintf('Deleted remote file <info>%s</info>', $element->path));
-                    }
-                } catch (\Throwable $e) {
-                    $this->logger->error($e->getMessage());
-                }
-            }
+            $io->text(sprintf(
+                'Imported <info>%s</> documents from <info>%s</>',
+                \count($documents),
+                (string) $storage,
+            ));
         }
 
         $io->success('Done');
