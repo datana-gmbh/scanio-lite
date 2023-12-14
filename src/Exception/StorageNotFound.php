@@ -11,7 +11,7 @@ final class StorageNotFound extends NotFoundException
     public static function withId(SourceId $id): self
     {
         return new self(sprintf(
-            'Cannot find Storage with id: %s',
+            'Cannot find Source with id: %s',
             $id->toString(),
         ));
     }
