@@ -12,6 +12,7 @@ use function Safe\fopen;
 final readonly class UploadedFileWriter implements UploadedFileWriterInterface
 {
     public function __construct(
+        private FilenameGeneratorInterface $filenameGenerator,
         private FilesystemOperator $documentsStorage,
     ) {
     }
@@ -22,14 +23,16 @@ final readonly class UploadedFileWriter implements UploadedFileWriterInterface
             throw new \RuntimeException('Invalid file');
         }
 
-        if ($this->documentsStorage->fileExists($file->getClientOriginalName())) {
+        $targetFilename = $this->filenameGenerator->generate($file);
+
+        if ($this->documentsStorage->fileExists($targetFilename)) {
             throw new \RuntimeException('File already exists');
         }
 
         $stream = fopen($file->getRealPath(), 'r+');
-        $this->documentsStorage->writeStream($file->getClientOriginalName(), $stream);
+        $this->documentsStorage->writeStream($targetFilename, $stream);
         fclose($stream);
 
-        return $file->getClientOriginalName();
+        return $targetFilename;
     }
 }
