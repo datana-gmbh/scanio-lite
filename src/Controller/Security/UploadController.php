@@ -10,6 +10,7 @@ use App\Entity\Document;
 use App\Form\UploadFormType;
 use App\Repository\DocumentRepositoryInterface;
 use App\Routing\Routes;
+use App\Storage\FilenameGeneratorInterface;
 use OskarStark\Symfony\Http\Responder;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -17,7 +18,6 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Uid\Ulid;
 
 #[Route(name: Routes::UPLOAD, path: '/upload')]
 final readonly class UploadController
@@ -26,6 +26,7 @@ final readonly class UploadController
         private FormFactoryInterface $formFactory,
         private DocumentRepositoryInterface $documents,
         private string $documentsDir,
+        private FilenameGeneratorInterface $filenameGenerator,
         private Responder $responder,
         private LoggerInterface $logger,
     ) {
@@ -45,7 +46,7 @@ final readonly class UploadController
             $group = $form->get('group')->getData();
             /** @var \DateTime $inboxDate */
             $inboxDate = $form->get('inboxDate')->getData();
-            $filename = sprintf('%s.%s', (new Ulid())->toBase32(), $file->guessExtension());
+            $filename = $this->filenameGenerator->generate($file);
 
             $document = new Document($filename);
 
