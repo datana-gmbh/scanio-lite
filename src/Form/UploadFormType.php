@@ -6,9 +6,9 @@ namespace App\Form;
 
 use App\Domain\Enum\Group;
 use App\Form\Type\DatePickerType;
+use App\Form\Type\SearchableEnumType;
 use Safe\DateTimeImmutable;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -41,12 +41,11 @@ final class UploadFormType extends AbstractType
                     new Range(max: new DateTimeImmutable()),
                 ],
             ])
-            ->add('group', ChoiceType::class, [
+            ->add('group', SearchableEnumType::class, [
                 'label' => 'Gruppe',
-                'choices' => Choices::groups(),
-                'data' => Group::Default->value,
+                'class' => Group::class,
+                'data' => Group::Default,
                 'required' => true,
-                'placeholder' => Choices::PLACEHOLDER,
                 'constraints' => [
                     new NotBlank(),
                 ],

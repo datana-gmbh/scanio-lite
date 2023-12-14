@@ -76,15 +76,15 @@ refactoring: vendor ## Refactor the code using rector/rector
 
 .PHONY: tests-changed
 tests-changed: export APP_ENV=test
-tests-changed: vendor doctrine
+tests-changed: remove-files vendor doctrine
 	symfony php vendor/bin/phpunit --configuration=phpunit.xml.dist $(shell git diff HEAD --name-only | grep Test.php | xargs )
 
 .PHONY: tests
 tests: export APP_ENV=test
-tests: vendor doctrine tests-auto-review tests-unit tests-integration tests-functional tests-acceptance ## Runs auto-review, unit, functional, integration, and acceptance tests with phpunit/phpunit (and symfony/panther)
+tests: remove-files vendor doctrine tests-auto-review tests-unit tests-integration tests-functional tests-acceptance ## Runs auto-review, unit, functional, integration, and acceptance tests with phpunit/phpunit (and symfony/panther)
 
 .PHONY: tests-acceptance
-tests-acceptance: doctrine vendor ## Runs acceptance tests with phpunit/phpunit
+tests-acceptance: remove-files doctrine vendor ## Runs acceptance tests with phpunit/phpunit
 	mkdir -p .build/phpunit
 	symfony php vendor/bin/phpunit --configuration=phpunit.xml.dist --testsuite=acceptance
 
@@ -96,13 +96,13 @@ tests-auto-review: vendor ## Runs auto-review tests with phpunit/phpunit
 
 .PHONY: tests-functional
 tests-functional: export APP_ENV=test
-tests-functional: doctrine vendor ## Runs functional tests with phpunit/phpunit
+tests-functional: remove-files doctrine vendor ## Runs functional tests with phpunit/phpunit
 	mkdir -p .build/phpunit
 	symfony php vendor/bin/phpunit --configuration=phpunit.xml.dist --testsuite=functional --testdox
 
 .PHONY: tests-integration
 tests-integration: export APP_ENV=test
-tests-integration: doctrine vendor ## Runs integration tests with phpunit/phpunit
+tests-integration: remove-files doctrine vendor ## Runs integration tests with phpunit/phpunit
 	mkdir -p .build/phpunit
 	symfony php vendor/bin/phpunit --configuration=phpunit.xml.dist --testsuite=integration --testdox
 
@@ -114,7 +114,7 @@ tests-unit: vendor ## Runs unit tests with phpunit/phpunit
 
 .PHONY: tests-temp
 tests-temp: export APP_ENV=test
-tests-temp: doctrine vendor ## Runs unit tests with phpunit/phpunit and "@group temp"
+tests-temp: remove-files doctrine vendor ## Runs unit tests with phpunit/phpunit and "@group temp"
 	mkdir -p .build/phpunit
 	symfony php vendor/bin/phpunit --configuration=phpunit.xml.dist --testdox --group=temp
 
@@ -135,10 +135,13 @@ public/build/manifest.json: webpack.config.js node_modules
 	$(YARN) run encore production
 
 .PHONY: dev
-dev: doctrine
-	rm -Rf public/documents
+dev: remove-files doctrine
 	symfony console doctrine:fixtures:load --no-interaction
 
 .PHONY: infection
 infection: vendor doctrine code-coverage
 	symfony php vendor/bin/infection --skip-initial-tests --show-mutations --only-covering-test-cases --coverage=.build/phpunit/
+
+.PHONY: remove-files
+remove-files:
+	rm -Rf public/documents

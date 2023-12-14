@@ -15,9 +15,11 @@ use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Webmozart\Assert\Assert;
 use Zenstruck\Console\Test\InteractsWithConsole;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
+use function Safe\shell_exec;
 
 abstract class IntegrationTestCase extends KernelTestCase
 {
@@ -79,5 +81,24 @@ abstract class IntegrationTestCase extends KernelTestCase
     final protected static function validator(): ValidatorInterface
     {
         return self::getContainer()->get(ValidatorInterface::class);
+    }
+
+    final protected static function fixtureFile(string $filepath): string
+    {
+        Assert::notStartsWith($filepath, '/', 'Filepath is not allowed to start with a "/"');
+
+        $file = __DIR__.'/../Fixture/'.$filepath;
+
+        Assert::fileExists($file);
+
+        return $file;
+    }
+
+    final protected static function removeFiles(): void
+    {
+        try {
+            shell_exec('rm -rf '.self::getContainer()->getParameter('documents_dir').'/*');
+        } catch (\Throwable) {
+        }
     }
 }

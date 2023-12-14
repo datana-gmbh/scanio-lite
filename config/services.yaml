@@ -52,3 +52,13 @@ services:
         resource: '../src/ValueResolver/'
         tags:
             - { name: controller.argument_value_resolver, priority: 150 }
+
+    App\Storage\FilenameGeneratorInterface: '@App\Storage\UniqueFilenameGenerator'
+
+when@test:
+    services:
+        App\Storage\UploadedFileWriter:
+            autowire: true
+            public: true
+
+        App\Storage\FilenameGeneratorInterface: '@App\Storage\SameFilenameGenerator'

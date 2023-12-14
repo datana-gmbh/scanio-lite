@@ -13,6 +13,7 @@ use Zenstruck\Browser\Test\HasBrowser;
 use Zenstruck\Console\Test\InteractsWithConsole;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
+use function Safe\shell_exec;
 
 /**
  * @method AppBrowser browser()
@@ -46,7 +47,7 @@ abstract class FunctionalTestCase extends WebTestCase
         return static::getContainer()->get(EntityManagerInterface::class);
     }
 
-    protected static function fixtureFile(string $filepath): string
+    final protected static function fixtureFile(string $filepath): string
     {
         Assert::notStartsWith($filepath, '/', 'Filepath is not allowed to start with a "/"');
 
@@ -55,5 +56,13 @@ abstract class FunctionalTestCase extends WebTestCase
         Assert::fileExists($file);
 
         return $file;
+    }
+
+    final protected static function removeFiles(): void
+    {
+        try {
+            shell_exec('rm -rf '.self::getContainer()->getParameter('documents_dir').'/*');
+        } catch (\Throwable) {
+        }
     }
 }

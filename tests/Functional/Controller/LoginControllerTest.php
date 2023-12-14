@@ -69,10 +69,7 @@ final class LoginControllerTest extends FunctionalTestCase
 
         $this->browser()
             ->visit('/')
-            ->loginAs(
-                $user->getEmail(),
-                $user->getPassword(),
-            )
+            ->login($user)
             ->assertSuccessful()
             ->assertOn('/dashboard');
     }
