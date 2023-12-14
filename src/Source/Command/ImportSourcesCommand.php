@@ -34,7 +34,7 @@ final class ImportSourcesCommand extends Command
             try {
                 $importer = $this->importerFactory->forSource($source);
             } catch (\InvalidArgumentException $e) {
-                $io->warning(sprintf('Skipping Source <info>%s</>: %s', $source, $e->getMessage()));
+                $io->text(sprintf('Skipping Source <info>%s</>: %s', $source, $e->getMessage()));
 
                 continue;
             }
