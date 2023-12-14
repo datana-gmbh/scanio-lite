@@ -35,7 +35,7 @@ final class SourceRepository extends ServiceEntityRepository implements SourceRe
 
     public function byType(Type $type): array
     {
-        return $this->findBy(['storageType' => $type]);
+        return $this->findBy(['type' => $type]);
     }
 
     public function save(Source $source): void
