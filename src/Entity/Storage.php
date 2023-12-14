@@ -45,6 +45,9 @@ class Storage implements \Stringable
     #[ORM\Column(type: Types::BOOLEAN)]
     private bool $enabled = false;
 
+    #[ORM\Column(type: Types::BOOLEAN)]
+    private bool $recursive = false;
+
     public function __construct()
     {
         $this->id = new StorageId();
@@ -104,5 +107,15 @@ class Storage implements \Stringable
     public function setEnabled(bool $enabled): void
     {
         $this->enabled = $enabled;
+    }
+
+    public function isRecursive(): bool
+    {
+        return $this->recursive;
+    }
+
+    public function setRecursive(bool $recursive): void
+    {
+        $this->recursive = $recursive;
     }
 }
