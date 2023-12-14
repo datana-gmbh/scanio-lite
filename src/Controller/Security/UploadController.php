@@ -9,7 +9,6 @@ use App\Entity\Document;
 use App\Form\UploadFormType;
 use App\Repository\DocumentRepositoryInterface;
 use App\Routing\Routes;
-use App\Storage\FilenameGeneratorInterface;
 use App\Storage\UploadedFileWriterInterface;
 use OskarStark\Symfony\Http\Responder;
 use Psr\Log\LoggerInterface;

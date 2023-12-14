@@ -10,6 +10,13 @@ use App\Tests\Functional\FunctionalTestCase;
 
 final class UploadControllerTest extends FunctionalTestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        self::removeFiles();
+    }
+
     /**
      * @test
      */
