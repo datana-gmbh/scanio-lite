@@ -95,10 +95,13 @@ final class ImportDropboxCommand extends Command
                         continue;
                     }
 
-                    if ($element->isDir) {
-                        // @TODO: Do some recursion here
+                    if ($element->isDir ) {
+                        if ($element->path === $path) {
+                            continue;
+                        }
 
-                        continue;
+                        dump($element);
+                        // do recursion here
                     }
 
                     try {
@@ -110,7 +113,7 @@ final class ImportDropboxCommand extends Command
                         $io->text(sprintf(
                             'Created Document with ID <info>%s</info> from <info>%s</info>',
                             $document->getId()->toString(),
-                            $document->getOriginalFilename(),
+                            $element->path,
                         ));
 
                         if ($deleteAfterImport) {
