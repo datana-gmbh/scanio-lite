@@ -8,7 +8,7 @@ use App\Domain\Identifier\DocumentId;
 use App\Entity\Document;
 use App\Exception\DocumentNotFound;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
-use Doctrine\ORM\ORMException;
+use Doctrine\ORM\Exception\ORMException;
 use Doctrine\ORM\ORMInvalidArgumentException;
 use Doctrine\ORM\QueryBuilder;
 

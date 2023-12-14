@@ -8,7 +8,7 @@ use App\Domain\Identifier\UserId;
 use App\Entity\User;
 use App\Exception\UserNotFound;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
-use Doctrine\ORM\ORMException;
+use Doctrine\ORM\Exception\ORMException;
 use Doctrine\ORM\ORMInvalidArgumentException;
 
 /**
