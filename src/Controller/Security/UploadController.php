@@ -24,10 +24,10 @@ final readonly class UploadController
 {
     public function __construct(
         private FormFactoryInterface $formFactory,
-        private Responder $responder,
-        private LoggerInterface $logger,
         private DocumentRepositoryInterface $documents,
         private string $documentsDir,
+        private Responder $responder,
+        private LoggerInterface $logger,
     ) {
     }
 
