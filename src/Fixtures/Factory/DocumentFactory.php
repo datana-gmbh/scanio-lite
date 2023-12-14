@@ -66,6 +66,7 @@ final class DocumentFactory extends ModelFactory
             'content' => $faker->text(),
             'filename' => $filename,
             'user' => sprintf('%s %s', $faker->firstName(), $faker->lastName()),
+            'originalFilename' => $faker->boolean(20) ? null : $filename,
         ];
     }
 
