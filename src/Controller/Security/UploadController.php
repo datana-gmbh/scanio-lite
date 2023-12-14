@@ -26,7 +26,7 @@ final readonly class UploadController
         private FormFactoryInterface $formFactory,
         private Responder $responder,
         private LoggerInterface $logger,
-        private DocumentRepositoryInterface $documentRepository,
+        private DocumentRepositoryInterface $documents,
         private string $documentsDir,
     ) {
     }
@@ -56,7 +56,7 @@ final readonly class UploadController
                 $document->setGroup($group);
                 $document->setInboxDate(\DateTimeImmutable::createFromMutable($inboxDate));
 
-                $this->documentRepository->save($document);
+                $this->documents->save($document);
 
                 $flashBag->add('success', 'Die Datei wurde hochgeladen und zur Weiterverarbeitung vorgemerkt.');
 
