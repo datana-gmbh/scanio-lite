@@ -35,6 +35,7 @@ class Storage implements \Stringable
     )]
     private ?string $token = null;
 
+    #[ORM\Column(type: Types::STRING, nullable: true)]
     #[Assert\When(
         expression: 'this.getStorageType().value in ["dropbox", "local"]',
         constraints: [new Assert\NotBlank()],
