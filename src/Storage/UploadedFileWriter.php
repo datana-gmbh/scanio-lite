@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace App\Storage;
 
+use function Safe\fopen;
+use function Safe\fclose;
 use League\Flysystem\FilesystemOperator;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-final class UploadedFileWriter implements UploadedFileWriterInterface
+final readonly class UploadedFileWriter implements UploadedFileWriterInterface
 {
     public function __construct(
-        private readonly FilesystemOperator $documentsStorage,
+        private FilesystemOperator $documentsStorage,
     ) {
     }
 
@@ -20,9 +22,9 @@ final class UploadedFileWriter implements UploadedFileWriterInterface
             throw new \RuntimeException('Invalid file');
         }
 
-        $stream = \Safe\fopen($file->getRealPath(), 'r+');
+        $stream = fopen($file->getRealPath(), 'r+');
         $this->documentsStorage->writeStream($file->getClientOriginalName(), $stream);
-        \Safe\fclose($stream);
+        fclose($stream);
 
         return $file->getClientOriginalName();
     }
