@@ -6,6 +6,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Storage;
 use App\Routing\AdminRoutes;
+use App\Routing\Routes;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -29,6 +30,7 @@ final class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
+        yield MenuItem::linkToRoute('Zurück', 'fas fa-arrow-left', Routes::DASHBOARD);
         yield MenuItem::linkToDashboard('Dashboard', 'fas fa-home');
         yield MenuItem::linkToCrud('Speicher', 'fas fa-database', Storage::class);
     }
