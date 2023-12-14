@@ -7,6 +7,7 @@ namespace App\Source\Import;
 use App\Bridge\Dropbox\Domain\Value\DropboxResource;
 use App\Creator\DocumentCreatorInterface;
 use App\Entity\Source;
+use App\Source\Value\Type;
 use Psr\Log\LoggerInterface;
 use Spatie\Dropbox\Client;
 
@@ -16,6 +17,11 @@ final readonly class DropboxImporter implements ImporterInterface
         private DocumentCreatorInterface $documentCreator,
         private LoggerInterface $logger,
     ) {
+    }
+
+    public function supports(Source $storage): bool
+    {
+        return $storage->getType()->equals(Type::Dropbox);
     }
 
     public function import(Source $storage): array

@@ -38,6 +38,11 @@ final class SourceRepository extends ServiceEntityRepository implements SourceRe
         return $this->findBy(['type' => $type]);
     }
 
+    public function findEnabled(): array
+    {
+        return $this->findBy(['enabled' => true]);
+    }
+
     public function save(Source $source): void
     {
         $this->_em->persist($source);
