@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
+use App\Domain\Enum\StorageType;
 use App\Domain\Identifier\StorageId;
 use App\Entity\Storage;
 use App\Exception\StorageNotFound;
@@ -25,6 +26,11 @@ interface StorageRepositoryInterface
      * @throws StorageNotFound
      */
     public function get(StorageId $id): Storage;
+
+    /**
+     * @return Storage[]
+     */
+    public function byType(StorageType $storageType): array;
 
     /**
      * @throws ORMException

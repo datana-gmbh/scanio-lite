@@ -55,6 +55,10 @@ services:
 
     App\Storage\FilenameGeneratorInterface: '@App\Storage\UniqueFilenameGenerator'
 
+    Spatie\Dropbox\Client:
+        arguments: ['%env(DROPBOX_ACCESS_TOKEN)%']
+        lazy: true
+
 when@test:
     services:
         App\Storage\UploadedFileWriter:

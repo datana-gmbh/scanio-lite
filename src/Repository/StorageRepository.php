@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
+use App\Domain\Enum\StorageType;
 use App\Domain\Identifier\StorageId;
 use App\Entity\Storage;
 use App\Exception\StorageNotFound;
@@ -30,6 +31,11 @@ final class StorageRepository extends ServiceEntityRepository implements Storage
         }
 
         return $storage;
+    }
+
+    public function byType(StorageType $storageType): array
+    {
+        return $this->findBy(['storageType' => $storageType]);
     }
 
     public function save(Storage $storage): void
