@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\ValueResolver;
 
+use App\Tests\Unit\UnitTestCase;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Controller\ValueResolverInterface;
 use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
 
-abstract class ValueResolverTestCase extends TestCase
+abstract class ValueResolverTestCase extends UnitTestCase
 {
     /**
      * @return \Generator<array{0: Request, 1: ArgumentMetadata}>
