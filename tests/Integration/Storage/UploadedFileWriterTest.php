@@ -7,6 +7,7 @@ namespace App\Tests\Integration\Storage;
 use App\Storage\UploadedFileWriter;
 use App\Tests\Integration\IntegrationTestCase;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use function Safe\shell_exec;
 
 final class UploadedFileWriterTest extends IntegrationTestCase
 {
