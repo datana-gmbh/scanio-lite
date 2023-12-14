@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Command;
 
 use App\Bridge\Dropbox\Domain\Value\FilesystemElement;
-use App\Creator\DocumentCreator;
+use App\Creator\DocumentCreatorInterface;
 use App\Domain\Enum\StorageType;
 use App\Repository\StorageRepositoryInterface;
 use Psr\Log\LoggerInterface;
@@ -25,7 +25,7 @@ final class ImportDropboxCommand extends Command
 {
     public function __construct(
         private readonly StorageRepositoryInterface $storages,
-        private readonly DocumentCreator $creator,
+        private readonly DocumentCreatorInterface $creator,
         private readonly LoggerInterface $logger,
     ) {
         parent::__construct();

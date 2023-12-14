@@ -8,5 +8,5 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 interface FilenameGeneratorInterface
 {
-    public function generate(string|UploadedFile $file): string;
+    public function generate(null|string|UploadedFile $file = null): string;
 }
