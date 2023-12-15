@@ -11,5 +11,5 @@ interface DocumentCreatorInterface
     /**
      * @param resource|string $content
      */
-    public function create(string $originalFilename, mixed $content, string $source = null): Document;
+    public function create(string $originalFilename, mixed $content, ?string $source = null): Document;
 }
