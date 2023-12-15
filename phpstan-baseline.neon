@@ -111,7 +111,7 @@ parameters:
 		-
 			message: "#^Parameter \\#1 \\$response of static method App\\\\Bridge\\\\Dropbox\\\\Domain\\\\Value\\\\DropboxResource\\:\\:fromResponse\\(\\) expects array\\{\\.tag\\: string, name\\: string, path_lower\\: string, path_display\\: string, id\\: string, client_modified\\?\\: string, server_modified\\?\\: string, rev\\?\\: string, \\.\\.\\.\\}, array given\\.$#"
 			count: 1
-			path: src/Source/Import/DropboxImporter.php
+			path: src/Source/Importer/DropboxImporter.php
 
 		-
 			message: "#^Match arm comparison between \\$this\\(App\\\\Source\\\\Value\\\\Type\\)&App\\\\Source\\\\Value\\\\Type\\:\\:Dropbox and App\\\\Source\\\\Value\\\\Type\\:\\:Dropbox is always true\\.$#"

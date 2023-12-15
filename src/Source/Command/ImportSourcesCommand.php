@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Source\Command;
 
 use App\Repository\SourceRepositoryInterface;
-use App\Source\Import\ImporterFactory;
+use App\Source\Importer\ImporterFactory;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;

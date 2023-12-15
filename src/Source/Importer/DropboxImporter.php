@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Source\Import;
+namespace App\Source\Importer;
 
 use App\Bridge\Dropbox\Domain\Value\DropboxResource;
 use App\Creator\DocumentCreatorInterface;
