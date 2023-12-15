@@ -46,11 +46,7 @@ final readonly class DropboxImporter implements ImporterInterface
         /** @var string $path */
         $path = $source->getPath();
 
-        // removes all values which are no array. Somehow it can happen that there are strings.
-        $response = array_filter(
-            $client->listFolder($path, $source->recursiveImport()),
-            static fn (array|string $item): bool => \is_array($item),
-        );
+        $response = $client->listFolder($path);
 
         $this->logger->debug(sprintf('Found files in %s', $path), [
             'number_of_files' => \count($response['entries']),

@@ -28,7 +28,7 @@ final class SourceFixtures extends Fixture implements OrderedFixtureInterface
             'enabled' => true,
             'type' => Type::Dropbox,
             'token' => $this->dropboxAccessToken,
-            'path' => '/scanbot',
+            'path' => '/temp/scanio-test',
             'recursiveImport' => true,
             'deleteAfterImport' => false,
         ]);
