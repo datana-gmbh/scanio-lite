@@ -46,7 +46,7 @@ final readonly class DropboxImporter implements ImporterInterface
         /** @var string $path */
         $path = $source->getPath();
 
-        $response = $client->listFolder($path);
+        $response = $client->listFolder($path, $source->recursiveImport());
 
         $this->logger->debug(sprintf('Found files in %s', $path), [
             'number_of_files' => \count($response['entries']),
