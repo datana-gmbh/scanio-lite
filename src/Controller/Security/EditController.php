@@ -8,10 +8,12 @@ use App\Crud\Edit\Form\FormTypeFactoryInterface;
 use App\Crud\Edit\Form\Types\Default\Pending;
 use App\Domain\Enum\Category;
 use App\Domain\Enum\Group;
+use App\Domain\Event\DocumentFinishedEvent;
 use App\Domain\Identifier\DocumentId;
 use App\Repository\DocumentRepositoryInterface;
 use App\Routing\Routes;
 use OskarStark\Symfony\Http\Responder;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,6 +26,7 @@ final readonly class EditController
         private DocumentRepositoryInterface $documents,
         private FormFactoryInterface $formFactory,
         private FormTypeFactoryInterface $formTypeFactory,
+        private EventDispatcherInterface $eventDispatcher,
         private Responder $responder,
     ) {
     }
@@ -40,6 +43,8 @@ final readonly class EditController
         if ($form->isSubmitted() && $form->isValid()) {
             if (Pending::class !== $formType::class) {
                 $document->markFinished();
+
+                $this->eventDispatcher->dispatch(new DocumentFinishedEvent($document));
             }
 
             $this->documents->save($document);
