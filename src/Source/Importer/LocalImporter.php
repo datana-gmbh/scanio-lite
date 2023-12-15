@@ -10,10 +10,13 @@ use App\Entity\Source;
 use App\Source\Value\Type;
 use Psr\Log\LoggerInterface;
 use Spatie\Dropbox\Client;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Finder\Finder;
 
-final readonly class DropboxImporter implements ImporterInterface
+final readonly class LocalImporter implements ImporterInterface
 {
     public function __construct(
+        private Filesystem $filesystem = new Filesystem(),
         private DocumentCreatorInterface $documentCreator,
         private LoggerInterface $logger,
     ) {
@@ -21,7 +24,7 @@ final readonly class DropboxImporter implements ImporterInterface
 
     public function supports(Source $source): bool
     {
-        return $source->getType()->equals(Type::Dropbox);
+        return $source->getType()->equals(Type::Local);
     }
 
     public function import(Source $source): array
@@ -38,18 +41,17 @@ final readonly class DropboxImporter implements ImporterInterface
 
         $documents = [];
 
-        $client = new Client($source->getToken());
         /** @var string $path */
         $path = $source->getPath();
 
-        // removes all values which are no array. Somehow it can happen that there are strings.
-        $response = array_filter(
-            $client->listFolder($path, $source->recursiveImport()),
-            static fn (array|string $item): bool => \is_array($item),
-        );
+        $finder = (new Finder())
+            ->in($path)
+            ->files();
+
+        $files = $finder->getIterator();
 
         $this->logger->debug(sprintf('Found files in %s', $path), [
-            'number_of_files' => \count($response['entries']),
+            'number_of_files' => \count($files),
         ]);
 
         // Maps all entries to FilesystemElement and filter only files.
