@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Source\Filesystem;
 
+use App\Bridge\Azure\Domain\Value\AzureDsn;
 use App\Entity\Source;
 use App\Source\Value\Type;
 use League\Flysystem\AzureBlobStorage\AzureBlobStorageAdapter;
@@ -11,7 +12,6 @@ use League\Flysystem\Filesystem;
 use League\Flysystem\FilesystemOperator;
 use MicrosoftAzure\Storage\Blob\BlobRestProxy;
 use Webmozart\Assert\Assert;
-use function Symfony\Component\String\u;
 
 final class AzureFilesystem implements FilesystemInterface
 {
@@ -20,28 +20,11 @@ final class AzureFilesystem implements FilesystemInterface
         Assert::notNull($source->getToken());
         Assert::notNull($source->getPath());
 
-        $containerName = null;
-        $token = null;
-
-        foreach (u($source->getToken())->split(';') as $part) {
-            $keyValue = $part->split('=');
-
-            if ($keyValue[0]->equalsTo('ContainerName')) {
-                $containerName = $keyValue[1]->toString();
-                $token = u($source->getToken())->replace($part->toString(), '')->toString();
-
-                break;
-            }
-        }
-
-        Assert::notNull($containerName);
-        Assert::notNull($token);
-
-        $client = BlobRestProxy::createBlobService($token);
-
+        $azureDsn = new AzureDsn($source->getToken());
+        $client = BlobRestProxy::createBlobService($azureDsn->raw);
         $adapter = new AzureBlobStorageAdapter(
             $client,
-            $containerName,
+            $azureDsn->containerName,
         );
 
         return new Filesystem($adapter);
