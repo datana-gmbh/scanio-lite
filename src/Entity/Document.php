@@ -34,6 +34,9 @@ class Document implements \Stringable
     #[ORM\Column(name: '`user`', type: Types::TEXT, nullable: true)]
     private ?string $user = null;
 
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $source = null;
+
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
     private \DateTimeImmutable $createdAt;
 
@@ -204,6 +207,16 @@ class Document implements \Stringable
     public function setUser(?string $user): void
     {
         $this->user = $user;
+    }
+
+    public function getSource(): ?string
+    {
+        return $this->source;
+    }
+
+    public function setSource(?string $source): void
+    {
+        $this->source = $source;
     }
 
     public function getOriginalFilename(): ?string
