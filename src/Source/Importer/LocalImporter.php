@@ -46,9 +46,7 @@ final readonly class LocalImporter implements ImporterInterface
             ->in($path)
             ->files();
 
-        $files = $finder->getIterator();
-
-        foreach ($files as $file) {
+        foreach ($finder->getIterator() as $file) {
             try {
                 $documents[] = $this->documentCreator->create(
                     $file->getFilename(),

@@ -21,7 +21,7 @@ final readonly class DropboxImporter implements ImporterInterface
 
     public function supports(Source $source): bool
     {
-        return $source->getType()->equals(Type::Dropbox) && false;
+        return $source->getType()->equals(Type::Dropbox);
     }
 
     public function import(Source $source): array
