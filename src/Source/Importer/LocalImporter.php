@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Source\Importer;
 
-use App\Bridge\Dropbox\Domain\Value\DropboxResource;
 use App\Creator\DocumentCreatorInterface;
 use App\Entity\Source;
 use App\Source\Value\Type;
@@ -49,39 +48,22 @@ final readonly class LocalImporter implements ImporterInterface
 
         $files = $finder->getIterator();
 
-        $this->logger->debug(sprintf('Found files in %s', $path), [
-            'number_of_files' => \count($files),
-        ]);
-
-        // Maps all entries to FilesystemElement and filter only files.
-        // Dropbox returns already flattened array of all files in all subdirectories.
-        $resources = array_filter(
-            array_map(static fn (array $entry): DropboxResource => DropboxResource::fromResponse($entry), $response['entries']),
-            static fn (DropboxResource $resource): bool => !$resource->isDir,
-        );
-
-        foreach ($resources as $resource) {
-            if (!$resource->isDownloadable) {
-                $this->logger->debug(sprintf('File %s is not downloadable', $resource->name));
-
-                continue;
-            }
-
+        foreach ($files as $file) {
             try {
                 $documents[] = $this->documentCreator->create(
-                    $resource->name,
-                    $client->download($resource->path),
+                    $file->getFilename(),
+                    $file->getContents(),
                 );
 
                 $this->logger->info('Created Document', [
-                    'path' => $resource->path,
+                    'path' => $file->getRealPath(),
                 ]);
 
                 if ($source->deleteAfterImport()) {
-                    $client->delete($resource->path);
+                    $this->filesystem->remove($file->getRealPath());
 
-                    $this->logger->info('Deleted remote file', [
-                        'path' => $resource->path,
+                    $this->logger->info('Deleted local file', [
+                        'path' => $file->getRealPath(),
                     ]);
                 }
             } catch (\Throwable $e) {
