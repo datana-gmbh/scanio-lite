@@ -10,7 +10,7 @@ use App\Source\Filesystem\FilesystemFactory;
 use App\Source\Value\Type;
 use Psr\Log\LoggerInterface;
 
-final readonly class DropboxImporter implements ImporterInterface
+final readonly class AzureImporter implements ImporterInterface
 {
     public function __construct(
         private FilesystemFactory $filesystemFactory,
@@ -21,7 +21,7 @@ final readonly class DropboxImporter implements ImporterInterface
 
     public function supports(Source $source): bool
     {
-        return $source->getType()->equals(Type::Dropbox);
+        return $source->getType()->equals(Type::Azure);
     }
 
     public function import(Source $source): array
@@ -38,13 +38,13 @@ final readonly class DropboxImporter implements ImporterInterface
 
         $documents = [];
 
-        $dropboxFactory = $this->filesystemFactory->forSource($source);
-        $dropboxFilesystem = $dropboxFactory->create($source);
+        $azureFactory = $this->filesystemFactory->forSource($source);
+        $azureFilesystem = $azureFactory->create($source);
 
         /** @var string $path */
         $path = $source->getPath();
 
-        $fileAttributes = $dropboxFilesystem->listContents($path, $source->recursiveImport())->toArray();
+        $fileAttributes = $azureFilesystem->listContents($path, $source->recursiveImport())->toArray();
 
         $this->logger->debug(sprintf('Found files in %s', $path), [
             'number_of_files' => \count($fileAttributes),
@@ -59,8 +59,7 @@ final readonly class DropboxImporter implements ImporterInterface
                 $filepath = $fileAttribute->path();
                 $documents[] = $this->documentCreator->create(
                     basename($filepath),
-                    $dropboxFilesystem->readStream($filepath),
-                    (string) $source,
+                    $azureFilesystem->readStream($filepath),
                 );
 
                 $this->logger->info('Created Document', [
@@ -68,7 +67,7 @@ final readonly class DropboxImporter implements ImporterInterface
                 ]);
 
                 if ($source->deleteAfterImport()) {
-                    $dropboxFilesystem->delete($filepath);
+                    $azureFilesystem->delete($filepath);
 
                     $this->logger->info('Deleted remote file', [
                         'path' => $filepath,
