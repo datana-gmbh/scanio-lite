@@ -20,11 +20,10 @@ final class AzureFilesystem implements FilesystemInterface
         Assert::notNull($source->getToken());
         Assert::notNull($source->getPath());
 
-        $azureDsn = new AzureDsn($source->getToken());
-        $client = BlobRestProxy::createBlobService($azureDsn->raw);
+        $dsn = new AzureDsn($source->getToken());
         $adapter = new AzureBlobStorageAdapter(
-            $client,
-            $azureDsn->containerName,
+            BlobRestProxy::createBlobService($dsn->raw),
+            $dsn->containerName,
         );
 
         return new Filesystem($adapter);
