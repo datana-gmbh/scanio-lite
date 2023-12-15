@@ -46,6 +46,10 @@ final readonly class LocalImporter implements ImporterInterface
             ->in($path)
             ->files();
 
+        if (!$source->recursiveImport()) {
+            $finder->depth(0);
+        }
+
         foreach ($finder->getIterator() as $file) {
             try {
                 $documents[] = $this->documentCreator->create(
