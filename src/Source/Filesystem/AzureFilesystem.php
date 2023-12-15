@@ -22,6 +22,7 @@ final class AzureFilesystem implements FilesystemInterface
 
         $containerName = null;
         $token = null;
+
         foreach (u($source->getToken())->split(';') as $part) {
             $keyValue = $part->split('=');
 
