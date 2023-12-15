@@ -9,14 +9,13 @@ use App\Creator\DocumentCreatorInterface;
 use App\Entity\Source;
 use App\Source\Value\Type;
 use Psr\Log\LoggerInterface;
-use Spatie\Dropbox\Client;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 
 final readonly class LocalImporter implements ImporterInterface
 {
     public function __construct(
-        private Filesystem $filesystem = new Filesystem(),
+        private Filesystem $filesystem,
         private DocumentCreatorInterface $documentCreator,
         private LoggerInterface $logger,
     ) {
