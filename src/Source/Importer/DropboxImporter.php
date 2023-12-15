@@ -39,7 +39,9 @@ final readonly class DropboxImporter implements ImporterInterface
 
         $documents = [];
 
-        $client = $this->clientFactory->create($source->getToken());
+        /** @var string $token */
+        $token = $source->getToken();
+        $client = $this->clientFactory->create($token);
 
         /** @var string $path */
         $path = $source->getPath();
