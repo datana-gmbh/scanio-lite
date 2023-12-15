@@ -20,7 +20,7 @@ final readonly class DocumentCreator implements DocumentCreatorInterface
     ) {
     }
 
-    public function create(string $originalFilename, mixed $content): Document
+    public function create(string $originalFilename, mixed $content, string $source = null): Document
     {
         if (!\is_resource($content) && !\is_string($content)) {
             throw new \InvalidArgumentException('$content must be a resource or a string');
@@ -34,6 +34,7 @@ final readonly class DocumentCreator implements DocumentCreatorInterface
         $document = new Document(
             filename: $filename,
             originalFilename: $originalFilename,
+            source: $source,
         );
         $document->setInboxDate(new DateTimeImmutable());
 

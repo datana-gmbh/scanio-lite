@@ -51,6 +51,7 @@ final readonly class LocalImporter implements ImporterInterface
                 $documents[] = $this->documentCreator->create(
                     $file->getFilename(),
                     $file->getContents(),
+                    (string) $source,
                 );
 
                 $this->logger->info('Created Document', [

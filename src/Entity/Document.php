@@ -34,9 +34,6 @@ class Document implements \Stringable
     #[ORM\Column(name: '`user`', type: Types::TEXT, nullable: true)]
     private ?string $user = null;
 
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $source = null;
-
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
     private \DateTimeImmutable $createdAt;
 
@@ -73,6 +70,8 @@ class Document implements \Stringable
         private Group $group = Group::Default,
         #[ORM\Column(type: Types::STRING, enumType: Category::class)]
         private Category $category = Category::Pending,
+        #[ORM\Column(type: Types::TEXT, nullable: true)]
+        private ?string $source = null,
     ) {
         $this->id = new DocumentId();
         $this->createdAt = new \DateTimeImmutable();
