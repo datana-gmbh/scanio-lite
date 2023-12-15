@@ -69,6 +69,7 @@ final class DocumentFactory extends ModelFactory
             'filename' => $filename,
             'user' => sprintf('%s %s', $faker->firstName(), $faker->lastName()),
             'originalFilename' => $faker->boolean(20) ? null : $filename,
+            'source' => 'local:/foo',
         ];
     }
 

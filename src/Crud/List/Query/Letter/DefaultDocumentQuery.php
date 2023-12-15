@@ -57,6 +57,7 @@ final readonly class DefaultDocumentQuery implements QueryInterface
         return new ListResult(
             [
                 (new Field(FieldType::TEXT, 'Dateiname', 'originalFilename'))->sortable(),
+                (new Field(FieldType::TEXT, 'Quelle', 'source'))->sortable(),
                 (new Field(FieldType::DATETIME, 'Erstellungsdatum', 'createdAt'))->sortable(),
                 new Field(FieldType::TEXT, 'Benutzer', 'user'),
             ],

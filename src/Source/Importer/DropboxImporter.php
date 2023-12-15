@@ -70,6 +70,7 @@ final readonly class DropboxImporter implements ImporterInterface
                 $documents[] = $this->documentCreator->create(
                     $resource->name,
                     $client->download($resource->path),
+                    (string) $source,
                 );
 
                 $this->logger->info('Created Document', [

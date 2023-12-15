@@ -70,6 +70,8 @@ class Document implements \Stringable
         private Group $group = Group::Default,
         #[ORM\Column(type: Types::STRING, enumType: Category::class)]
         private Category $category = Category::Pending,
+        #[ORM\Column(type: Types::TEXT, nullable: true)]
+        private ?string $source = null,
     ) {
         $this->id = new DocumentId();
         $this->createdAt = new \DateTimeImmutable();
@@ -204,6 +206,16 @@ class Document implements \Stringable
     public function setUser(?string $user): void
     {
         $this->user = $user;
+    }
+
+    public function getSource(): ?string
+    {
+        return $this->source;
+    }
+
+    public function setSource(?string $source): void
+    {
+        $this->source = $source;
     }
 
     public function getOriginalFilename(): ?string
