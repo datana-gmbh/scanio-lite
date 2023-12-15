@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Twig;
 
 use App\Entity\Document;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Twig\Environment;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
@@ -13,7 +14,9 @@ use Webmozart\Assert\Assert;
 final class PreviewExtension extends AbstractExtension
 {
     public function __construct(
+        #[Autowire('%kernel.project_dir%')]
         private readonly string $projectDir,
+        #[Autowire('%documents_dir%')]
         private readonly string $documentsDir,
     ) {
     }
