@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace App\Source\Importer;
 
+use App\Bridge\Dropbox\ClientFactory;
 use App\Bridge\Dropbox\Domain\Value\DropboxResource;
 use App\Creator\DocumentCreatorInterface;
 use App\Entity\Source;
 use App\Source\Value\Type;
 use Psr\Log\LoggerInterface;
-use Spatie\Dropbox\Client;
 
 final readonly class DropboxImporter implements ImporterInterface
 {
     public function __construct(
+        private ClientFactory $clientFactory,
         private DocumentCreatorInterface $documentCreator,
         private LoggerInterface $logger,
     ) {
@@ -38,7 +39,8 @@ final readonly class DropboxImporter implements ImporterInterface
 
         $documents = [];
 
-        $client = new Client($source->getToken());
+        $client = $this->clientFactory->create($source->getToken());
+
         /** @var string $path */
         $path = $source->getPath();
 
