@@ -4,17 +4,16 @@ declare(strict_types=1);
 
 namespace App\Source\Importer;
 
-use App\Bridge\Dropbox\ClientFactory;
-use App\Bridge\Dropbox\Domain\Value\DropboxResource;
 use App\Creator\DocumentCreatorInterface;
 use App\Entity\Source;
+use App\Source\Filesystem\FilesystemFactory;
 use App\Source\Value\Type;
 use Psr\Log\LoggerInterface;
 
 final readonly class DropboxImporter implements ImporterInterface
 {
     public function __construct(
-        private ClientFactory $clientFactory,
+        private FilesystemFactory $filesystemFactory,
         private DocumentCreatorInterface $documentCreator,
         private LoggerInterface $logger,
     ) {
@@ -39,49 +38,40 @@ final readonly class DropboxImporter implements ImporterInterface
 
         $documents = [];
 
-        /** @var string $token */
-        $token = $source->getToken();
-        $client = $this->clientFactory->create($token);
+        $dropboxFactory = $this->filesystemFactory->forSource($source);
+        $dropboxFilesystem = $dropboxFactory->create($source);
 
         /** @var string $path */
         $path = $source->getPath();
 
-        $response = $client->listFolder($path, $source->recursiveImport());
+        $fileAttributes = $dropboxFilesystem->listContents($path, $source->recursiveImport())->toArray();
 
         $this->logger->debug(sprintf('Found files in %s', $path), [
-            'number_of_files' => \count($response['entries']),
+            'number_of_files' => \count($fileAttributes),
         ]);
 
-        // Maps all entries to FilesystemElement and filter only files.
-        // Dropbox returns already flattened array of all files in all subdirectories.
-        $resources = array_filter(
-            array_map(static fn (array $entry): DropboxResource => DropboxResource::fromResponse($entry), $response['entries']),
-            static fn (DropboxResource $resource): bool => !$resource->isDir,
-        );
-
-        foreach ($resources as $resource) {
-            if (!$resource->isDownloadable) {
-                $this->logger->debug(sprintf('File %s is not downloadable', $resource->name));
-
+        foreach ($fileAttributes as $fileAttribute) {
+            if ($fileAttribute->isDir()) {
                 continue;
             }
 
             try {
+                $filepath = $fileAttribute->path();
                 $documents[] = $this->documentCreator->create(
-                    $resource->name,
-                    $client->download($resource->path),
-                    (string) $source,
+                    basename($filepath),
+                    $dropboxFilesystem->readStream($filepath),
+                    (string)$source,
                 );
 
                 $this->logger->info('Created Document', [
-                    'path' => $resource->path,
+                    'path' => $filepath,
                 ]);
 
                 if ($source->deleteAfterImport()) {
-                    $client->delete($resource->path);
+                    $dropboxFilesystem->delete($filepath);
 
                     $this->logger->info('Deleted remote file', [
-                        'path' => $resource->path,
+                        'path' => $filepath,
                     ]);
                 }
             } catch (\Throwable $e) {

@@ -30,14 +30,18 @@ class Source implements \Stringable
 
     #[ORM\Column(type: Types::STRING, nullable: true)]
     #[Assert\When(
-        expression: 'this.getType().value in ["dropbox"]',
+        expression: 'this.getType().value in ["dropbox", "azure"]',
         constraints: [new Assert\NotBlank()],
+    )]
+    #[Assert\When(
+        expression: 'this.getType().value in ["azure"]',
+        constraints: [new Assert\Regex('/ContainerName\=[^;]+/', 'Dieser Wert muss einen Key "ContainerName" beinhalten')],
     )]
     private ?string $token = null;
 
     #[ORM\Column(type: Types::STRING, nullable: true)]
     #[Assert\When(
-        expression: 'this.getType().value in ["dropbox", "local"]',
+        expression: 'this.getType().value in ["dropbox", "local", "azure"]',
         constraints: [new Assert\NotBlank()],
     )]
     private ?string $path = null;
