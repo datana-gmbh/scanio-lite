@@ -19,18 +19,18 @@ final readonly class DropboxImporter implements ImporterInterface
     ) {
     }
 
-    public function supports(Source $storage): bool
+    public function supports(Source $source): bool
     {
-        return $storage->getType()->equals(Type::Dropbox);
+        return $source->getType()->equals(Type::Dropbox);
     }
 
-    public function import(Source $storage): array
+    public function import(Source $source): array
     {
-        if (!$storage->isEnabled()) {
+        if (!$source->isEnabled()) {
             $this->logger->info(sprintf(
-                'Storage %s: %s is not enabled.',
-                $storage->getType()->label(),
-                $storage->getPath(),
+                'Source %s: %s is not enabled.',
+                $source->getType()->label(),
+                $source->getPath(),
             ));
 
             return [];
@@ -38,13 +38,13 @@ final readonly class DropboxImporter implements ImporterInterface
 
         $documents = [];
 
-        $client = new Client($storage->getToken());
+        $client = new Client($source->getToken());
         /** @var string $path */
-        $path = $storage->getPath();
+        $path = $source->getPath();
 
         // removes all values which are no array. Somehow it can happen that there are strings.
         $response = array_filter(
-            $client->listFolder($path, $storage->recursiveImport()),
+            $client->listFolder($path, $source->recursiveImport()),
             static fn (array|string $item): bool => \is_array($item),
         );
 
@@ -76,7 +76,7 @@ final readonly class DropboxImporter implements ImporterInterface
                     'path' => $resource->path,
                 ]);
 
-                if ($storage->deleteAfterImport()) {
+                if ($source->deleteAfterImport()) {
                     $client->delete($resource->path);
 
                     $this->logger->info('Deleted remote file', [
