@@ -7,9 +7,6 @@ namespace App\Tests\Unit\Bridge\Azure\Domain\Value;
 use App\Bridge\Azure\Domain\Value\AzureDsn;
 use App\Tests\Unit\UnitTestCase;
 
-/**
- * @group temp
- */
 final class AzureDsnTest extends UnitTestCase
 {
     /**
