@@ -1,0 +1,114 @@
+{# @var email \App\Entity\Email #}
+
+{% extends 'secured/layout.html.twig' %}
+
+{% block title email.subject ~ ' - ' ~ parent() %}
+
+{% block sidebar_content %}
+
+{% endblock %}
+
+{% block content %}
+    <div class="xl:pr-[32%]">
+        <div class="sm:flex sm:items-center">
+            <div class="sm:flex-auto">
+                <h1 class="text-lg font-semibold leading-6 text-gray-900 items-center">
+{#                    {% if category.icon is not null %}#}
+{#                        <i class="{{ category.icon }} mr-1.5"></i>#}
+{#                    {% endif %}#}
+{#                    {{ document.filename }} ({{ category.label }})#}
+                </h1>
+            </div>
+        </div>
+
+        <div class="mt-6 -mb-16">
+            <section class="w-6/12 px-4 flex flex-col bg-white rounded-r-3xl">
+                <div class="flex justify-between items-center h-48 border-b-2 mb-8">
+                    <div class="flex space-x-4 items-center">
+                        <div>
+                            <span class="uppercase text-gray-400 text-sm font-medium tracking-wide">Absender:</span>
+                            <h3 class="font-semibold"> {{ email.sender }}</h3>
+                        </div>
+                        <div>
+                            <span class="uppercase text-gray-400 text-sm font-medium tracking-wide">Empfänger:</span>
+                            <h3 class="font-semibold"> {{ email.receiver }}</h3>
+                        </div>
+                    </div>
+                </div>
+                <section>
+                    <h1 class="font-bold text-2xl">{{ email.subject }}</h1>
+                    <article class="mt-8 text-gray-500 leading-7 tracking-wider">
+                        {{ email.body }}
+                    </article>
+                    <div class="flex mt-12 uppercase text-gray-400 text-sm font-medium tracking-wide">
+                        Anhänge
+                    </div>
+                </section>
+
+                <section>
+                    {% set attachments = [
+                        {
+                            type: 'pdf',
+                            name: 'MY_fancy_file.pdf',
+                            size: 300,
+                        },
+                        {
+                            type: 'docx',
+                            name: 'word_andmore 2020-01-12.docx',
+                            size: 700,
+                        },
+                        {
+                            type: 'txt',
+                            name: 'super_nice_description.txt',
+                            size: 8800,
+                        }
+                    ] %}
+
+                    <ul role="list" class="divide-y divide-gray-100">
+                        {% for attachment in attachments %}
+                            <li class="flex items-center justify-between gap-x-6 py-5">
+                                <div class="flex min-w-0 gap-x-4">
+                                    {% if attachment.type in  ['doc', 'docx'] %}
+                                        {% set icon = 'fa-file-word' %}
+                                    {% elseif attachment.type in ['txt'] %}
+                                        {% set icon = 'fa-file-lines' %}
+                                    {% elseif attachment.type in ['pdf'] %}
+                                        {% set icon = 'fa-file-pdf' %}
+                                    {% else %}
+                                        {% set icon = 'fa-square-question' %}
+                                    {% endif %}
+
+                                    <i class="fa-light {{ icon }} text-4xl"></i>
+                                    <div class="min-w-0 flex-auto">
+                                        <p class="text-sm font-semibold leading-6 text-gray-900">
+                                            {{ attachment.name }}
+                                            <span class="rounded-md whitespace-nowrap mt-0.5 px-1.5 py-0.5 text-xs font-medium ring-1 ring-inset text-green-700 bg-green-50 ring-green-600/20">
+                                                {{ attachment.type }}
+                                            </span>
+
+                                        </p>
+                                        <p class="mt-1 flex text-xs leading-5 text-gray-500">
+                                          {{ attachment.size|readable_filesize }}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="flex flex-none items-center gap-x-4">
+                                    <a href="#" class="hidden rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:block">
+                                        <i class="fa-light fa-eye"></i>
+                                        <span class="sr-only">Vorschau</span>
+                                    </a>
+                                    <a href="#" class="hidden rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:block">
+                                        <i class="fa-light fa-arrow-right"></i>
+                                        <span class="sr-only">Verschieben</span>
+                                    </a>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </section>
+
+            </section>
+        </div>
+    </div>
+{% endblock %}

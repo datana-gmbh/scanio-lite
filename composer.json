@@ -28,6 +28,7 @@
         "microsoft/azure-storage-blob": "^1.5",
         "nelmio/cors-bundle": "^2.4.0",
         "oskarstark/enum-helper": "^1.2",
+        "oskarstark/readable-filesize-extension": "^1.2",
         "oskarstark/symfony-http-responder": "^1.5",
         "oskarstark/trimmed-non-empty-string": "^1.11.1",
         "psr/log": "^3.0",
