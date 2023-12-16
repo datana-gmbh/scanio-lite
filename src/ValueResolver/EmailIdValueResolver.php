@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\ValueResolver;
 
-use App\Domain\Identifier\DocumentId;
 use App\Domain\Identifier\EmailId;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Controller\ValueResolverInterface;

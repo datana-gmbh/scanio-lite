@@ -4,19 +4,9 @@ declare(strict_types=1);
 
 namespace App\Controller\Security;
 
-use App\Crud\Edit\Form\FormTypeFactoryInterface;
-use App\Crud\Edit\Form\Types\Default\Pending;
-use App\Domain\Enum\Category;
-use App\Domain\Enum\Group;
-use App\Domain\Event\DocumentFinishedEvent;
-use App\Domain\Identifier\DocumentId;
 use App\Domain\Identifier\EmailId;
-use App\Repository\DocumentRepositoryInterface;
 use App\Repository\EmailRepositoryInterface;
-use App\Routing\Routes;
 use OskarStark\Symfony\Http\Responder;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
