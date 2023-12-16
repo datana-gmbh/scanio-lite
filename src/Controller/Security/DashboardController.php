@@ -20,6 +20,6 @@ final readonly class DashboardController
 
     public function __invoke(Request $request): Response
     {
-        return $this->responder->render('dashboard.html.twig');
+        return $this->responder->render('secured/dashboard.html.twig');
     }
 }

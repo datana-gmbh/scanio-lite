@@ -3,8 +3,7 @@
 {# @var sortings \App\Crud\Domain\Value\Sorting[] #}
 {# @var category \App\Domain\Enum\Category #}
 {# @var group \App\Domain\Enum\Group #}
-
-{% extends 'layout.html.twig' %}
+{% extends 'secured/layout.html.twig' %}
 
 {% block title category.label() ~ ' - ' ~ group.label() ~ ' - ' ~ parent() %}
 
@@ -30,7 +29,7 @@
                             <thead>
                             <tr>
                                 {% for field in result.fields %}
-                                    {% include 'default/list_header.html.twig' %}
+                                    {% include 'secured/default/list_header.html.twig' %}
                                 {% endfor %}
                                 <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6 lg:pr-8">
                                     <span class="sr-only">Aktionen</span>
@@ -42,7 +41,7 @@
                                 <tr>
                                     {% for field in result.fields %}
                                         <td class="{{ loop.first ? 'py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8' : 'whitespace-nowrap px-3 py-4 text-sm text-gray-500' }}">
-                                            {% include 'default/types/field.html.twig' %}
+                                            {% include 'secured/default/types/field.html.twig' %}
                                         </td>
                                     {% endfor %}
                                     <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:pr-8">
@@ -71,6 +70,6 @@
     </div>
 
     {% if pagination.totalItems > pagination.limit %}
-        {% include 'default/pagination.html.twig' %}
+        {% include 'secured/default/pagination.html.twig' %}
     {% endif %}
 {% endblock %}

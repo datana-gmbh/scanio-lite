@@ -66,7 +66,7 @@ final readonly class UploadController
             }
         }
 
-        return $this->responder->render('upload/upload.html.twig', [
+        return $this->responder->render('secured/upload/upload.html.twig', [
             'form' => $form->createView(),
         ]);
     }

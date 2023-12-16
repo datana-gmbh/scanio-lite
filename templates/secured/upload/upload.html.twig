@@ -1,9 +1,6 @@
-{% extends 'layout.html.twig' %}
+{% extends 'secured/layout.html.twig' %}
 
 {% block title  'Datei hochladen - ' ~ parent() %}
-
-{# @TODO: move to twig.yaml when old code is gone. #}
-{% form_theme form 'form/tailwind_layout.html.twig' %}
 
 {% block content %}
     <h2 class="text-3xl font-bold tracking-wide">Datei Hochladen</h2>

@@ -50,7 +50,7 @@ final class PreviewExtension extends AbstractExtension
 
     public function renderPdfPreview(Environment $twig, Document $document): string
     {
-        return $twig->render('pdf/preview.html.twig', [
+        return $twig->render('secured/pdf/preview.html.twig', [
             'path' => $this->pdfPreviewPath($document),
         ]);
     }

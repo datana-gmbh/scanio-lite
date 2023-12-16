@@ -40,7 +40,7 @@ final readonly class ListController
             array_values($request->query->all('order')),
         );
 
-        return $this->responder->render('default/list.html.twig', [
+        return $this->responder->render('secured/default/list.html.twig', [
             'group' => $group,
             'category' => $category,
             'result' => $query->execute($pagination, $sortings),
