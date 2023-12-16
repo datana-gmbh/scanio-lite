@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Crud\List\Query\Letter;
+namespace App\Crud\List\Query\Document;
 
 use App\Crud\Domain\Enum\FieldType;
 use App\Crud\Domain\Value\Field;

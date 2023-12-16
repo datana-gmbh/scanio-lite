@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Crud\List\Query;
 
-use App\Crud\List\Query\Letter\DefaultDocumentQuery;
+use App\Crud\List\Query\Document\DefaultDocumentQuery;
 use App\Domain\Enum\Category;
 use App\Domain\Enum\Group;
 use App\Repository\DocumentRepositoryInterface;
