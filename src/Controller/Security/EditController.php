@@ -55,7 +55,7 @@ final readonly class EditController
             ]);
         }
 
-        return $this->responder->render('default/edit.html.twig', [
+        return $this->responder->render('secured/default/edit.html.twig', [
             'group' => $group,
             'category' => $category,
             'document' => $document,
