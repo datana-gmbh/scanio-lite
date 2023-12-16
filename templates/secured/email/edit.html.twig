@@ -13,10 +13,10 @@
         <div class="sm:flex sm:items-center">
             <div class="sm:flex-auto">
                 <h1 class="text-lg font-semibold leading-6 text-gray-900 items-center">
-{#                    {% if category.icon is not null %}#}
-{#                        <i class="{{ category.icon }} mr-1.5"></i>#}
-{#                    {% endif %}#}
-{#                    {{ document.filename }} ({{ category.label }})#}
+{# {% if category.icon is not null %} #}
+{# <i class="{{ category.icon }} mr-1.5"></i> #}
+{# {% endif %} #}
+{# {{ document.filename }} ({{ category.label }}) #}
                 </h1>
             </div>
         </div>
@@ -68,7 +68,7 @@
                         {% for attachment in attachments %}
                             <li class="flex items-center justify-between gap-x-6 py-5">
                                 <div class="flex min-w-0 gap-x-4">
-                                    {% if attachment.type in  ['doc', 'docx'] %}
+                                    {% if attachment.type in ['doc', 'docx'] %}
                                         {% set icon = 'fa-file-word' %}
                                     {% elseif attachment.type in ['txt'] %}
                                         {% set icon = 'fa-file-lines' %}
