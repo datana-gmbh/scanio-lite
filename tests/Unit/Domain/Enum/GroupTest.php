@@ -28,6 +28,7 @@ final class GroupTest extends EnumTestCase
     public static function labelProvider(): iterable
     {
         yield ['Standard', Group::Default];
+        yield ['E-Mails', Group::Emails];
     }
 
     protected static function getClass(): string
@@ -37,6 +38,6 @@ final class GroupTest extends EnumTestCase
 
     protected static function getNumberOfValues(): int
     {
-        return 1;
+        return 2;
     }
 }
