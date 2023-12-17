@@ -31,7 +31,23 @@
                         </div>
                         <div>
                             <span class="uppercase text-gray-400 text-sm font-medium tracking-wide">Empfänger:</span>
-                            <h3 class="font-semibold"> {{ email.to }}</h3>
+                            {% for to in email.to %}
+                                <h3 class="font-semibold"> {{ to }}</h3>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="flex space-x-4 items-center">
+                        <div>
+                            <span class="uppercase text-gray-400 text-sm font-medium tracking-wide">Kopien:</span>
+                            {% for cc in email.cc %}
+                                <h3 class="font-semibold"> {{ cc }}</h3>
+                            {% endfor %}
+                        </div>
+                        <div>
+                            <span class="uppercase text-gray-400 text-sm font-medium tracking-wide">Blindkopien:</span>
+                            {% for bcc in email.bcc %}
+                                <h3 class="font-semibold"> {{ bcc }}</h3>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
