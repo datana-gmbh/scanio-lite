@@ -21,7 +21,7 @@ final class EmailFactory extends ModelFactory
 
         return [
             'from' => $faker->email(),
-            'receiver' => $faker->companyEmail(),
+            'to' => $faker->companyEmail(),
             'subject' => $faker->sentence(),
             'body' => $faker->realText($faker->numberBetween(100, 500)),
         ];
