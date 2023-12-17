@@ -22,7 +22,14 @@ final class EmailFactory extends ModelFactory
 
         return [
             'from' => $faker->email(),
-            'to' => $faker->companyEmail(),
+            'to' => $faker->boolean(40)
+                ? [
+                    $faker->name() => $faker->companyEmail(),
+                ]
+                : [
+                    $faker->name() => $faker->companyEmail(),
+                    $faker->name() => $faker->companyEmail(),
+                ],
             'subject' => $faker->sentence(),
             'body' => $faker->realText($faker->numberBetween(100, 500)),
             'createdAt' => DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-1 year', '-1 day')),
