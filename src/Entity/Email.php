@@ -21,9 +21,9 @@ class Email
     private EmailId $id;
 
     public function __construct(
-        #[ORM\Column(type: Types::STRING)]
+        #[ORM\Column(name: '`from`', type: Types::STRING)]
         private string $from,
-        #[ORM\Column(type: Types::STRING)]
+        #[ORM\Column(name: '`to`', type: Types::STRING)]
         private string $to,
         #[ORM\Column(type: Types::STRING)]
         private string $subject,
