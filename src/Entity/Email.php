@@ -50,6 +50,11 @@ class Email
         #[ORM\Column(type: Types::JSON)]
         private array $bcc = [],
         /**
+         * @var array<string, string>
+         */
+        #[ORM\Column(type: Types::JSON)]
+        private array $headers = [],
+        /**
          * The source of the email, e.g. the name of the mailbox it was received in.
          */
         #[ORM\Column(type: Types::STRING, nullable: true)]
@@ -57,6 +62,8 @@ class Email
     ) {
         $this->id = new EmailId();
     }
+
+
 
     public function getId(): EmailId
     {
@@ -102,6 +109,22 @@ class Email
     public function setBcc(array $bcc): void
     {
         $this->bcc = $bcc;
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    public function getHeaders(): array
+    {
+        return $this->headers;
+    }
+
+    /**
+     * @param array<string, string> $headers
+     */
+    public function setHeaders(array $headers): void
+    {
+        $this->headers = $headers;
     }
 
     public function getCreatedAt(): \DateTimeImmutable
