@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Fixtures\Factory;
 
 use App\Entity\Email;
+use Safe\DateTimeImmutable;
 use Zenstruck\Foundry\ModelFactory;
 
 /**
@@ -24,6 +25,7 @@ final class EmailFactory extends ModelFactory
             'to' => $faker->companyEmail(),
             'subject' => $faker->sentence(),
             'body' => $faker->realText($faker->numberBetween(100, 500)),
+            'createdAt' => DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-1 year', '-1 day')),
         ];
     }
 
