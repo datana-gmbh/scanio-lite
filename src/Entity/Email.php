@@ -28,7 +28,7 @@ class Email
         #[ORM\Column(type: Types::STRING)]
         private string $from,
         #[ORM\Column(type: Types::STRING)]
-        private string $receiver,
+        private string $to,
         #[ORM\Column(type: Types::STRING)]
         private string $subject,
         #[ORM\Column(type: Types::TEXT)]
@@ -53,9 +53,9 @@ class Email
         return $this->from;
     }
 
-    public function getReceiver(): string
+    public function getTo(): string
     {
-        return $this->receiver;
+        return $this->to;
     }
 
     public function getSubject(): string
