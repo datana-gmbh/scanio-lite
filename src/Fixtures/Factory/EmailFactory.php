@@ -24,11 +24,11 @@ final class EmailFactory extends ModelFactory
             'from' => $faker->email(),
             'to' => $faker->boolean(40)
                 ? [
-                    $faker->name() => $faker->companyEmail(),
+                    $faker->companyEmail(),
                 ]
                 : [
-                    $faker->name() => $faker->companyEmail(),
-                    $faker->name() => $faker->companyEmail(),
+                    $faker->companyEmail(),
+                    $faker->companyEmail(),
                 ],
             'subject' => $faker->sentence(),
             'body' => $faker->realText($faker->numberBetween(100, 500)),
@@ -36,14 +36,14 @@ final class EmailFactory extends ModelFactory
             'cc' => $faker->boolean(40)
                 ? []
                 : [
-                    $faker->name() => $faker->companyEmail(),
-                    $faker->name() => $faker->companyEmail(),
+                    $faker->companyEmail(),
+                    $faker->companyEmail(),
                 ],
             'bcc' => $faker->boolean(40)
                 ? []
                 : [
-                    $faker->name() => $faker->companyEmail(),
-                    $faker->name() => $faker->companyEmail(),
+                    $faker->companyEmail(),
+                    $faker->companyEmail(),
                 ],
             'headers' => $faker->boolean(10)
                 ? []

@@ -24,7 +24,7 @@ class Email
         #[ORM\Column(name: '`from`', type: Types::STRING)]
         private string $from,
         /**
-         * @var array<string, string>
+         * @var string[]
          */
         #[ORM\Column(name: '`to`', type: Types::JSON)]
         private array $to,
@@ -43,12 +43,12 @@ class Email
         #[ORM\Column(type: Types::STRING, nullable: true)]
         private ?string $messageId = null,
         /**
-         * @var array<string, string>
+         * @var string[]
          */
         #[ORM\Column(type: Types::JSON)]
         private array $cc = [],
         /**
-         * @var array<string, string>
+         * @var string[]
          */
         #[ORM\Column(type: Types::JSON)]
         private array $bcc = [],
@@ -67,7 +67,7 @@ class Email
     }
 
     /**
-     * @return array<string, string>
+     * @return string[]
      */
     public function getTo(): array
     {
@@ -75,7 +75,7 @@ class Email
     }
 
     /**
-     * @param array<string, string> $to
+     * @param string[] $to
      */
     public function setTo(array $to): void
     {
@@ -97,7 +97,7 @@ class Email
         $this->messageId = $messageId;
     }
     /**
-     * @return array<string, string>
+     * @return string[]
      */
     public function getCc(): array
     {
@@ -105,7 +105,7 @@ class Email
     }
 
     /**
-     * @param array<string, string> $cc
+     * @param string[] $cc
      */
     public function setCc(array $cc): void
     {
@@ -113,7 +113,7 @@ class Email
     }
 
     /**
-     * @return array<string, string>
+     * @return string[]
      */
     public function getBcc(): array
     {
@@ -121,7 +121,7 @@ class Email
     }
 
     /**
-     * @param array<string, string> $bcc
+     * @param string[] $bcc
      */
     public function setBcc(array $bcc): void
     {
