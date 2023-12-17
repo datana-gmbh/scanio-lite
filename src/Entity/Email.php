@@ -23,8 +23,11 @@ class Email
     public function __construct(
         #[ORM\Column(name: '`from`', type: Types::STRING)]
         private string $from,
-        #[ORM\Column(name: '`to`', type: Types::STRING)]
-        private string $to,
+        /**
+         * @var array<string, string>
+         */
+        #[ORM\Column(name: '`to`', type: Types::JSON)]
+        private array $to,
         #[ORM\Column(type: Types::STRING)]
         private string $subject,
         #[ORM\Column(type: Types::TEXT)]
@@ -61,6 +64,22 @@ class Email
         private ?string $source = null,
     ) {
         $this->id = new EmailId();
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    public function getTo(): array
+    {
+        return $this->to;
+    }
+
+    /**
+     * @param array<string, string> $to
+     */
+    public function setTo(array $to): void
+    {
+        $this->to = $to;
     }
 
     public function getId(): EmailId
@@ -133,11 +152,6 @@ class Email
     public function getFrom(): string
     {
         return $this->from;
-    }
-
-    public function getTo(): string
-    {
-        return $this->to;
     }
 
     public function getSubject(): string
