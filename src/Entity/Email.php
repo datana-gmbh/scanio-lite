@@ -26,7 +26,7 @@ class Email
 
     public function __construct(
         #[ORM\Column(type: Types::STRING)]
-        private string $sender,
+        private string $from,
         #[ORM\Column(type: Types::STRING)]
         private string $receiver,
         #[ORM\Column(type: Types::STRING)]
@@ -48,9 +48,9 @@ class Email
         return $this->createdAt;
     }
 
-    public function getSender(): string
+    public function getFrom(): string
     {
-        return $this->sender;
+        return $this->from;
     }
 
     public function getReceiver(): string
