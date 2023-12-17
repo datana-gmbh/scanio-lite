@@ -30,11 +30,19 @@ final class EmailFactory extends ModelFactory
                 ? []
                 : [
                     $faker->name() => $faker->companyEmail(),
+                    $faker->name() => $faker->companyEmail(),
                 ],
             'bcc' => $faker->boolean(40)
                 ? []
                 : [
                     $faker->name() => $faker->companyEmail(),
+                    $faker->name() => $faker->companyEmail(),
+                ],
+            'headers' => $faker->boolean(10)
+                ? []
+                : [
+                    $faker->word() => $faker->word(),
+                    $faker->word() => $faker->word(),
                 ],
         ];
     }
