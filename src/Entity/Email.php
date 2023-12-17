@@ -63,8 +63,6 @@ class Email
         $this->id = new EmailId();
     }
 
-
-
     public function getId(): EmailId
     {
         return $this->id;
