@@ -20,7 +20,7 @@ final class EmailFactory extends ModelFactory
         $faker = self::faker();
 
         return [
-            'sender' => $faker->email(),
+            'from' => $faker->email(),
             'receiver' => $faker->companyEmail(),
             'subject' => $faker->sentence(),
             'body' => $faker->realText($faker->numberBetween(100, 500)),
