@@ -21,9 +21,9 @@ class Email
     private EmailId $id;
 
     public function __construct(
-        #[ORM\Column(type: Types::STRING)]
+        #[ORM\Column(name: '`from`', type: Types::STRING)]
         private string $from,
-        #[ORM\Column(type: Types::STRING)]
+        #[ORM\Column(name: '`to`', type: Types::STRING)]
         private string $to,
         #[ORM\Column(type: Types::STRING)]
         private string $subject,
@@ -39,6 +39,16 @@ class Email
          */
         #[ORM\Column(type: Types::STRING, nullable: true)]
         private ?string $messageId = null,
+        /**
+         * @var array<string, string>
+         */
+        #[ORM\Column(type: Types::JSON)]
+        private array $cc = [],
+        /**
+         * @var array<string, string>
+         */
+        #[ORM\Column(type: Types::JSON)]
+        private array $bcc = [],
         /**
          * The source of the email, e.g. the name of the mailbox it was received in.
          */
@@ -61,6 +71,37 @@ class Email
     public function setMessageId(?string $messageId): void
     {
         $this->messageId = $messageId;
+    }
+    /**
+     * @return array<string, string>
+     */
+    public function getCc(): array
+    {
+        return $this->cc;
+    }
+
+    /**
+     * @param array<string, string> $cc
+     */
+    public function setCc(array $cc): void
+    {
+        $this->cc = $cc;
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    public function getBcc(): array
+    {
+        return $this->bcc;
+    }
+
+    /**
+     * @param array<string, string> $bcc
+     */
+    public function setBcc(array $bcc): void
+    {
+        $this->bcc = $bcc;
     }
 
     public function getCreatedAt(): \DateTimeImmutable
