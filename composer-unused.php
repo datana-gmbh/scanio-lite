@@ -14,6 +14,7 @@ return static fn (Configuration $config): Configuration => $config
     ->addNamedFilter(NamedFilter::fromString('symfony/flex'))
     ->addNamedFilter(NamedFilter::fromString('symfony/mime'))
     ->addNamedFilter(NamedFilter::fromString('symfony/var-dumper'))
+    ->addNamedFilter(NamedFilter::fromString('oskarstark/readable-filesize-extension'))
     ->setAdditionalFilesFor('datana-gmbh/scanio-lite', [
         __FILE__,
         ...array_merge(
