@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6d81e85f68e390079f403ceb498c3b52",
+    "content-hash": "8e324e7a3275b7b3c55fb2176d7b6fa2",
     "packages": [
         {
             "name": "api-platform/core",
@@ -2944,7 +2944,7 @@
         },
         {
             "name": "oskarstark/trimmed-non-empty-string",
-            "version": "1.11.1",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/OskarStark/trimmed-non-empty-string.git",
@@ -2989,7 +2989,7 @@
             ],
             "support": {
                 "issues": "https://github.com/OskarStark/trimmed-non-empty-string/issues",
-                "source": "https://github.com/OskarStark/trimmed-non-empty-string/tree/1.11.1"
+                "source": "https://github.com/OskarStark/trimmed-non-empty-string/tree/1.1.1"
             },
             "time": "2023-12-01T11:02:53+00:00"
         },
