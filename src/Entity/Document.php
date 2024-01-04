@@ -26,7 +26,7 @@ class Document implements \Stringable
     private ?string $content = null;
 
     /**
-     * @var array<mixed>
+     * @var list<mixed>
      */
     #[ORM\Column(type: Types::ARRAY)]
     private array $data = [];
@@ -183,7 +183,7 @@ class Document implements \Stringable
     }
 
     /**
-     * @return array<mixed>
+     * @return list<mixed>
      */
     public function getData(): array
     {
@@ -191,7 +191,7 @@ class Document implements \Stringable
     }
 
     /**
-     * @param array<mixed> $data
+     * @param list<mixed> $data
      */
     public function setData(array $data): void
     {

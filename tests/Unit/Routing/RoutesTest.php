@@ -6,7 +6,6 @@ namespace App\Tests\Unit\Routing;
 
 use App\Routing\Routes;
 use App\Tests\Unit\UnitTestCase;
-use ReflectionClass;
 
 final class RoutesTest extends UnitTestCase
 {
@@ -15,7 +14,7 @@ final class RoutesTest extends UnitTestCase
      */
     public function numberOfRoutes(): void
     {
-        $class = new ReflectionClass(Routes::class);
+        $class = new \ReflectionClass(Routes::class);
 
         self::assertCount(6, $class->getConstants());
     }

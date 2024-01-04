@@ -22,7 +22,7 @@ final class PreviewExtension extends AbstractExtension
     }
 
     /**
-     * @return array<TwigFunction>
+     * @return list<TwigFunction>
      */
     public function getFunctions(): array
     {
