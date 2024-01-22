@@ -21,46 +21,46 @@ class Email
     private EmailId $id;
 
     public function __construct(
-        #[ORM\Column(name: '`from`', type: Types::STRING)]
+        #[Column(name: '`from`', type: Types::STRING)]
         private string $from,
         /**
          * @var string[]
          */
-        #[ORM\Column(name: '`to`', type: Types::JSON)]
+        #[Column(name: '`to`', type: Types::JSON)]
         private array $to,
-        #[ORM\Column(type: Types::STRING)]
+        #[Column(type: Types::STRING)]
         private string $subject,
-        #[ORM\Column(type: Types::TEXT)]
+        #[Column(type: Types::TEXT)]
         private string $body,
         /**
          * The date and time the physical email was created.
          */
-        #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
+        #[Column(type: Types::DATETIME_IMMUTABLE)]
         private \DateTimeImmutable $createdAt,
         /**
          * The message ID of the email.
          */
-        #[ORM\Column(type: Types::STRING, nullable: true)]
+        #[Column(type: Types::STRING, nullable: true)]
         private ?string $messageId = null,
         /**
          * @var string[]
          */
-        #[ORM\Column(type: Types::JSON)]
+        #[Column(type: Types::JSON)]
         private array $cc = [],
         /**
          * @var string[]
          */
-        #[ORM\Column(type: Types::JSON)]
+        #[Column(type: Types::JSON)]
         private array $bcc = [],
         /**
          * @var array<string, string>
          */
-        #[ORM\Column(type: Types::JSON)]
+        #[Column(type: Types::JSON)]
         private array $headers = [],
         /**
          * The source of the email, e.g. the name of the mailbox it was received in.
          */
-        #[ORM\Column(type: Types::STRING, nullable: true)]
+        #[Column(type: Types::STRING, nullable: true)]
         private ?string $source = null,
     ) {
         $this->id = new EmailId();
