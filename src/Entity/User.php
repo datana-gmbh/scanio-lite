@@ -25,13 +25,13 @@ class User implements PasswordAuthenticatedUserInterface, UserInterface
     /**
      * @var string[]
      */
-    #[ORM\Column]
+    #[Column]
     private array $roles = [];
 
     /**
      * @var string The hashed password
      */
-    #[ORM\Column]
+    #[Column]
     private ?string $password = null;
 
     public function __construct(
