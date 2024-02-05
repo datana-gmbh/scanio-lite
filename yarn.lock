@@ -1030,9 +1030,9 @@
   integrity sha512-XLi5HOQ3XLNtM9UhrCyT5jEj0RHkx5GfzKDmUPpVTea4C/Ekj5plOYVAp9dUWgH+NWo3IrVpwhsnhIFh/FZPgA==
 
 "@headlessui/vue@^1.7.15":
-  version "1.7.17"
-  resolved "https://registry.yarnpkg.com/@headlessui/vue/-/vue-1.7.17.tgz#153a17432a0fa4b58ac55e16e0c883b66bec5f83"
-  integrity sha512-hmJChv8HzKorxd9F70RGnECAwZfkvmmwOqreuKLWY/19d5qbWnSdw+DNbuA/Uo6X5rb4U5B3NrT+qBKPmjhRqw==
+  version "1.7.18"
+  resolved "https://registry.yarnpkg.com/@headlessui/vue/-/vue-1.7.18.tgz#1c61473fa232053a3d90f83e1ccf661fcb52abb1"
+  integrity sha512-N9EUJY0sHhuJQ81oQlk+vmB80NwUXsyJjxOaBrzUyO+VHIZz7v/ffFICAlrtM4TxZaZFMCzehe74yEPSqkEJ9g==
   dependencies:
     "@tanstack/vue-virtual" "^3.0.0-beta.60"
 
