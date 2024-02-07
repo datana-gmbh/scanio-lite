@@ -76,10 +76,7 @@ return static function (RectorConfig $rectorConfig): void {
         ],
     ]);
 
-    /**
-     * @see https://github.com/rectorphp/rector/blob/master/docs/rector_rules_overview.md#annotationtoattributerector
-     */
-    $rectorConfig->rule(AnnotationToAttributeRector::class);
+
     $rectorConfig->rule(PreferPHPUnitSelfCallRector::class);
 
     $rectorConfig->import('vendor/fakerphp/faker/rector-migrate.php');
