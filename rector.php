@@ -4,7 +4,6 @@ declare(strict_types=1);
 use Rector\CodingStyle\Rector\FuncCall\ArraySpreadInsteadOfArrayMergeRector;
 use Rector\Config\RectorConfig;
 use Rector\Doctrine\Set\DoctrineSetList;
-use Rector\Php80\Rector\Class_\AnnotationToAttributeRector;
 use Rector\Php82\Rector\Class_\ReadOnlyClassRector;
 use Rector\Php83\Rector\ClassMethod\AddOverrideAttributeToOverriddenMethodsRector;
 use Rector\PHPUnit\CodeQuality\Rector\Class_\PreferPHPUnitThisCallRector;
@@ -75,7 +74,6 @@ return static function (RectorConfig $rectorConfig): void {
             'src/MessageHandler/*Handler.php', // #[MessageHandler]
         ],
     ]);
-
 
     $rectorConfig->rule(PreferPHPUnitSelfCallRector::class);
 
