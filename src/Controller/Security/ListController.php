@@ -14,7 +14,7 @@ use App\Routing\Routes;
 use OskarStark\Symfony\Http\Responder;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 #[Route(name: Routes::LIST, path: '/list/{group}/{category}')]
 final readonly class ListController
