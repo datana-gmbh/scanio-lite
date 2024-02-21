@@ -13982,16 +13982,16 @@
         },
         {
             "name": "vincentlanglet/twig-cs-fixer",
-            "version": "2.4.4",
+            "version": "2.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/VincentLanglet/Twig-CS-Fixer.git",
-                "reference": "f9e76645b81df65d64d09d88ce05eaae34def8b6"
+                "reference": "5f364b9dcc64ea0743698834bd2cdb64e15d08bb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VincentLanglet/Twig-CS-Fixer/zipball/f9e76645b81df65d64d09d88ce05eaae34def8b6",
-                "reference": "f9e76645b81df65d64d09d88ce05eaae34def8b6",
+                "url": "https://api.github.com/repos/VincentLanglet/Twig-CS-Fixer/zipball/5f364b9dcc64ea0743698834bd2cdb64e15d08bb",
+                "reference": "5f364b9dcc64ea0743698834bd2cdb64e15d08bb",
                 "shasum": ""
             },
             "require": {
@@ -14007,6 +14007,7 @@
                 "webmozart/assert": "^1.10"
             },
             "require-dev": {
+                "cweagans/composer-patches": "^1.7",
                 "dereuromark/composer-prefer-lowest": "^0.1.10",
                 "ergebnis/composer-normalize": "^2.29",
                 "friendsofphp/php-cs-fixer": "^3.13.0",
@@ -14050,7 +14051,7 @@
             "homepage": "https://github.com/VincentLanglet/Twig-CS-Fixer",
             "support": {
                 "issues": "https://github.com/VincentLanglet/Twig-CS-Fixer/issues",
-                "source": "https://github.com/VincentLanglet/Twig-CS-Fixer/tree/2.4.4"
+                "source": "https://github.com/VincentLanglet/Twig-CS-Fixer/tree/2.5.0"
             },
             "funding": [
                 {
@@ -14058,7 +14059,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-02-19T10:17:09+00:00"
+            "time": "2024-02-21T16:05:21+00:00"
         },
         {
             "name": "webmozart/glob",
