@@ -11,14 +11,16 @@ enum Type: string
 {
     use Comparable;
 
-    case Local = 'local';
+    case Azure = 'azure';
     case Dropbox = 'dropbox';
+    case Local = 'local';
 
     public function label(): string
     {
         return match ($this) {
-            self::Local => 'Lokal',
+            self::Azure => 'Azure Blob Storage',
             self::Dropbox => 'Dropbox',
+            self::Local => 'Lokal',
             default => u($this->value)
                 ->replace('_', ' ')
                 ->title(true)
@@ -29,8 +31,9 @@ enum Type: string
     public function icon(): ?string
     {
         return match ($this) {
-            self::Local => 'fa-light fa-folder',
+            self::Azure => 'fa-brands fa-microsoft',
             self::Dropbox => 'fa-brands fa-dropbox',
+            self::Local => 'fa-light fa-folder',
             default => null,
         };
     }

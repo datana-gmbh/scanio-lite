@@ -16,7 +16,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 #[Route(name: Routes::UPLOAD, path: '/upload')]
 final readonly class UploadController
@@ -66,7 +66,7 @@ final readonly class UploadController
             }
         }
 
-        return $this->responder->render('upload/upload.html.twig', [
+        return $this->responder->render('secured/upload/upload.html.twig', [
             'form' => $form->createView(),
         ]);
     }

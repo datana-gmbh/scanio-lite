@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Controller\Security;
 
 use App\Routing\Routes;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 #[Route('/logout', name: Routes::LOGOUT)]
 final class LogoutController

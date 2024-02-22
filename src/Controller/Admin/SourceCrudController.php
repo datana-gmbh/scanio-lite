@@ -50,7 +50,7 @@ final class SourceCrudController extends AbstractCrudController
 
         yield BooleanField::new('enabled');
 
-        yield BooleanField::new('importRecursive')
+        yield BooleanField::new('recursiveImport')
             ->setHelp('Sollen Dateien ebenfalls aus Unterordnern importiert werden?');
 
         yield BooleanField::new('deleteAfterImport')

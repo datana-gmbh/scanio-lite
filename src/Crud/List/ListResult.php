@@ -10,8 +10,8 @@ use Webmozart\Assert\Assert;
 final readonly class ListResult
 {
     /**
-     * @param Field[]                  $fields
-     * @param array<int, array<mixed>> $rows
+     * @param Field[]                 $fields
+     * @param array<int, list<mixed>> $rows
      */
     public function __construct(
         public array $fields,

@@ -22,54 +22,56 @@ class Document implements \Stringable
     #[Column(type: DocumentIdType::class, unique: true)]
     private DocumentId $id;
 
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[Column(type: Types::TEXT, nullable: true)]
     private ?string $content = null;
 
     /**
-     * @var array<mixed>
+     * @var list<mixed>
      */
-    #[ORM\Column(type: Types::ARRAY)]
+    #[Column(type: Types::ARRAY)]
     private array $data = [];
 
-    #[ORM\Column(name: '`user`', type: Types::TEXT, nullable: true)]
+    #[Column(name: '`user`', type: Types::TEXT, nullable: true)]
     private ?string $user = null;
 
-    #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
+    #[Column(type: Types::DATETIME_IMMUTABLE)]
     private \DateTimeImmutable $createdAt;
 
     /**
      * Das Posteingangsdatum des Dokuments.
      */
-    #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
+    #[Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
     private ?\DateTimeImmutable $inboxDate = null;
 
     /**
      * Das Dokument wurde gelöscht (soft delete) und kann wiederhergestellt werden.
      */
-    #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
+    #[Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
     private ?\DateTimeImmutable $deletedAt = null;
 
     /**
      * Die Bearbeitung durch den Benutzer ist abgeschlossen.
      */
-    #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
+    #[Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
     private ?\DateTimeImmutable $finishedAt = null;
 
     /**
      * Alle Informationen samt Dokument wurden an das Ziel-System gemeldet.
      */
-    #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
+    #[Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
     private ?\DateTimeImmutable $exportedAt = null;
 
     public function __construct(
-        #[ORM\Column(type: Types::STRING, length: 255)]
+        #[Column(type: Types::STRING, length: 255)]
         private string $filename,
-        #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
+        #[Column(type: Types::STRING, length: 255, nullable: true)]
         private ?string $originalFilename = null,
-        #[ORM\Column(name: '`group`', type: Types::STRING, enumType: Group::class)]
+        #[Column(name: '`group`', type: Types::STRING, enumType: Group::class)]
         private Group $group = Group::Default,
-        #[ORM\Column(type: Types::STRING, enumType: Category::class)]
+        #[Column(type: Types::STRING, enumType: Category::class)]
         private Category $category = Category::Pending,
+        #[Column(type: Types::TEXT, nullable: true)]
+        private ?string $source = null,
     ) {
         $this->id = new DocumentId();
         $this->createdAt = new \DateTimeImmutable();
@@ -181,7 +183,7 @@ class Document implements \Stringable
     }
 
     /**
-     * @return array<mixed>
+     * @return list<mixed>
      */
     public function getData(): array
     {
@@ -189,7 +191,7 @@ class Document implements \Stringable
     }
 
     /**
-     * @param array<mixed> $data
+     * @param list<mixed> $data
      */
     public function setData(array $data): void
     {
@@ -204,6 +206,16 @@ class Document implements \Stringable
     public function setUser(?string $user): void
     {
         $this->user = $user;
+    }
+
+    public function getSource(): ?string
+    {
+        return $this->source;
+    }
+
+    public function setSource(?string $source): void
+    {
+        $this->source = $source;
     }
 
     public function getOriginalFilename(): ?string

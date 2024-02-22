@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Twig;
 
 use App\Entity\Document;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Twig\Environment;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
@@ -13,13 +14,15 @@ use Webmozart\Assert\Assert;
 final class PreviewExtension extends AbstractExtension
 {
     public function __construct(
+        #[Autowire('%kernel.project_dir%')]
         private readonly string $projectDir,
+        #[Autowire('%documents_dir%')]
         private readonly string $documentsDir,
     ) {
     }
 
     /**
-     * @return array<TwigFunction>
+     * @return list<TwigFunction>
      */
     public function getFunctions(): array
     {
@@ -47,7 +50,7 @@ final class PreviewExtension extends AbstractExtension
 
     public function renderPdfPreview(Environment $twig, Document $document): string
     {
-        return $twig->render('pdf/preview.html.twig', [
+        return $twig->render('secured/pdf/preview.html.twig', [
             'path' => $this->pdfPreviewPath($document),
         ]);
     }

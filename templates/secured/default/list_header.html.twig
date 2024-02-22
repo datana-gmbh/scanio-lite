@@ -5,11 +5,7 @@
     {% if field.isSortable is defined and field.isSortable == true %}
         {# @var currentSorting \App\Crud\Domain\Value\Sorting #}
         {% set currentSorting = sortings|filter(sorting => sorting.property == field.propertyPath)|first %}
-        {% set orderParameters = app.request.query.get('order') %}
-
-        {% if orderParameters is null %}
-            {% set orderParameters = {} %}
-        {% endif %}
+        {% set orderParameters = app.request.query.all('order') %}
 
         {% if currentSorting %}
             {% if currentSorting.direction.value == 'ASC' %}

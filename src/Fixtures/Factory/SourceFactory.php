@@ -22,6 +22,22 @@ final class SourceFactory extends ModelFactory
         ]);
     }
 
+    public function azure(): self
+    {
+        $faker = self::faker();
+
+        return $this->addState([
+            'type' => Type::Azure,
+            'token' => sprintf(
+                'DefaultEndpointsProtocol=https;AccountName=%s;AccountKey=%s;EndpointSuffix=core.windows.net;ContainerName=%s',
+                $faker->userName(),
+                $faker->md5(),
+                $faker->word(),
+            ),
+            'path' => self::faker()->filePath(),
+        ]);
+    }
+
     public function local(): self
     {
         return $this->addState([

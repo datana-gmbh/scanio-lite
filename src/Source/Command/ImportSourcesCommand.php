@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Source\Command;
 
 use App\Repository\SourceRepositoryInterface;
-use App\Source\Import\ImporterFactory;
+use App\Source\Importer\ImporterFactory;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -34,7 +34,7 @@ final class ImportSourcesCommand extends Command
             try {
                 $importer = $this->importerFactory->forSource($source);
             } catch (\InvalidArgumentException $e) {
-                $io->warning(sprintf('Skipping Source <info>%s</>: %s', $source, $e->getMessage()));
+                $io->text(sprintf('Skipping Source <info>%s</>: %s', $source, $e->getMessage()));
 
                 continue;
             }

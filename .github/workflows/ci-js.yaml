@@ -51,7 +51,7 @@ jobs:
 
             -
                 name: "Install Node.js"
-                uses: "actions/setup-node@v4.0.0"
+                uses: "actions/setup-node@v4.0.2"
                 with:
                     node-version: "${{ matrix.node-version }}"
                     cache: "yarn" # use 'npm' for npm commands
@@ -101,7 +101,7 @@ jobs:
 
             -
                 name: "Install Node.js"
-                uses: "actions/setup-node@v4.0.0"
+                uses: "actions/setup-node@v4.0.2"
                 with:
                     node-version: "${{ matrix.node-version }}"
                     cache: "yarn" # use 'npm' for npm commands

@@ -3,19 +3,17 @@
 declare(strict_types=1);
 use Rector\CodingStyle\Rector\FuncCall\ArraySpreadInsteadOfArrayMergeRector;
 use Rector\Config\RectorConfig;
-use Rector\Core\ValueObject\PhpVersion;
 use Rector\Doctrine\Set\DoctrineSetList;
-use Rector\Php80\Rector\Class_\AnnotationToAttributeRector;
 use Rector\Php82\Rector\Class_\ReadOnlyClassRector;
 use Rector\Php83\Rector\ClassMethod\AddOverrideAttributeToOverriddenMethodsRector;
 use Rector\PHPUnit\CodeQuality\Rector\Class_\PreferPHPUnitThisCallRector;
 use Rector\PHPUnit\CodeQuality\Rector\ClassMethod\ReplaceTestAnnotationWithPrefixedFunctionRector;
 use Rector\PHPUnit\Rector\Class_\PreferPHPUnitSelfCallRector;
 use Rector\PHPUnit\Set\PHPUnitSetList;
-use Rector\Set\ValueObject\LevelSetList;
 use Rector\Set\ValueObject\SetList;
-use Rector\Symfony\Set\SymfonyLevelSetList;
+use Rector\Symfony\Set\SymfonySetList;
 use Rector\TypeDeclaration\Rector\ClassMethod\ReturnNeverTypeRector;
+use Rector\ValueObject\PhpVersion;
 use function Safe\getcwd;
 
 return static function (RectorConfig $rectorConfig): void {
@@ -43,11 +41,8 @@ return static function (RectorConfig $rectorConfig): void {
 
     $rectorConfig->sets([
         SetList::PHP_82,
-        LevelSetList::UP_TO_PHP_82,
-        PHPUnitSetList::PHPUNIT_91,
         PHPUnitSetList::PHPUNIT_CODE_QUALITY,
-        PHPUnitSetList::PHPUNIT_EXCEPTION,
-        SymfonyLevelSetList::UP_TO_SYMFONY_63,
+        SymfonySetList::SYMFONY_64,
         DoctrineSetList::DOCTRINE_ORM_29,
         DoctrineSetList::DOCTRINE_DBAL_30,
         DoctrineSetList::DOCTRINE_CODE_QUALITY,
@@ -76,10 +71,6 @@ return static function (RectorConfig $rectorConfig): void {
         ],
     ]);
 
-    /**
-     * @see https://github.com/rectorphp/rector/blob/master/docs/rector_rules_overview.md#annotationtoattributerector
-     */
-    $rectorConfig->rule(AnnotationToAttributeRector::class);
     $rectorConfig->rule(PreferPHPUnitSelfCallRector::class);
 
     $rectorConfig->import('vendor/fakerphp/faker/rector-migrate.php');

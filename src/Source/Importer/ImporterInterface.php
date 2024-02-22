@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Source\Import;
+namespace App\Source\Importer;
 
 use App\Entity\Document;
 use App\Entity\Source;
@@ -14,7 +14,7 @@ interface ImporterInterface
     /**
      * @return Document[]
      */
-    public function import(Source $storage): array;
+    public function import(Source $source): array;
 
-    public function supports(Source $storage): bool;
+    public function supports(Source $source): bool;
 }

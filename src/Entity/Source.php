@@ -22,33 +22,37 @@ class Source implements \Stringable
     #[Column(type: SourceIdType::class, unique: true)]
     private SourceId $id;
 
-    #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
+    #[Column(type: Types::DATETIME_IMMUTABLE)]
     private \DateTimeImmutable $createdAt;
 
-    #[ORM\Column(type: Types::STRING, enumType: Type::class)]
+    #[Column(type: Types::STRING, enumType: Type::class)]
     private Type $type;
 
-    #[ORM\Column(type: Types::STRING, nullable: true)]
+    #[Column(type: Types::STRING, nullable: true)]
     #[Assert\When(
-        expression: 'this.getType().value in ["dropbox"]',
+        expression: 'this.getType().value in ["dropbox", "azure"]',
         constraints: [new Assert\NotBlank()],
+    )]
+    #[Assert\When(
+        expression: 'this.getType().value in ["azure"]',
+        constraints: [new Assert\Regex('/ContainerName\=[^;]+/', 'Dieser Wert muss einen Key "ContainerName" beinhalten')],
     )]
     private ?string $token = null;
 
-    #[ORM\Column(type: Types::STRING, nullable: true)]
+    #[Column(type: Types::STRING, nullable: true)]
     #[Assert\When(
-        expression: 'this.getType().value in ["dropbox", "local"]',
+        expression: 'this.getType().value in ["dropbox", "local", "azure"]',
         constraints: [new Assert\NotBlank()],
     )]
     private ?string $path = null;
 
-    #[ORM\Column(type: Types::BOOLEAN)]
+    #[Column(type: Types::BOOLEAN)]
     private bool $enabled = false;
 
-    #[ORM\Column(type: Types::BOOLEAN)]
+    #[Column(type: Types::BOOLEAN)]
     private bool $recursiveImport = false;
 
-    #[ORM\Column(type: Types::BOOLEAN)]
+    #[Column(type: Types::BOOLEAN)]
     private bool $deleteAfterImport = false;
 
     public function __construct()

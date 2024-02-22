@@ -9,6 +9,7 @@ use App\Domain\Enum\Category;
 use App\Domain\Enum\Group;
 use App\Entity\Document;
 use League\Flysystem\FilesystemOperator;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Webmozart\Assert\Assert;
 use Zenstruck\Foundry\ModelFactory;
 use function Safe\file_get_contents;
@@ -24,6 +25,7 @@ final class DocumentFactory extends ModelFactory
      */
     public function __construct(
         private readonly FilesystemOperator $documentsStorage,
+        #[Autowire('%kernel.project_dir%')]
         private readonly string $projectDir,
     ) {
         parent::__construct();
@@ -66,6 +68,8 @@ final class DocumentFactory extends ModelFactory
             'content' => $faker->text(),
             'filename' => $filename,
             'user' => sprintf('%s %s', $faker->firstName(), $faker->lastName()),
+            'originalFilename' => $faker->boolean(20) ? null : $filename,
+            'source' => 'local:/foo',
         ];
     }
 

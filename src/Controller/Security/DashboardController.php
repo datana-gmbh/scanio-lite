@@ -8,7 +8,7 @@ use App\Routing\Routes;
 use OskarStark\Symfony\Http\Responder;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 #[Route(name: Routes::DASHBOARD, path: '/dashboard')]
 final readonly class DashboardController
@@ -20,6 +20,6 @@ final readonly class DashboardController
 
     public function __invoke(Request $request): Response
     {
-        return $this->responder->render('dashboard.html.twig');
+        return $this->responder->render('secured/dashboard.html.twig');
     }
 }

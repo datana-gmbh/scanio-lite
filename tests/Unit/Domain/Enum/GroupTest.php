@@ -23,7 +23,7 @@ final class GroupTest extends EnumTestCase
     }
 
     /**
-     * @return \Generator<array<Group|string>>
+     * @return \Generator<list<Group|string>>
      */
     public static function labelProvider(): iterable
     {

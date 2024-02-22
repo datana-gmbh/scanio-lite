@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Crud\List\Query\Letter;
+namespace App\Crud\List\Query\Document;
 
 use App\Crud\Domain\Enum\FieldType;
 use App\Crud\Domain\Value\Field;
@@ -13,7 +13,7 @@ use App\Domain\Enum\Category;
 use App\Repository\DocumentRepositoryInterface;
 use Doctrine\ORM\QueryBuilder;
 
-final readonly class DefaultLetterQuery implements QueryInterface
+final readonly class DefaultDocumentQuery implements QueryInterface
 {
     private QueryBuilder $qb;
 
@@ -21,12 +21,12 @@ final readonly class DefaultLetterQuery implements QueryInterface
         private DocumentRepositoryInterface $repository,
         private Category $category,
     ) {
-        $qb = $this->repository->createQueryBuilder('l');
+        $qb = $this->repository->createQueryBuilder('d');
         $qb->where(
-            $qb->expr()->eq('l.category', ':category'),
+            $qb->expr()->eq('d.category', ':category'),
         );
         $qb->andWhere(
-            $qb->expr()->isNull('l.finishedAt'),
+            $qb->expr()->isNull('d.finishedAt'),
         );
         $qb->setParameter('category', $this->category->value);
 
@@ -36,7 +36,7 @@ final readonly class DefaultLetterQuery implements QueryInterface
     public function count(): int
     {
         $qb = clone $this->qb;
-        $qb->select('count(l.id)');
+        $qb->select('count(d.id)');
 
         /** @var int */
         return $qb->getQuery()->getSingleScalarResult();
@@ -47,7 +47,7 @@ final readonly class DefaultLetterQuery implements QueryInterface
         $qb = clone $this->qb;
 
         foreach ($sortings as $sorting) {
-            $qb->addOrderBy(sprintf('l.%s', $sorting->property), $sorting->direction->value);
+            $qb->addOrderBy(sprintf('d.%s', $sorting->property), $sorting->direction->value);
         }
 
         $qb
@@ -56,7 +56,8 @@ final readonly class DefaultLetterQuery implements QueryInterface
 
         return new ListResult(
             [
-                (new Field(FieldType::ID, 'ID', 'id'))->sortable(),
+                (new Field(FieldType::TEXT, 'Dateiname', 'originalFilename'))->sortable(),
+                (new Field(FieldType::TEXT, 'Quelle', 'source'))->sortable(),
                 (new Field(FieldType::DATETIME, 'Erstellungsdatum', 'createdAt'))->sortable(),
                 new Field(FieldType::TEXT, 'Benutzer', 'user'),
             ],

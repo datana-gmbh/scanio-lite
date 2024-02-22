@@ -12,7 +12,7 @@ use Twig\TwigFunction;
 final class PropertyAccessExtension extends AbstractExtension
 {
     /**
-     * @return array<TwigFunction>
+     * @return list<TwigFunction>
      */
     public function getFunctions(): array
     {

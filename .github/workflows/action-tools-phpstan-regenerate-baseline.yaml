@@ -33,7 +33,7 @@ jobs:
 
             -
                 name: "Install PHP with extensions"
-                uses: "shivammathur/setup-php@2.28.0"
+                uses: "shivammathur/setup-php@2.29.0"
                 with:
                     coverage: "none"
                     extensions: "${{ env.REQUIRED_PHP_EXTENSIONS }}"
@@ -54,7 +54,7 @@ jobs:
 
             -
                 name: "Cache cache directory for phpstan/phpstan"
-                uses: "actions/cache@v3"
+                uses: "actions/cache@v4"
                 with:
                     path: ".build/phpstan"
                     key: "php-${{ matrix.php-version }}-phpstan-${{ github.sha }}"

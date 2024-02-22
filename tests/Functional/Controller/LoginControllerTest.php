@@ -35,7 +35,7 @@ final class LoginControllerTest extends FunctionalTestCase
                 $faker->password(8),
             )
             ->assertOn('/')
-            ->assertSeeIn('#login-form-error', 'Invalid Credentials.');
+            ->assertSeeIn('#login-form-error', 'Fehlerhafte Zugangsdaten.');
     }
 
     /**
