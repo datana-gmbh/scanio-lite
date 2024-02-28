@@ -63,7 +63,7 @@ jobs:
 
             -
                 name: "Install dependencies with composer"
-                uses: "ramsey/composer-install@2.2.0"
+                uses: "ramsey/composer-install@2.3.0"
                 with:
                     composer-options: "--no-scripts"
 
@@ -150,7 +150,7 @@ jobs:
 
             -
                 name: "Install dependencies with composer"
-                uses: "ramsey/composer-install@2.2.0"
+                uses: "ramsey/composer-install@2.3.0"
                 with:
                     composer-options: "--no-scripts"
 
@@ -198,7 +198,7 @@ jobs:
 
             -
                 name: "Install dependencies with composer"
-                uses: "ramsey/composer-install@2.2.0"
+                uses: "ramsey/composer-install@2.3.0"
 
             -
                 name: "Warm up application cache"
@@ -242,7 +242,7 @@ jobs:
 
             -
                 name: "Install dependencies with composer"
-                uses: "ramsey/composer-install@2.2.0"
+                uses: "ramsey/composer-install@2.3.0"
 
             -
                 name: "Check for unused dependencies"
@@ -293,7 +293,7 @@ jobs:
 
             -
                 name: "Install dependencies with composer"
-                uses: "ramsey/composer-install@2.2.0"
+                uses: "ramsey/composer-install@2.3.0"
 
             -
                 name: "Show Doctrine migration status"
@@ -366,7 +366,7 @@ jobs:
 
             -
                 name: "Install dependencies with composer"
-                uses: "ramsey/composer-install@2.2.0"
+                uses: "ramsey/composer-install@2.3.0"
                 with:
                     composer-options: "--no-scripts"
 
