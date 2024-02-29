@@ -65,7 +65,7 @@ jobs:
                     tools: "composer:v2"
 
             -   name: "Install dependencies with composer"
-                uses: "ramsey/composer-install@2.3.0"
+                uses: "ramsey/composer-install@3.0.0"
 
             -   name: "Show Doctrine migration status"
                 run: "bin/console doctrine:migrations:status"
