@@ -57,7 +57,7 @@ jobs:
                     ref: "${{ github.head_ref }}"
 
             -   name: "Install PHP with extensions"
-                uses: "shivammathur/setup-php@2.29.0"
+                uses: "shivammathur/setup-php@2.30.0"
                 with:
                     coverage: "none"
                     extensions: "${{ env.REQUIRED_PHP_EXTENSIONS }}"
