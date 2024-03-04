@@ -1328,16 +1328,16 @@
         },
         {
             "name": "doctrine/orm",
-            "version": "2.18.2",
+            "version": "2.19.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/orm.git",
-                "reference": "52a6a21387380b09419a66a7ec1c66f6cab69b20"
+                "reference": "a809a71aa6a233a6c82e68ebaaf8954adc4998dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/orm/zipball/52a6a21387380b09419a66a7ec1c66f6cab69b20",
-                "reference": "52a6a21387380b09419a66a7ec1c66f6cab69b20",
+                "url": "https://api.github.com/repos/doctrine/orm/zipball/a809a71aa6a233a6c82e68ebaaf8954adc4998dc",
+                "reference": "a809a71aa6a233a6c82e68ebaaf8954adc4998dc",
                 "shasum": ""
             },
             "require": {
@@ -1423,22 +1423,22 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/orm/issues",
-                "source": "https://github.com/doctrine/orm/tree/2.18.2"
+                "source": "https://github.com/doctrine/orm/tree/2.19.0"
             },
-            "time": "2024-03-01T09:47:18+00:00"
+            "time": "2024-03-03T17:43:41+00:00"
         },
         {
             "name": "doctrine/persistence",
-            "version": "3.3.0",
+            "version": "3.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/persistence.git",
-                "reference": "f75d11b1bcd0a9b75a9e1cabd80ffe3bc0164bcc"
+                "reference": "b6fd1f126b13c1f7e7321f7338b14a19116b5de4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/persistence/zipball/f75d11b1bcd0a9b75a9e1cabd80ffe3bc0164bcc",
-                "reference": "f75d11b1bcd0a9b75a9e1cabd80ffe3bc0164bcc",
+                "url": "https://api.github.com/repos/doctrine/persistence/zipball/b6fd1f126b13c1f7e7321f7338b14a19116b5de4",
+                "reference": "b6fd1f126b13c1f7e7321f7338b14a19116b5de4",
                 "shasum": ""
             },
             "require": {
@@ -1507,7 +1507,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/persistence/issues",
-                "source": "https://github.com/doctrine/persistence/tree/3.3.0"
+                "source": "https://github.com/doctrine/persistence/tree/3.3.1"
             },
             "funding": [
                 {
@@ -1523,7 +1523,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-03-01T10:11:31+00:00"
+            "time": "2024-03-01T19:53:13+00:00"
         },
         {
             "name": "doctrine/sql-formatter",
