@@ -2346,16 +2346,16 @@
         },
         {
             "name": "league/flysystem-azure-blob-storage",
-            "version": "3.23.1",
+            "version": "3.25.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem-azure-blob-storage.git",
-                "reference": "ac2ce3fc54d6591a7fd8f3d009b475714aa0b9ee"
+                "reference": "09c60d11bc55c9483b1e9883b5511d12bb75a7e3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem-azure-blob-storage/zipball/ac2ce3fc54d6591a7fd8f3d009b475714aa0b9ee",
-                "reference": "ac2ce3fc54d6591a7fd8f3d009b475714aa0b9ee",
+                "url": "https://api.github.com/repos/thephpleague/flysystem-azure-blob-storage/zipball/09c60d11bc55c9483b1e9883b5511d12bb75a7e3",
+                "reference": "09c60d11bc55c9483b1e9883b5511d12bb75a7e3",
                 "shasum": ""
             },
             "require": {
@@ -2380,8 +2380,7 @@
                 }
             ],
             "support": {
-                "issues": "https://github.com/thephpleague/flysystem-azure-blob-storage/issues",
-                "source": "https://github.com/thephpleague/flysystem-azure-blob-storage/tree/3.23.1"
+                "source": "https://github.com/thephpleague/flysystem-azure-blob-storage/tree/3.25.1"
             },
             "funding": [
                 {
@@ -2393,7 +2392,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-01-26T18:25:23+00:00"
+            "time": "2024-03-15T19:58:44+00:00"
         },
         {
             "name": "league/flysystem-bundle",
