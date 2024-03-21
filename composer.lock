@@ -2397,16 +2397,16 @@
         },
         {
             "name": "league/flysystem-bundle",
-            "version": "3.3.2",
+            "version": "3.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem-bundle.git",
-                "reference": "ad6ef9c0a8d918269ae5cf47da2f0a4a995bfbd8"
+                "reference": "a69de474d7d7229d6c3b0eb59912b5f38955b9d3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem-bundle/zipball/ad6ef9c0a8d918269ae5cf47da2f0a4a995bfbd8",
-                "reference": "ad6ef9c0a8d918269ae5cf47da2f0a4a995bfbd8",
+                "url": "https://api.github.com/repos/thephpleague/flysystem-bundle/zipball/a69de474d7d7229d6c3b0eb59912b5f38955b9d3",
+                "reference": "a69de474d7d7229d6c3b0eb59912b5f38955b9d3",
                 "shasum": ""
             },
             "require": {
@@ -2452,9 +2452,9 @@
             "description": "Symfony bundle integrating Flysystem into Symfony 5.4+ applications",
             "support": {
                 "issues": "https://github.com/thephpleague/flysystem-bundle/issues",
-                "source": "https://github.com/thephpleague/flysystem-bundle/tree/3.3.2"
+                "source": "https://github.com/thephpleague/flysystem-bundle/tree/3.3.3"
             },
-            "time": "2023-12-02T17:27:51+00:00"
+            "time": "2024-03-21T08:37:42+00:00"
         },
         {
             "name": "league/flysystem-local",
